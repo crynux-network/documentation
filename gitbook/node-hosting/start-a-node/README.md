@@ -24,7 +24,7 @@
             <td>Dymension</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
@@ -36,7 +36,7 @@
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Kasplex</td>
@@ -48,7 +48,7 @@
             <td>Kasplex</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-kasplex-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-kasplex-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>

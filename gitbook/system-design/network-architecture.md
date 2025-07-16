@@ -36,7 +36,7 @@ More explanations about the design of the consensus protocol can be found here:
 [consensus-protocol](consensus-protocol/)
 {% endcontent-ref %}
 
-The source code of the Node of the Hydrogen Network could be found in the repository [https://github.com/crynux-ai/crynux-node](https://github.com/crynux-ai/h-node).
+The source code of the Node of the Crynux Network could be found in the repository [https://github.com/crynux-network/crynux-node](https://github.com/crynux-network/h-node).
 
 ## The Application
 
@@ -48,9 +48,9 @@ After the blockchain confirmation, the application sends the task arguments to t
 
 Once the task success event has been emitted on the blockchain, the application could fetch the images/texts from the relay, and continue with its own subsequent business logics.
 
-A showcase application, the [Image Generator](https://ig.crynux.ai), has been developed to demonstrate the workflow. The showcase application is quite similar to the [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui), which is a web interface for the users to generate images using different models and text prompt. The difference is that, our application does not require the presence of a local GPU, thus could be used on any devices.
+A showcase application, the [Image Generator](https://ig.crynux.io), has been developed to demonstrate the workflow. The showcase application is quite similar to the [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui), which is a web interface for the users to generate images using different models and text prompt. The difference is that, our application does not require the presence of a local GPU, thus could be used on any devices.
 
-The Image Generator could be accessed at: [https://ig.crynux.ai](https://ig.crynux.ai).
+The Image Generator could be accessed at: [https://ig.crynux.io](https://ig.crynux.io).
 
 The Image Generator is designed to be a traditional centralized application. The wallet is created and operated transparently by the application backend. To the end users, the blockchain, the tokens, are completely invisible, which makes it easier for the users to get started, comparing to a DApp where the users have to install the Metamask, and prepare a wallet with enough tokens before using the app.
 
@@ -64,9 +64,9 @@ A detailed explanation of the application workflow is described here:
 
 The source code of the Image Generator could be found at:
 
-Backend: [https://github.com/crynux-ai/crynux-bridge](https://github.com/crynux-ai/crynux-bridge)
+Backend: [https://github.com/crynux-network/crynux-bridge](https://github.com/crynux-network/crynux-bridge)
 
-Web UI: [https://github.com/crynux-ai/ig-web](https://github.com/crynux-ai/ig-web)
+Web UI: [https://github.com/crynux-network/ig-web](https://github.com/crynux-network/ig-web)
 
 ## The Blockchain
 
@@ -76,9 +76,9 @@ Certain amount of tokens must be staked on-chain in order to join the network. I
 
 &#x20;When a task is submitted by an application, the blockchain randomly selects 3 available nodes to execute the task. When the node discloses their image hashes on-chain, the blockchain compares the hashes of the 3 nodes, and slash the node whose result is different.
 
-Hydrogen Network could be deployed on any blockchain system that supports the smart contracts. The source code of the smart contracts is in this repository:
+Crynux Network could be deployed on any blockchain system that supports the smart contracts. The source code of the smart contracts is in this repository:
 
-[https://github.com/crynux-ai/crynux-contracts](https://github.com/crynux-ai/h-contracts)
+[https://github.com/crynux-network/crynux-contracts](https://github.com/crynux-network/crynux-contracts)
 
 ## The Relay
 
@@ -98,5 +98,4 @@ The relay in Crynux Network is located at the public network, where everyone cou
 
 The source code of the relay could be found at:
 
-[https://github.com/crynux-ai/crynux-relay](https://github.com/crynux-ai/h-relay)
-
+[https://github.com/crynux-network/crynux-relay](https://github.com/crynux-network/crynux-relay)

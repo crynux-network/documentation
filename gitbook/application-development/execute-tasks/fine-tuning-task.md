@@ -64,12 +64,12 @@ The following is an intuitive look at a task definition:
 }
 ```
 
-Full example of the fine tuning task can be found [in the GitHub repository](https://github.com/crynux-ai/stable-diffusion-task/tree/main/examples/finetune_lora.py).
+Full example of the fine tuning task can be found [in the GitHub repository](https://github.com/crynux-network/stable-diffusion-task/tree/main/examples/finetune_lora.py).
 
 ### model
 
 ```json
-{   
+{
     "model": {
         "name": "runwayml/stable-diffusion-v1-5",
         "variant": "fp16",

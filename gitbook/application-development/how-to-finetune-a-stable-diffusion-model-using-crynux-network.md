@@ -66,7 +66,7 @@ api_key = "q3hXHA_8O0LuGJ1_tou4_KamMlQqAo-aYwyAIDttdmI="  # For public demonstra
 
 # Fine-tuning configuration
 data = {
-    "model_name": "crynux-ai/stable-diffusion-v1-5",
+    "model_name": "crynux-network/stable-diffusion-v1-5",
     "model_variant": "fp16",
     "dataset_url": "https://gateway.irys.xyz/GivF5FBMdJVr6xHT7hi2aE7vH55wVjrtKLpRc2E86icJ",
     "validation_num_images": 4,
@@ -150,7 +150,7 @@ async function finetuneStableDiffusion() {
     try {
         // Fine-tuning configuration
         const data = {
-            model_name: "crynux-ai/stable-diffusion-v1-5",
+            model_name: "crynux-network/stable-diffusion-v1-5",
             model_variant: "fp16",
             dataset_url: "https://gateway.irys.xyz/GivF5FBMdJVr6xHT7hi2aE7vH55wVjrtKLpRc2E86icJ",
             validation_num_images: 4,
@@ -374,7 +374,7 @@ You can host your own instance of the Crynux Bridge to provide private APIs for 
 
 Starting a Crynux Bridge is as straightforward as running a Docker container. An additional requirement is a wallet funded with sufficient (test) CNX to cover the tasks you run on the network. And at this moment, you can get test CNXs for free in the [Crynux Discord](https://discord.gg/y8YKxb7uZk) as well.
 
-Crynux Bridge is fully open-sourced on [GitHub](https://github.com/crynux-ai/crynux-bridge). A step-by-step guide for starting a Crynux Bridge instance is available in the following document:
+Crynux Bridge is fully open-sourced on [GitHub](https://github.com/crynux-network/crynux-bridge). A step-by-step guide for starting a Crynux Bridge instance is available in the following document:
 
 {% content-ref url="crynux-bridge.md" %}
 [crynux-bridge.md](crynux-bridge.md)

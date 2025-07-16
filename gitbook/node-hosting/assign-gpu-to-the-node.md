@@ -55,13 +55,13 @@ And add another line below:
 The GPU id could also be given to the container in the starting command. If you are starting the container using the following command before:
 
 ```
-docker run -p 7412:7412 --name crynux_node --gpus all ghcr.io/crynux-ai/crynux-node:latest
+docker run -p 7412:7412 --name crynux_node --gpus all ghcr.io/crynux-network/crynux-node:latest
 ```
 
 You could change it to:
 
 ```
-docker run -p 7412:7412 --name crynux_node --gpus '"device=0"' ghcr.io/crynux-ai/crynux-node:latest
+docker run -p 7412:7412 --name crynux_node --gpus '"device=0"' ghcr.io/crynux-network/crynux-node:latest
 ```
 
 The change is on the `--gpus` argument, from `all`, which provides all the GPUs to the container, to `'"device=0"'`, which provides only the GPU with id `0`.
@@ -145,7 +145,7 @@ name: "crynux_node"
 
 services:
   crynux_node:
-    image: ghcr.io/crynux-ai/crynux-node:latest
+    image: ghcr.io/crynux-network/crynux-node:latest
     container_name: crynux_node
     restart: unless-stopped
     ports:
@@ -173,7 +173,7 @@ name: "crynux_node_2"
 
 services:
   crynux_node_2:
-    image: ghcr.io/crynux-ai/crynux-node:latest
+    image: ghcr.io/crynux-network/crynux-node:latest
     container_name: crynux_node_2
     restart: unless-stopped
     ports:
@@ -201,7 +201,7 @@ name: "crynux_node_3"
 
 services:
   crynux_node_3:
-    image: ghcr.io/crynux-ai/crynux-node:latest
+    image: ghcr.io/crynux-network/crynux-node:latest
     container_name: crynux_node_3
     restart: unless-stopped
     ports:

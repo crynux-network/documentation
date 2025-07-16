@@ -43,7 +43,7 @@ The following is an intuitive look at a task definition:
 }
 ```
 
-More examples of the different GPT tasks can be found [in the GitHub repository](https://github.com/crynux-ai/gpt-task/tree/main/examples).
+More examples of the different GPT tasks can be found [in the GitHub repository](https://github.com/crynux-network/gpt-task/tree/main/examples).
 
 ### Model
 

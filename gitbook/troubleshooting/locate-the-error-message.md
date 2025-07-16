@@ -30,7 +30,7 @@ The output should be similar to:
 
 ```
 CONTAINER ID   IMAGE                                COMMAND              CREATED          STATUS          PORTS                      NAMES
-77e559a0d707   ghcr.io/crynux-ai/crynux-node:2.0.4  "bash start.sh run"  33 minutes ago   Up 32 minutes   127.0.0.1:7412->7412/tcp   ecstatic_chatterjee
+77e559a0d707   ghcr.io/crynux-network/crynux-node:2.0.4  "bash start.sh run"  33 minutes ago   Up 32 minutes   127.0.0.1:7412->7412/tcp   ecstatic_chatterjee
 ```
 
 In this case, the container name is `ecstatic_chatterjee`.
@@ -126,4 +126,3 @@ Traceback (most recent call last):
   File "anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
 asyncio.exceptions.CancelledError
 ```
-

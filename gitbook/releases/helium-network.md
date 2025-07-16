@@ -16,13 +16,13 @@ To get started, follow the guide below:
 
 ## AI Chatbot Application
 
-An AI chatbot application has been released to demonstrate the abilities. The app provides a simple chat UI in the browser, and the text generation task is sent to the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge) at the backend, and then sent to the Crynux Network for execution. The task fees are paid from the wallet inside the Crynux Bridge so that the users won't have to deal with the wallet themselves.
+An AI chatbot application has been released to demonstrate the abilities. The app provides a simple chat UI in the browser, and the text generation task is sent to the [Crynux Bridge](https://github.com/crynux-network/crynux-bridge) at the backend, and then sent to the Crynux Network for execution. The task fees are paid from the wallet inside the Crynux Bridge so that the users won't have to deal with the wallet themselves.
 
 Try the application yourself at: [https://chat.crynux.io](https://chat.crynux.io/)
 
 The source code of the application is located on the GitHub:
 
-[https://github.com/crynux-ai/chat-web](https://github.com/crynux-ai/chat-web)
+[https://github.com/crynux-network/chat-web](https://github.com/crynux-network/chat-web)
 
 ## GPT Task Framework
 

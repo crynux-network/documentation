@@ -20,7 +20,7 @@ Some highlights in case you are starting the container using other cloud service
 
 * Use the image link of Crynux Node to start the container:&#x20;
 
-`ghcr.io/crynux-ai/crynux-node:latest`
+`ghcr.io/crynux-network/crynux-node:latest`
 
 * Expose port `7412` for WebUI
 * Use the default docker ENTRYPOINT to start the container. Do not use interactive shells.

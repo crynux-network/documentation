@@ -104,24 +104,24 @@ If something goes wrong on the above steps, the problem is on the Docker or your
 you can use Git to clone the branch for Dymension of the following repository:
 
 ```bash
-$ git clone -b dymension https://github.com/crynux-ai/crynux-node-docker-compose.git
+$ git clone -b dymension https://github.com/crynux-network/crynux-node-docker-compose.git
 ```
 
 or simply download the files from GitHub:
 
-[https://github.com/crynux-ai/crynux-node-docker-compose/tree/dymension](https://github.com/crynux-ai/crynux-node-docker-compose/tree/dymension)
+[https://github.com/crynux-network/crynux-node-docker-compose/tree/dymension](https://github.com/crynux-network/crynux-node-docker-compose/tree/dymension)
 {% endtab %}
 
 {% tab title="Near users" %}
 you can use Git to clone the branch for Near of the following repository:
 
 ```bash
-$ git clone -b near https://github.com/crynux-ai/crynux-node-docker-compose.git
+$ git clone -b near https://github.com/crynux-network/crynux-node-docker-compose.git
 ```
 
 or simply download the files from GitHub:
 
-[https://github.com/crynux-ai/crynux-node-docker-compose/tree/near](https://github.com/crynux-ai/crynux-node-docker-compose/tree/near)
+[https://github.com/crynux-network/crynux-node-docker-compose/tree/near](https://github.com/crynux-network/crynux-node-docker-compose/tree/near)
 {% endtab %}
 {% endtabs %}
 

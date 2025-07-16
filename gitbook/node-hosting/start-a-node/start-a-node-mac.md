@@ -22,15 +22,15 @@ Download the DMG file using the following link, then double-click the file, and 
 
 For Dymension users:
 
-{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg" %}
 
 For Near users:
 
-{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg" %}
 
 For Kasplex users:
 
-{% embed url="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-kasplex-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-kasplex-mac-arm64-signed.dmg" %}
 
 ## 3. Start the node
 

@@ -35,7 +35,7 @@ The following is an intuitive look at a task definition:
 }
 ```
 
-More examples of the different audio tasks can be found [in the GitHub repository](https://github.com/crynux-ai/audio-task/tree/main/examples).
+More examples of the different audio tasks can be found [in the GitHub repository](https://github.com/crynux-network/audio-task/tree/main/examples).
 
 ### Model
 
