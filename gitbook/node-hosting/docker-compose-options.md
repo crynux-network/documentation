@@ -24,7 +24,7 @@ name: "crynux_node"
 
 services:
   h_node:
-    image: ghcr.io/crynux-ai/crynux-node:latest
+    image: ghcr.io/crynux-network/crynux-node:latest
     container_name: crynux_node
     restart: unless-stopped
     ports:
@@ -71,7 +71,7 @@ name: "crynux_node"
 
 services:
   h_node:
-    image: ghcr.io/crynux-ai/crynux-node:latest
+    image: ghcr.io/crynux-network/crynux-node:latest
     container_name: crynux_node
     restart: unless-stopped
     ports:
@@ -117,7 +117,7 @@ name: "crynux_node"
 
 services:
   h_node:
-    image: ghcr.io/crynux-ai/crynux-node:latest
+    image: ghcr.io/crynux-network/crynux-node:latest
     container_name: crynux_node
     restart: unless-stopped
     ports:

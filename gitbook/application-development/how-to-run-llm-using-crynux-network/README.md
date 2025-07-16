@@ -53,7 +53,7 @@ async function main() {
       stream: false,
     });
     console.log("Chat completion response:", chatCompletion);
-    
+
     return chatCompletion;
   } catch (error) {
     console.error("Error:", error);
@@ -85,7 +85,7 @@ You can host your own instance of the Crynux Bridge to provide private APIs for 
 
 Starting a Crynux Bridge is as straightforward as running a Docker container. An additional requirement is a wallet funded with sufficient (test) CNX to cover the tasks you run on the network. And at this moment, you can get test CNXs for free in the [Crynux Discord](https://discord.gg/y8YKxb7uZk) as well.
 
-Crynux Bridge is fully open-sourced on [GitHub](https://github.com/crynux-ai/crynux-bridge). A step-by-step guide for starting a Crynux Bridge instance is available in the following document:
+Crynux Bridge is fully open-sourced on [GitHub](https://github.com/crynux-network/crynux-bridge). A step-by-step guide for starting a Crynux Bridge instance is available in the following document:
 
 {% content-ref url="../crynux-bridge.md" %}
 [crynux-bridge.md](../crynux-bridge.md)

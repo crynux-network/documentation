@@ -68,7 +68,7 @@ The text completions API (`/v1/llm/completions`) provides a simpler interface fo
 
 The Crynux Bridge provides an OpenAI-compatible image generation API that uses Stable Diffusion models. The API (`/v1/sd/images/generations`) supports the following key parameters:
 
-* `model`: The model to use (default: "crynux-ai/sdxl-turbo")
+* `model`: The model to use (default: "crynux-network/sdxl-turbo")
 * `prompt`: Text description of the desired image
 * `n`: Number of images to generate (default: 1)
 * `size`: Image dimensions (default: "512x512", options: "256x256", "512x512", "1024x1024")
@@ -94,12 +94,12 @@ The Crynux Bridge is designed to support multiple users, enabling seamless colla
 
 The Docker Compose files are located in the `build` folder of the Crynux Bridge project:
 
-{% embed url="https://github.com/crynux-ai/crynux-bridge/tree/main/build" %}
+{% embed url="https://github.com/crynux-network/crynux-bridge/tree/main/build" %}
 
 Download the folder to the deployment server, or clone the whole project:
 
 ```sh
-$ git clone https://github.com/crynux-ai/crynux-bridge.git
+$ git clone https://github.com/crynux-network/crynux-bridge.git
 $ cd build
 ```
 
@@ -151,7 +151,7 @@ Once the Docker container is started, find the correct IP address of the Docker 
 
 Open the following URL in your web browser:
 
-{% embed url="https://crynux-ai.github.io/crynux-bridge/examples/access-key-generation.html" %}
+{% embed url="https://crynux-network.github.io/crynux-bridge/examples/access-key-generation.html" %}
 
 You should see a webpage like this:
 
@@ -172,7 +172,7 @@ import requests
 import json
 
 # API configuration
-API_URL = "https://bridge.crynux.ai/v1/llm/chat/completions"
+API_URL = "https://bridge.crynux.io/v1/llm/chat/completions"
 API_KEY = "your-api-key-here"  # Replace with your API key
 
 # Request headers
@@ -210,7 +210,7 @@ print(response.json())
 ```javascript
 async function getChatCompletion() {
     try {
-        const API_URL = "https://bridge.crynux.ai/v1/llm/chat/completions";
+        const API_URL = "https://bridge.crynux.io/v1/llm/chat/completions";
         const API_KEY = "your-api-key-here";  // Replace with your API key
 
         const response = await fetch(API_URL, {
@@ -252,7 +252,7 @@ import requests
 import json
 
 # API configuration
-API_URL = "https://bridge.crynux.ai/v1/sd/images/generations"
+API_URL = "https://bridge.crynux.io/v1/sd/images/generations"
 API_KEY = "your-api-key-here"  # Replace with your API key
 
 # Request headers
@@ -263,8 +263,8 @@ headers = {
 
 # Request payload
 payload = {
-    "model": "crynux-ai/sdxl-turbo",
-    "prompt": "A beautiful sunset over a calm ocean",
+    "model": "crynux-network/sdxl-turbo",
+    "prompt": "a beautiful landscape",
     "n": 1,
     "size": "512x512"
 }
@@ -286,8 +286,8 @@ print(response.json())
 ```javascript
 async function generateImage() {
     try {
-        const API_URL = "https://bridge.crynux.ai/v1/sd/images/generations";
-        const API_KEY = "your-api-key-here";  // Replace with your API key
+        const API_URL = "https://bridge.crynux.io/v1/sd/images/generations";
+        const API_KEY = "your-api-key-here"; // Replace with your API key
 
         const response = await fetch(API_URL, {
             method: "POST",
@@ -296,7 +296,7 @@ async function generateImage() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "crynux-ai/sdxl-turbo",
+                model: "crynux-network/sdxl-turbo",
                 prompt: "A beautiful sunset over a calm ocean",
                 n: 1,
                 size: "512x512"

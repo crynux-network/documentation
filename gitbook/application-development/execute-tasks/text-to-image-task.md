@@ -54,7 +54,7 @@ The following is an intuitive look at a task definition:
 }
 ```
 
-More examples of the different Stable Diffusion tasks can be found [in the GitHub repository](https://github.com/crynux-ai/stable-diffusion-task/tree/main/examples).
+More examples of the different Stable Diffusion tasks can be found [in the GitHub repository](https://github.com/crynux-network/stable-diffusion-task/tree/main/examples).
 
 ## Acceleration of the Image Generation
 
@@ -66,7 +66,7 @@ SDXL Turbo is an adversarial time-distilled [Stable Diffusion XL](https://huggin
 
 ```
 "base_model": {
-    "name": "crynux-ai/sdxl-turbo"
+    "name": "crynux-network/sdxl-turbo"
 },
 ```
 
@@ -367,4 +367,3 @@ Hydrogen Network requires a deterministic image generation process, which means 
 
 Beside the seed, the Stable Diffusion Task Framework has been implemented to maximize the reproducibility, for all the components used, across the whole image generation process.&#x20;
 {% endhint %}
-

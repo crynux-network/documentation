@@ -37,14 +37,14 @@ By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Comput
 
 [https://ig.crynux.io](https://ig.crynux.io)
 
-The Image Generator is a showcase application that provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser. 
-The application can be used on any devices that do not have a capable GPU integrated. The Blockchain and token stuff are handled at the application backend using the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
+The Image Generator is a showcase application that provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser.
+The application can be used on any devices that do not have a capable GPU integrated. The Blockchain and token stuff are handled at the application backend using the [Crynux Bridge](https://github.com/crynux-network/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
 
 ## The GPT Chatbot
 
 [https://chat.crynux.io](https://chat.crynux.io)
 
-The GPT Chatbot is a showcase application that provides a simple chat UI in the browser. The web application connects to the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge) at the backend to interact with the Crynux Network.
+The GPT Chatbot is a showcase application that provides a simple chat UI in the browser. The web application connects to the [Crynux Bridge](https://github.com/crynux-network/crynux-bridge) at the backend to interact with the Crynux Network.
 
 ## Getting Started
 

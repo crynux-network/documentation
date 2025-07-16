@@ -6,7 +6,7 @@ description: Truly permissionless DeAI on GPU@edge
 
 [![](https://dcbadge.limes.pink/api/server/https://discord.gg/y8YKxb7uZk)](https://discord.gg/y8YKxb7uZk)
 [![X](https://img.shields.io/badge/@crynuxio-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/crynuxio)
-[![GitHub Org's stars](https://img.shields.io/github/stars/crynux-ai?style=for-the-badge&logo=github)](https://github.com/crynux-ai)
+[![GitHub Org's stars](https://img.shields.io/github/stars/crynux-network?style=for-the-badge&logo=github)](https://github.com/crynux-network)
 
 ### Truly Permissionless
 
@@ -50,7 +50,7 @@ The OpenAI-compliant APIs for LLM inference are provided through the Crynux Brid
 [How to Run LLM Using Crynux Network](application-development/how-to-run-llm-using-crynux-network)
 {% endcontent-ref %}
 
-A chatbot web application has been developed as an example for the developers. The web application provides a simple chat UI in the browser, and connects to the [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge) at the backend to interact with the Crynux Network.
+A chatbot web application has been developed as an example for the developers. The web application provides a simple chat UI in the browser, and connects to the [Crynux Bridge](https://github.com/crynux-network/crynux-bridge) at the backend to interact with the Crynux Network.
 
 The chatbot can be accessed at [https://chat.crynux.io](https://chat.crynux.io)
 
@@ -60,7 +60,7 @@ The applications could now send the Stable Diffusion image generation tasks to t
 
 A showcase application has been developed to demonstrate the abilities. The app provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser. Thanks to the Helium Network, the users could use the application on any devices that do not have a capable GPU integrated.
 
-The complexity of the blockchain and tokens are taken care of at the backend using [Crynux Bridge](https://github.com/crynux-ai/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
+The complexity of the blockchain and tokens are taken care of at the backend using [Crynux Bridge](https://github.com/crynux-network/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
 
 Give it a try at [https://ig.crynux.io](https://ig.crynux.io)
 
@@ -98,7 +98,7 @@ To read more about the Helium Network release, go to the following page:
             <td>Dymension</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
@@ -110,7 +110,7 @@ To read more about the Helium Network release, go to the following page:
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Kasplex</td>
@@ -122,7 +122,7 @@ To read more about the Helium Network release, go to the following page:
             <td>Kasplex</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-ai/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-kasplex-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-kasplex-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
@@ -184,7 +184,7 @@ Join the Crynux community on Discord:
 
 All the codes are open sourced at GitHub, feel free to submit issues and PRs:
 
-{% embed url="https://github.com/crynux-ai" %}
+{% embed url="https://github.com/crynux-network" %}
 
 The Crynux Blog contains the technical explanations and our latest progress:
 

@@ -10,7 +10,7 @@ To speed up the integration of the Crynux Network into the applications. SDKs in
 
 The source code of the SDK in Python can be found on the GitHub:
 
-{% embed url="https://github.com/crynux-ai/crynux-sdk-python" %}
+{% embed url="https://github.com/crynux-network/crynux-sdk-python" %}
 
 The example usages are provided in the README of the project.
 
@@ -22,6 +22,6 @@ The SDK in Go will be released shortly.
 
 The source code of the SDK in JavaScript can be found on the GitHub:
 
-{% embed url="https://github.com/crynux-ai/crynux-sdk-js" %}
+{% embed url="https://github.com/crynux-network/crynux-sdk-js" %}
 
 The example usages are provided in the README of the project.

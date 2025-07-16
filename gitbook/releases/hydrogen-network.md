@@ -42,7 +42,7 @@ The following document gives more information on how to write a Stable Diffusion
 
 And more examples can be found in the GitHub repository:
 
-{% embed url="https://github.com/crynux-ai/stable-diffusion-task/tree/main/examples" %}
+{% embed url="https://github.com/crynux-network/stable-diffusion-task/tree/main/examples" %}
 
 #### The Image Generator
 
@@ -54,7 +54,7 @@ Thanks to the Hydrogen Network, the application could be used on the devices tha
 
 Give it a try:
 
-{% embed url="https://ig.crynux.ai" %}
+{% embed url="https://ig.crynux.io" %}
 
 The Image Generator also serves as a reference implementation for the traditional centralized applications who want to integrate the inference API. The source code of the Image Generator is also hosted on GitHub:
 
@@ -62,11 +62,11 @@ The Image Generator also serves as a reference implementation for the traditiona
 
 The Crynux Bridge is serving as the backend of the Image Generator. The bridge transparently handles the blockchain transaction processing and wallet signatures at the backend, and provides simple traditional APIs to the web UI:
 
-{% embed url="https://github.com/crynux-ai/crynux-bridge" %}
+{% embed url="https://github.com/crynux-network/crynux-bridge" %}
 
 **The frontend:**
 
-{% embed url="https://github.com/crynux-ai/ig-web" %}
+{% embed url="https://github.com/crynux-network/ig-web" %}
 
 ## Node Hosting
 
@@ -95,7 +95,7 @@ The consensus protocol is described in detail in the following doc:
 The Hydrogen Network is running on a private blockchain whose node can be accessed using the RPC endpoint:
 
 ```url
-https://block-node.crynux.ai/rpc
+https://block-node.crynux.io/rpc
 ```
 
 The reason for a private Blockchain is that public Blockchains with strong consensus protocol, such as Ethereum, is not fast enough alone to support the throughput of the Hydrogen Network, or any other networks of Crynux in the future. The solution will be a layer 2 scaling tech such as [ZK-Rollups](https://blockworks.co/news/zk-rollups-future-of-smart-contract-blockchains). We will be either using a generalized solution that is well known to the industry, or developing our own for better performance(under the limit of our use cases).
@@ -118,16 +118,16 @@ The CNX token is just an standard ERC20 token. The tokens will be operated by th
 
 The source code of the smart contracts is hosted on the GitHub:
 
-{% embed url="https://github.com/crynux-ai/crynux-contracts" %}
+{% embed url="https://github.com/crynux-network/crynux-contracts" %}
 
 ## The Relay In Use
 
 The relay server could be accessed at:
 
 ```url
-https://relay.h.crynux.ai
+https://relay.h.crynux.io
 ```
 
 The source code of the relay is hosted at:
 
-{% embed url="https://github.com/crynux-ai/crynux-relay" %}
+{% embed url="https://github.com/crynux-network/crynux-relay" %}

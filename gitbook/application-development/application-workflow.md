@@ -79,23 +79,23 @@ For a detailed workflow involving all network participants, please refer to the 
 
 The workflow has been fully implemented in the showcase applications: the Image Generator and the AI Chatbot. Which can be accessed at:
 
-The Image Generator: [https://ig.crynux.ai](https://ig.crynux.ai)
+The Image Generator: [https://ig.crynux.io](https://ig.crynux.io)
 
-The AI Chatbot: [https://chat.crynux.ai](https://chat.crynux.ai)
+The AI Chatbot: [https://chat.crynux.io](https://chat.crynux.io)
 
 Both applications utilize the Crynux Bridge as the backend. The Crynux Bridge includes a built-in wallet to cover task fees, eliminating the need for applications to manage their own wallets. Additionally, it isolates the blockchain and Relay from the applications. This allows applications to simply submit task parameters via API and await the result without further action.
 
 The Crynux Bridge can be used by all the applications. The source code of the Crynux Bridge can be found at:
 
-{% embed url="https://github.com/crynux-ai/crynux-bridge" %}
+{% embed url="https://github.com/crynux-network/crynux-bridge" %}
 
 The source code of the web UI of the Image Generator:
 
-{% embed url="https://github.com/crynux-ai/ig-web" %}
+{% embed url="https://github.com/crynux-network/ig-web" %}
 
 The source code of the web UI of the AI Chatbot
 
-{% embed url="https://github.com/crynux-ai/chat-web" %}
+{% embed url="https://github.com/crynux-network/chat-web" %}
 
 ## Application Workflow Step by Step
 
@@ -158,7 +158,7 @@ The task parameters are organized as a JSON string. An example of the parameters
 }
 ```
 
-The task definition above follows the schema given in the [Stable Diffusion Task Framework](https://github.com/crynux-ai/stable-diffusion-task). A wide range of common configurations are supported. The framework also provides a JSON schema to validate task parameters. More information about the framework can be found in the document below:&#x20;
+The task definition above follows the schema given in the [Stable Diffusion Task Framework](https://github.com/crynux-network/stable-diffusion-task). A wide range of common configurations are supported. The framework also provides a JSON schema to validate task parameters. More information about the framework can be found in the document below:&#x20;
 
 {% content-ref url="execute-tasks/text-to-image-task.md" %}
 [text-to-image-task.md](execute-tasks/text-to-image-task.md)
@@ -178,7 +178,7 @@ The application must validate task parameters against the schema before sending 
 
 Once the JSON string for the task parameters is ready, the application must create and send the `CreateTask` transaction to the blockchain.
 
-`CreateTask` method of the [Task Contract](https://github.com/crynux-ai/crynux-contracts/blob/75a2f7014d9d797df9721be17161ec32c745b9dd/contracts/Task.sol#L75) has five arguments:
+`CreateTask` method of the [Task Contract](https://github.com/crynux-network/crynux-contracts/blob/75a2f7014d9d797df9721be17161ec32c745b9dd/contracts/Task.sol#L75) has five arguments:
 
 ```solidity
 function createTask(
@@ -198,11 +198,11 @@ function createTask(
 
 In addition to the arguments listed above, the task fee should be set in the `value` field of the transaction. The application is free to choose any task fee value, a higher task fee will result in a faster task execution, while lower task fee will result in longer waiting time.
 
-The source code that implements the invocation of the `CreateTask` method in the Crynux Bridge [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/652ea694980da774a283782886bedaa362a53a50/blockchain/task.go#L32).
+The source code that implements the invocation of the `CreateTask` method in the Crynux Bridge [can be found here](https://github.com/crynux-network/crynux-bridge/blob/652ea694980da774a283782886bedaa362a53a50/blockchain/task.go#L32).
 
 #### Wait for the transaction confirmation
 
-After sending the transaction, the application should wait for confirmation before proceeding. The transaction might be reverted by the blockchain for various reasons. All possible reasons for a transaction being reverted can be found [in the source code](https://github.com/crynux-ai/crynux-contracts/blob/43f98cc0d0b6726c54dc93103739414c6313a6c9/contracts/Task.sol#L59C21-L59C21).
+After sending the transaction, the application should wait for confirmation before proceeding. The transaction might be reverted by the blockchain for various reasons. All possible reasons for a transaction being reverted can be found [in the source code](https://github.com/crynux-network/crynux-contracts/blob/43f98cc0d0b6726c54dc93103739414c6313a6c9/contracts/Task.sol#L59C21-L59C21).
 
 If the transaction is reverted, no event will be emitted. Therefore, the creation result can only be queried using the transaction hash or the receipt provided by the blockchain when sending the `CreateTask` transaction.
 
@@ -210,11 +210,11 @@ If the transaction is reverted, no event will be emitted. Therefore, the creatio
 
 Once the transaction is confirmed, the next step is to upload the task parameters JSON string to the Relay. Use the following API endpoint:
 
-{% swagger src="https://dy.relay.crynux.ai/openapi.json" path="/v1/inference_tasks" method="post" %}
-[https://dy.relay.crynux.ai/openapi.json](https://dy.relay.crynux.ai/openapi.json)
+{% swagger src="https://dy.relay.crynux.io/openapi.json" path="/v1/inference_tasks" method="post" %}
+[https://dy.relay.crynux.io/openapi.json](https://dy.relay.crynux.io/openapi.json)
 {% endswagger %}
 
-The complete API documentation can be found in the [OpenAPI Specifications](https://dy.relay.crynux.ai/openapi.json) of the Relay server.
+The complete API documentation can be found in the [OpenAPI Specifications](https://dy.relay.crynux.io/openapi.json) of the Relay server.
 
 To upload, simply invoke the API to the Relay server. Ensure the request is signed by the application wallet before sending.
 
@@ -222,7 +222,7 @@ To upload, simply invoke the API to the Relay server. Ensure the request is sign
 
 The signature is generated using ECDSA with the same curve as Ethereum, on the Keccak256 hash of a string. This string is created by including all query and body parameters (except `timestamp` and `signature`) from the request in a JSON string with keys sorted alphabetically and concatenated with the current Unix timestamp.
 
-The reference implementation of the signing method in Crynux Bridge [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/main/relay/sign\_data.go). The code to upload the task parameters to the Relay can also be found [in the source code](https://github.com/crynux-ai/crynux-bridge/blob/652ea694980da774a283782886bedaa362a53a50/relay/inference\_task.go#L41).
+The reference implementation of the signing method in Crynux Bridge [can be found here](https://github.com/crynux-network/crynux-bridge/blob/main/relay/sign_data.go). The code to upload the task parameters to the Relay can also be found [in the source code](https://github.com/crynux-network/crynux-bridge/blob/652ea694980da774a283782886bedaa362a53a50/relay/inference_task.go#L41).
 
 ### 4. Wait for the Task to Finish
 
@@ -244,7 +244,7 @@ To ensure reliable block tracking, the application must handle potential crashes
 
 Another approach is to extract the task ID from the creation transaction, store it, and periodically check the blockchain for the latest task status. This method eliminates the need to track the block, but it is less efficient due to a high volume of unnecessary queries.
 
-The Crynux Bridge uses the first method, the source code of the block synchronization [can be found here](https://github.com/crynux-ai/crynux-bridge/blob/main/tasks/sync\_block.go).
+The Crynux Bridge uses the first method, the source code of the block synchronization [can be found here](https://github.com/crynux-network/crynux-bridge/blob/main/tasks/sync_block.go).
 
 ### 5. Fetch the result from the Relay
 
@@ -254,8 +254,8 @@ The final step is to retrieve the actual images or texts from the Relay. This ca
 
 The URL could be treated like an image downloading link as it returns the binary stream of the image content directly. The signature and timestamp is still required.
 
-{% swagger src="https://dy.relay.crynux.ai/openapi.json" path="/v1/inference_tasks/{task_id}/results/{image_num}" method="get" %}
-[https://dy.relay.crynux.ai/openapi.json](https://dy.relay.crynux.ai/openapi.json)
+{% swagger src="https://dy.relay.crynux.io/openapi.json" path="/v1/inference_tasks/{task_id}/results/{image_num}" method="get" %}
+[https://dy.relay.crynux.io/openapi.json](https://dy.relay.crynux.io/openapi.json)
 {% endswagger %}
 
 #### Get texts
@@ -268,4 +268,4 @@ When the application accesses the above URL after the `TaskSuccess` event is rec
 
 When the application accesses the URL after receiving the `TaskSuccess` event, it might encounter `404 not found` errors temporarily. This occurs because the node initiates the upload of images/texts to the Relay only after the `TaskSuccess` event is triggered. Therefore, the results won't be available on the Relay until the upload is complete. Retrying the request several times may be necessary.
 
-The source code where the Crynux Bridge downloads the images is [located here](https://github.com/crynux-ai/crynux-bridge/blob/aba6390424904c14b8f8676d5559c8ec9f6da503/relay/inference\_task.go#L93).
+The source code where the Crynux Bridge downloads the images is [located here](https://github.com/crynux-network/crynux-bridge/blob/aba6390424904c14b8f8676d5559c8ec9f6da503/relay/inference_task.go#L93).
