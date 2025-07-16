@@ -50,25 +50,11 @@ Some test CNX tokens are required to start the node. The test CNX tokens can be 
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
 
-In the `happy-aigen-discussions` channel of the Discord server, type in the following command in the input bar, **DO NOT copy & paste the command, it only works when typed in using keyboard**:
+Follow the instructions in the following document to get the test tokens:
 
-```
-/user join
-```
-
-Then bind the wallet address using the following command:
-
-```
-/node wallet {wallet_address}
-```
-
-Remember to replace `{wallet_address}` with the wallet address you just created in the Web UI.
-
-<figure><img src="../../.gitbook/assets/f8d5a672e0b753ad9f6ce99ff85a0fb.png" alt=""><figcaption></figcaption></figure>
-
-After a short while, the test CNX tokens should appear in your node wallet:
-
-<figure><img src="../../.gitbook/assets/8d57ad8e029d6de1cc4fcbe9f0c96c3.png" alt=""><figcaption></figcaption></figure>
+{% content-ref url="../get-the-test-cnx-tokens.md" %}
+[get-the-test-cnx-tokens.md](../get-the-test-cnx-tokens.md)
+{% endcontent-ref %}
 
 ## 5. Wait for the system initialization to finish
 
