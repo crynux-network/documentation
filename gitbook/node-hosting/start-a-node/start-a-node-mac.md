@@ -18,7 +18,17 @@ The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Ma
 
 ## 2. Download the Crynux Node software
 
-Download the DMG file using the following link, then double-click the file, and drag the app to the application's folder:
+Download the DMG file using the following link. By default, it will be saved to your `Downloads` folder.
+
+{% hint style="warning" %}
+**Allow the Installer to Run**
+
+Due to macOS security policies, you must remove the `quarantine` attribute from the downloaded DMG file before opening it. This prevents security warnings during installation.
+
+Open the `Terminal` app and run the following command. Make sure to replace `crynux-node.dmg` with the actual name of the downloaded file.
+
+`$ xattr -d com.apple.quarantine ~/Downloads/crynux-node.dmg`
+{% endhint %}
 
 For Dymension users:
 
