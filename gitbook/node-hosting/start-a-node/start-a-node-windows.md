@@ -28,15 +28,15 @@ Download the binary release version of the Crynux Node from the link below:
 
 For Dymension users:
 
-{% embed url="https://drive.google.com/file/d/1T1ZULsSSLKlsanPD5R1Ga34qdNCB33Mr/view?usp=drivesdk" %}
+{% embed url="https://drive.google.com/file/d/18qPeBaH_EXIIUUSF8nv_vPoWD1bTY5Xk/view?usp=drivesdk" %}
 
 For Near users:
 
-{% embed url="https://drive.google.com/file/d/1N6doUOvDdhl28UPp5QxCv7UQdngDmnpl/view?usp=drivesdk" %}
+{% embed url="https://drive.google.com/file/d/1HdJ7GjJMN6obDP5srP7o7AbzH6A1_oR0/view?usp=drivesdk" %}
 
 For Kasplex users:
 
-{% embed url="https://drive.google.com/file/d/11P57LgZ8VLwuxMYg3EBeI447edQfsFNr/view?usp=drivesdk" %}
+{% embed url="https://drive.google.com/file/d/1rNPSa_G2kkT_xfwuob2P3mI1kwo6xgTP/view?usp=drivesdk" %}
 
 {% hint style="info" %}
 Starting a node on Windows using the binary release package, as described here, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.

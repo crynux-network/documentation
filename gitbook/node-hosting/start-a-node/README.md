@@ -18,7 +18,7 @@
             <td>Dymension</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1T1ZULsSSLKlsanPD5R1Ga34qdNCB33Mr&export=download">crynux-node-helium-v2.5.2-dymension-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=18qPeBaH_EXIIUUSF8nv_vPoWD1bTY5Xk&export=download">crynux-node-helium-v2.5.2-dymension-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Dymension</td>
@@ -30,7 +30,7 @@
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1N6doUOvDdhl28UPp5QxCv7UQdngDmnpl&export=download">crynux-node-helium-v2.5.2-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1HdJ7GjJMN6obDP5srP7o7AbzH6A1_oR0&export=download">crynux-node-helium-v2.5.2-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
@@ -42,7 +42,7 @@
             <td>Kasplex</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=11P57LgZ8VLwuxMYg3EBeI447edQfsFNr&export=download">crynux-node-helium-v2.5.2-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1rNPSa_G2kkT_xfwuob2P3mI1kwo6xgTP&export=download">crynux-node-helium-v2.5.2-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Kasplex</td>
