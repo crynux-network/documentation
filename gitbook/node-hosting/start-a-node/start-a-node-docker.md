@@ -133,7 +133,7 @@ $ git clone -b kasplex https://github.com/crynux-network/crynux-node-docker-comp
 
 or simply download the files from GitHub:
 
-[https://github.com/crynux-network/crynux-node-docker-compose/tree/kasplex](https://github.com/crynux-network/crynux-node-docker-compose/tree/near)
+[https://github.com/crynux-network/crynux-node-docker-compose/tree/kasplex](https://github.com/crynux-network/crynux-node-docker-compose/tree/kasplex)
 {% endtab %}
 {% endtabs %}
 
