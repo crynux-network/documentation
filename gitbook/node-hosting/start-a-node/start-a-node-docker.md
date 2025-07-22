@@ -123,6 +123,18 @@ or simply download the files from GitHub:
 
 [https://github.com/crynux-network/crynux-node-docker-compose/tree/near](https://github.com/crynux-network/crynux-node-docker-compose/tree/near)
 {% endtab %}
+
+{% tab title="Kaspa users" %}
+you can use Git to clone the branch for Near of the following repository:
+
+```bash
+$ git clone -b kasplex https://github.com/crynux-network/crynux-node-docker-compose.git
+```
+
+or simply download the files from GitHub:
+
+[https://github.com/crynux-network/crynux-node-docker-compose/tree/kasplex](https://github.com/crynux-network/crynux-node-docker-compose/tree/near)
+{% endtab %}
 {% endtabs %}
 
 #### b. Start the container
@@ -188,4 +200,4 @@ Now the Node is fully up and running. You could just leave it there to run tasks
 
 The Node could be paused or stopped at any time by clicking the control buttons. If the node is in the middle of running a task, after clicking the buttons, the node will go into the "pending" status and continue with the running task. When the task is finished, the node will pause/stop automatically.
 
-The difference between pausing and stopping is that pausing will not cause the staked CNX tokens to be returned, so that the transaction costs less gas fee than stopping. If you have a plan of going back, you could use pausing rather than stopping.&#x20;
+The difference between pausing and stopping is that pausing will not cause the staked CNX tokens to be returned, so that the transaction costs less gas fee than stopping. If you have a plan of going back, you could use pausing rather than stopping.
