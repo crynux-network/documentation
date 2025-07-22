@@ -32,15 +32,15 @@ Open the `Terminal` app and run the following command. Make sure to replace `cry
 
 For Dymension users:
 
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-dymension-mac-arm64-unsigned.dmg" %}
 
 For Near users:
 
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-near-mac-arm64-unsigned.dmg" %}
 
 For Kasplex users:
 
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-kasplex-mac-arm64-signed.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-kasplex-mac-arm64-unsigned.dmg" %}
 
 ## 3. Start the node
 
