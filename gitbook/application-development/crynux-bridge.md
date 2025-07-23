@@ -18,7 +18,7 @@ Check out this simple webpage that lets users create images from text prompts. T
 
 And the following webpage that implements a chatbot using the OpenAI-compliant LLM API:
 
-{% embed url="https://codepen.io/0x-Berry/pen/raaorYP" %}
+{% embed url="https://codepen.io/Luke-Weber/pen/RNWaOgL" %}
 
 ## Features
 
