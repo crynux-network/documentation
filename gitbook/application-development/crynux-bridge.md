@@ -66,7 +66,7 @@ The text completions API (`/v1/llm/completions`) provides a simpler interface fo
 
 ### Image Generation APIs
 
-The Crynux Bridge provides an OpenAI-compatible image generation API that uses Stable Diffusion models. The API (`/v1/sd/images/generations`) supports the following key parameters:
+The Crynux Bridge provides an OpenAI-compatible image generation API that uses Stable Diffusion models. The API (`/v1/images`) supports the following key parameters:
 
 * `model`: The model to use (default: "crynux-network/sdxl-turbo")
 * `prompt`: Text description of the desired image
@@ -252,7 +252,7 @@ import requests
 import json
 
 # API configuration
-API_URL = "https://bridge.crynux.io/v1/sd/images/generations"
+API_URL = "https://bridge.crynux.io/v1/images"
 API_KEY = "your-api-key-here"  # Replace with your API key
 
 # Request headers
@@ -286,7 +286,7 @@ print(response.json())
 ```javascript
 async function generateImage() {
     try {
-        const API_URL = "https://bridge.crynux.io/v1/sd/images/generations";
+        const API_URL = "https://bridge.crynux.io/v1/images";
         const API_KEY = "your-api-key-here"; // Replace with your API key
 
         const response = await fetch(API_URL, {
