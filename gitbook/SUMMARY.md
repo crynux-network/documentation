@@ -28,6 +28,7 @@
   * [Start a Node - Mac](node-hosting/start-a-node/start-a-node-mac.md)
   * [Start a Node - Linux](node-hosting/start-a-node/start-a-node-linux.md)
   * [Start a Node - Docker](node-hosting/start-a-node/start-a-node-docker.md)
+  * [Start a Node - LXC](node-hosting/start-a-node/start-a-node-lxc.md)
   * [Start a Node - Vast](node-hosting/start-a-node/start-a-node-vast.md)
   * [Start a Node - Octa](node-hosting/start-a-node/start-a-node-octa.md)
 * [Get the Test CNX Tokens](node-hosting/get-the-test-cnx-tokens.md)
