@@ -67,7 +67,7 @@ main();
 
 This code is standard for invoking OpenAI models through their API. The only modification is the `base_url`, which is changed from the OpenAI URL to the official Crynux Bridge. A live version of this JavaScript code, embedded in a CodePen webpage, allows you to input arbitrary text and receive a response:
 
-{% embed url="https://codepen.io/0x-Berry/pen/raaorYP" %}
+{% embed url="https://codepen.io/Luke-Weber/pen/RNWaOgL" %}
 
 The API, provided by the official Crynux Bridge, supports both OpenAI-compliant `/completions` and `/chat/completions` endpoints. Features like streaming, tool-calling, and numerous other configuration options are also supported. For a comprehensive list of supported features, please refer to the[ Crynux Bridge documentation](../crynux-bridge.md).
 

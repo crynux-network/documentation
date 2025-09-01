@@ -92,37 +92,37 @@ To read more about the Helium Network release, go to the following page:
             <td>Dymension</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1T1ZULsSSLKlsanPD5R1Ga34qdNCB33Mr&export=download">crynux-node-helium-v2.5.2-dymension-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1Ja7uWmhH8qD7KToJRzlM9bWqFbWiR5aq&export=download">crynux-node-helium-v2.6.0-dymension-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Dymension</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-dymension-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-dymension-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-dymension-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1N6doUOvDdhl28UPp5QxCv7UQdngDmnpl&export=download">crynux-node-helium-v2.5.2-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1ND0t4rRadLLL8gN1zvcHZXijUd6nMrXE&export=download">crynux-node-helium-v2.6.0-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-near-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-near-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Kasplex</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=11P57LgZ8VLwuxMYg3EBeI447edQfsFNr&export=download">crynux-node-helium-v2.5.2-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1fpb639DlKv4lxYd9ze1uh7406Q-AcqvF&export=download">crynux-node-helium-v2.6.0-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Kasplex</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.5.2/crynux-node-helium-v2.5.2-kasplex-mac-arm64-signed.dmg">crynux-node-helium-v2.5.2-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-kasplex-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
@@ -146,7 +146,6 @@ To start a node on cloud services based on Docker:
 {% content-ref url="node-hosting/start-a-node/start-a-node-vast.md" %}
 [start-a-node-vast.md](node-hosting/start-a-node/start-a-node-vast.md)
 {% endcontent-ref %}
-
 
 *Octa.space*
 
