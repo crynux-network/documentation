@@ -20,6 +20,21 @@ Before you start, make sure your device meets the following requirements:
 
 Download the latest NVIDIA driver from the [NVIDIA official website](https://www.nvidia.com/Download/index.aspx?lang=en-us), and finish the installation.
 
+The Crynux Node requires the `nvidia-smi` command to be installed on the host machine. You need to make sure this command is available on your host.
+
+On Ubuntu, the command can be installed via the `nvidia-utils` package. For other Linux distributions, please find the package that provides the `nvidia-smi` command and install it.
+
+You can verify the installation by running `nvidia-smi` on your host machine:
+
+```bash
+$ nvidia-smi
+```
+
+### Install NVIDIA Container Toolkit
+
+Install the NVIDIA Container Toolkit by following the official guide:
+[https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+
 ### Install LXD or Incus
 
 Install your chosen container manager by following its official guide:
@@ -30,29 +45,47 @@ After installation, initialize it according to its documentation.
 
 ## 3. Setup the Configuration Profile
 
-The Crynux Node repository provides a ready-to-use profile configuration file.
+The Crynux Node repository provides a script to generate a ready-to-use profile configuration file tailored to your system.
 
-#### a. Get the profile from GitHub
+#### a. Get the profile script from GitHub
 
-Clone the `crynux-node` repository to get the profile file:
+Clone the `crynux-node` repository and navigate to the script directory:
 
 ```bash
 $ git clone https://github.com/crynux-network/crynux-node.git
 $ cd crynux-node/build/lxc/crynux-profile
 ```
 
-#### b. Create the profile
+{% hint style="info" %}
+Cloning the entire `crynux-node` repository can be time-consuming. As an alternative, you can download only the files from the `crynux-profile` directory.
 
-Now, create the `crynux` profile using the downloaded `profile.yaml` file:
+Visit [this Github link](https://github.com/crynux-network/crynux-node/tree/main/build/lxc/crynux-profile) to download the files. Make sure you are in the `crynux-profile` directory in your terminal to proceed with the next steps.
+{% endhint %}
+
+#### b. Generate the profile configuration
+
+Run the `create-profile.sh` script to generate the `profile.yaml` file. You must tell the script whether you are using `lxc` or `incus`.
 
 ```bash
 # Using LXD
-$ lxc profile create crynux
-$ cat profile.yaml | lxc profile edit crynux
+$ ./create-profile.sh lxc
 
 # Using Incus
-$ incus profile create crynux
-$ cat profile.yaml | incus profile edit crynux
+$ ./create-profile.sh incus
+```
+
+#### c. Create the profile
+
+Now, create the `crynux-node` profile using the generated `profile.yaml` file:
+
+```bash
+# Using LXD
+$ sudo lxc profile create crynux-node
+$ cat profile.yaml | sudo lxc profile edit crynux-node
+
+# Using Incus
+$ sudo incus profile create crynux-node
+$ cat profile.yaml | sudo incus profile edit crynux-node
 ```
 
 ## 4. Start the Node
@@ -63,25 +96,25 @@ The Crynux Node LXC images are hosted on a public image server. Add it to your r
 
 ```bash
 # Using LXD
-$ lxc remote add --protocol simplestreams crynux https://lxc.crynux.io
+$ sudo lxc remote add --protocol simplestreams crynux https://lxc.crynux.io
 
 # Using Incus
-$ incus remote add --protocol simplestreams crynux https://lxc.crynux.io
+$ sudo incus remote add --protocol simplestreams crynux https://lxc.crynux.io
 ```
 
 You can list the available images:
 
 ```bash
 # Using LXD
-$ lxc image list crynux:
+$ sudo lxc image list crynux:
 
 # Using Incus
-$ incus image list crynux:
+$ sudo incus image list crynux:
 ```
 
 ### b. Launch the container
 
-Now, launch the container using the profile you created. This is a clean, single command that applies all your configurations at once. Note that we apply both the `default` profile (for basic networking) and our new `crynux` profile.
+Now, launch the container using the profile you created. This is a clean, single command that applies all your configurations at once. Note that we apply both the `default` profile (for basic networking) and our new `crynux-node` profile.
 
 Launch the Crynux Node container. There are different images for different blockchain networks.
 
@@ -91,10 +124,10 @@ Use the `crynux-node:latest-dymension` image:
 
 ```bash
 # Using LXD
-$ lxc launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux -c nvidia.runtime=true
+$ sudo lxc launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux-node
 
 # Using Incus
-$ incus launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux -c nvidia.runtime=true
+$ sudo incus launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux-node
 ```
 {% endtab %}
 
@@ -102,10 +135,10 @@ $ incus launch crynux:crynux-node:latest-dymension crynux-node -p default -p cry
 Use the `crynux-node:latest-near` image:
 ```bash
 # Using LXD
-$ lxc launch crynux:crynux-node:latest-near crynux-node -p default -p crynux -c nvidia.runtime=true
+$ sudo lxc launch crynux:crynux-node:latest-near crynux-node -p default -p crynux-node
 
 # Using Incus
-$ incus launch crynux:crynux-node:latest-near crynux-node -p default -p crynux -c nvidia.runtime=true
+$ sudo incus launch crynux:crynux-node:latest-near crynux-node -p default -p crynux-node
 ```
 {% endtab %}
 {% endtabs %}
@@ -176,19 +209,19 @@ First, refresh your local image to pull the latest version from the remote serve
 {% tab title="Dymension users" %}
 ```bash
 # Using LXD
-$ lxc image refresh crynux:crynux-node:latest-dymension --alias
+$ sudo lxc image refresh crynux:crynux-node:latest-dymension --alias
 
 # Using Incus
-$ incus image refresh crynux:crynux-node:latest-dymension --alias
+$ sudo incus image refresh crynux:crynux-node:latest-dymension --alias
 ```
 {% endtab %}
 {% tab title="Near users" %}
 ```bash
 # Using LXD
-$ lxc image refresh crynux:crynux-node:latest-near --alias
+$ sudo lxc image refresh crynux:crynux-node:latest-near --alias
 
 # Using Incus
-$ incus image refresh crynux:crynux-node:latest-near --alias
+$ sudo incus image refresh crynux:crynux-node:latest-near --alias
 ```
 {% endtab %}
 {% endtabs %}
@@ -198,36 +231,36 @@ $ incus image refresh crynux:crynux-node:latest-near --alias
 
 ```bash
 # Using LXD
-$ lxc stop crynux-node
-$ lxc delete crynux-node
+$ sudo lxc stop crynux-node
+$ sudo lxc delete crynux-node
 
 # Using Incus
-$ incus stop crynux-node
-$ incus delete crynux-node
+$ sudo incus stop crynux-node
+$ sudo incus delete crynux-node
 ```
 Don't worry, if you have mounted the data and config directories, your data will be safe on the host machine as it is managed by the profile.
 
 ### c. Launch a new container with the latest image
 
-Follow the instructions in step 4 to launch a new container. It will now use the latest image you just pulled, and automatically apply the `crynux` profile with all your settings.
+Follow the instructions in step 4 to launch a new container. It will now use the latest image you just pulled, and automatically apply the `crynux-node` profile with all your settings.
 
 {% tabs %}
 {% tab title="Dymension users" %}
 ```bash
 # Using LXD
-$ lxc launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux -c nvidia.runtime=true
+$ sudo lxc launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux-node
 
 # Using Incus
-$ incus launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux -c nvidia.runtime=true
+$ sudo incus launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux-node
 ```
 {% endtab %}
 {% tab title="Near users" %}
 ```bash
 # Using LXD
-$ lxc launch crynux:crynux-node:latest-near crynux-node -p default -p crynux -c nvidia.runtime=true
+$ sudo lxc launch crynux:crynux-node:latest-near crynux-node -p default -p crynux-node
 
 # Using Incus
-$ incus launch crynux:crynux-node:latest-near crynux-node -p default -p crynux -c nvidia.runtime=true
+$ sudo incus launch crynux:crynux-node:latest-near crynux-node -p default -p crynux-node
 ```
 {% endtab %}
 {% endtabs %}
