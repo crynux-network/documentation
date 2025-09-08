@@ -38,10 +38,6 @@ For Near users:
 
 {% embed url="MAC_LINK_NEAR" %}
 
-For Kasplex users:
-
-{% embed url="MAC_LINK_KASPLEX" %}
-
 ## 3. Start the node
 
 Double-click on the icon of the newly installed app to start the node:

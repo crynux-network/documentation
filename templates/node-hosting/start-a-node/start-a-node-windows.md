@@ -34,10 +34,6 @@ For Near users:
 
 {% embed url="WINDOWS_PREVIEW_LINK_NEAR" %}
 
-For Kasplex users:
-
-{% embed url="WINDOWS_PREVIEW_LINK_KASPLEX" %}
-
 {% hint style="info" %}
 Starting a node on Windows using the binary release package, as described here, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.
 {% endhint %}

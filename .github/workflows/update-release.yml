@@ -21,13 +21,10 @@ jobs:
               "${{ github.event.client_payload.release-version }}" \
               "${{ github.event.client_payload.mac-link-dymension }}" \
               "${{ github.event.client_payload.mac-link-near }}" \
-              "${{ github.event.client_payload.mac-link-kasplex }}" \
               "${{ github.event.client_payload.windows-download-link-dymension }}" \
               "${{ github.event.client_payload.windows-preview-link-dymension }}" \
               "${{ github.event.client_payload.windows-download-link-near }}" \
               "${{ github.event.client_payload.windows-preview-link-near }}" \
-              "${{ github.event.client_payload.windows-download-link-kasplex }}" \
-              "${{ github.event.client_payload.windows-preview-link-kasplex }}"
       - name: Commit the changes
         uses: EndBug/add-and-commit@v9
         with:

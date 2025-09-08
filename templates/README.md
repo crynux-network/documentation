@@ -112,18 +112,6 @@ To read more about the Helium Network release, go to the following page:
             <td>M1/M2/M3 and later</td>
             <td><a href="MAC_LINK_NEAR">crynux-node-helium-vRELEASE_VERSION-near-mac-arm64-signed.dmg</a></td>
         </tr>
-        <tr>
-            <td>Kasplex</td>
-            <td>Windows</td>
-            <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="WINDOWS_DOWNLOAD_LINK_KASPLEX">crynux-node-helium-vRELEASE_VERSION-near-windows-x64.zip</a></td>
-        </tr>
-        <tr>
-            <td>Kasplex</td>
-            <td>Mac</td>
-            <td>M1/M2/M3 and later</td>
-            <td><a href="MAC_LINK_KASPLEX">crynux-node-helium-vRELEASE_VERSION-near-mac-arm64-signed.dmg</a></td>
-        </tr>
     </tbody>
 </table>
 
