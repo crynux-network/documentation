@@ -74,9 +74,7 @@ To read more about the Helium Network release, go to the following page:
 
 ### Start a Node
 
-1. ~~Fill a form to tell us your GPU type, location, network bandwidth~~ \[<mark style="color:blue;">**No application form, no sign up, you don’t need to tell us**</mark>]
-2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
-3. Just download the package according to your platform, and follow the tutorials below:
+Download the package according to your platform, and follow the tutorials below:
 
 <table>
     <thead>
@@ -111,18 +109,6 @@ To read more about the Helium Network release, go to the following page:
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
             <td><a href="MAC_LINK_NEAR">crynux-node-helium-vRELEASE_VERSION-near-mac-arm64-signed.dmg</a></td>
-        </tr>
-        <tr>
-            <td>Kasplex</td>
-            <td>Windows</td>
-            <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="WINDOWS_DOWNLOAD_LINK_KASPLEX">crynux-node-helium-vRELEASE_VERSION-near-windows-x64.zip</a></td>
-        </tr>
-        <tr>
-            <td>Kasplex</td>
-            <td>Mac</td>
-            <td>M1/M2/M3 and later</td>
-            <td><a href="MAC_LINK_KASPLEX">crynux-node-helium-vRELEASE_VERSION-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
