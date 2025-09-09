@@ -74,9 +74,7 @@ To read more about the Helium Network release, go to the following page:
 
 ### Start a Node
 
-1. ~~Fill a form to tell us your GPU type, location, network bandwidth~~ \[<mark style="color:blue;">**No application form, no sign up, you don’t need to tell us**</mark>]
-2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
-3. Just download the package according to your platform, and follow the tutorials below:
+Download the package according to your platform, and follow the tutorials below:
 
 <table>
     <thead>
@@ -92,37 +90,25 @@ To read more about the Helium Network release, go to the following page:
             <td>Dymension</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1Ja7uWmhH8qD7KToJRzlM9bWqFbWiR5aq&export=download">crynux-node-helium-v2.6.0-dymension-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1PRV5Kw80LumVbU5CK0vrNJFBMgdxZfgW&export=download">crynux-node-helium-v2.6.0-dymension-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Dymension</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-dymension-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-dymension-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.7.0/crynux-node-helium-v2.6.0-dymension-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-dymension-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1ND0t4rRadLLL8gN1zvcHZXijUd6nMrXE&export=download">crynux-node-helium-v2.6.0-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=10DI53z8yj6cDctHCgAUk_RNPm9dePH8A&export=download">crynux-node-helium-v2.6.0-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-near-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-near-mac-arm64-signed.dmg</a></td>
-        </tr>
-        <tr>
-            <td>Kasplex</td>
-            <td>Windows</td>
-            <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1fpb639DlKv4lxYd9ze1uh7406Q-AcqvF&export=download">crynux-node-helium-v2.6.0-near-windows-x64.zip</a></td>
-        </tr>
-        <tr>
-            <td>Kasplex</td>
-            <td>Mac</td>
-            <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-kasplex-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.7.0/crynux-node-helium-v2.6.0-near-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>

@@ -4,12 +4,6 @@ description: Start a node to join the Crynux Network on Mac
 
 # Start a Node - Mac
 
-## 0. Overview
-
-* ~~Fill a form to tell us your GPU type, location, network bandwidth~~ \[<mark style="color:blue;">**No application form, no sign up, you don’t need to tell us**</mark>]
-* ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
-* Follow the steps below:
-
 ## 1. Prerequisite
 
 The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Make sure your device meets the requirement before running the node.
@@ -32,15 +26,11 @@ Open the `Terminal` app and run the following command. Make sure to replace `cry
 
 For Dymension users:
 
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-dymension-mac-arm64-unsigned.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.7.0/crynux-node-helium-v2.6.0-dymension-mac-arm64-unsigned.dmg" %}
 
 For Near users:
 
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-near-mac-arm64-unsigned.dmg" %}
-
-For Kasplex users:
-
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.6.0/crynux-node-helium-v2.6.0-kasplex-mac-arm64-unsigned.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v2.7.0/crynux-node-helium-v2.6.0-near-mac-arm64-unsigned.dmg" %}
 
 ## 3. Start the node
 

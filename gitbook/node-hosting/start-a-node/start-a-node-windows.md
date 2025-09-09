@@ -4,12 +4,6 @@ description: Start a node to join the Crynux Network on Windows
 
 # Start a Node - Windows
 
-## 0. Overview
-
-* ~~Fill a form to tell us your GPU type, location, network bandwidth~~ \[<mark style="color:blue;">**No application form, no sign up, you don't need to tell us**</mark>]
-* ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
-* Follow the steps below:
-
 ## 1. Prerequisite
 
 Before you start, make sure your device meets the following requirements:
@@ -28,15 +22,11 @@ Download the binary release version of the Crynux Node from the link below:
 
 For Dymension users:
 
-{% embed url="https://drive.google.com/file/d/1Ja7uWmhH8qD7KToJRzlM9bWqFbWiR5aq/view?usp=drivesdk" %}
+{% embed url="https://drive.google.com/file/d/1PRV5Kw80LumVbU5CK0vrNJFBMgdxZfgW/view?usp=drivesdk" %}
 
 For Near users:
 
-{% embed url="https://drive.google.com/file/d/1ND0t4rRadLLL8gN1zvcHZXijUd6nMrXE/view?usp=drivesdk" %}
-
-For Kasplex users:
-
-{% embed url="https://drive.google.com/file/d/1fpb639DlKv4lxYd9ze1uh7406Q-AcqvF/view?usp=drivesdk" %}
+{% embed url="https://drive.google.com/file/d/10DI53z8yj6cDctHCgAUk_RNPm9dePH8A/view?usp=drivesdk" %}
 
 {% hint style="info" %}
 Starting a node on Windows using the binary release package, as described here, is still in **beta testing**. If you have trouble running the downloaded package, please use [the Docker version](start-a-node-docker.md) instead.
