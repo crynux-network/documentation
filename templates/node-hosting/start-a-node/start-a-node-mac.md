@@ -4,12 +4,6 @@ description: Start a node to join the Crynux Network on Mac
 
 # Start a Node - Mac
 
-## 0. Overview
-
-* ~~Fill a form to tell us your GPU type, location, network bandwidth~~ \[<mark style="color:blue;">**No application form, no sign up, you don’t need to tell us**</mark>]
-* ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
-* Follow the steps below:
-
 ## 1. Prerequisite
 
 The Crynux Node supports only the Macs with the M1, M2, M3 or newer versions. Make sure your device meets the requirement before running the node.

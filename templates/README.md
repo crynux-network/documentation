@@ -74,9 +74,7 @@ To read more about the Helium Network release, go to the following page:
 
 ### Start a Node
 
-1. ~~Fill a form to tell us your GPU type, location, network bandwidth~~ \[<mark style="color:blue;">**No application form, no sign up, you don’t need to tell us**</mark>]
-2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
-3. Just download the package according to your platform, and follow the tutorials below:
+Download the package according to your platform, and follow the tutorials below:
 
 <table>
     <thead>
