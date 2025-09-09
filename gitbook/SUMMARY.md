@@ -56,8 +56,7 @@
 
 ## Crynux Token
 
-* [Wallet Configuration](crynux-token/wallet-configuration/README.md)
-  * [Metamask](crynux-token/wallet-configuration/metamask.md)
+* [Wallet Configuration](crynux-token/wallet-configuration.md)
 
 ## Troubleshooting
 

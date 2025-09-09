@@ -14,11 +14,11 @@ Go to the directory where you click `Crynux Node.exe`, there is a sub directory 
 {% endtab %}
 
 {% tab title="Mac" %}
-Open a Finder window, go to the `Applications` folder, right click on the `Crynux Node.app`  and select `Show Package Content`, then go to the folder `Contents/Resources/data/logs`, and the log files are located inside.
+Open a Finder window, go to the `Applications` folder, right click on the `Crynux Node.app` and select `Show Package Content`, then go to the folder `Contents/Resources/data/logs`, and the log files are located inside.
 {% endtab %}
 
 {% tab title="Docker" %}
-### Find the logs in the container output
+#### Find the logs in the container output
 
 Find the container name of the Crynux Node:
 
@@ -47,7 +47,7 @@ If you want to save the logs to a file, use the following command:
 $ docker logs {container_name} >> crynux.log
 ```
 
-### Find the log file inside the container
+#### Find the log file inside the container
 
 The log file can also be found under `/app/logs` inside the container.
 {% endtab %}
@@ -63,7 +63,7 @@ The log file is located at `logs/crynux-server.log`, relative to the project roo
 
 There are several log files inside the `log` folder. The content of each file is described below:
 
-* `crynux-server.log`: Node manager related logs.&#x20;
+* `crynux-server.log`: Node manager related logs.
 * `crynux-worker.log`: Task executor related logs.
 * `crynux_worker_inference.log`: Task execution logs.
 * `crynux_worker_prefetch.log`: Model downloading logs.
