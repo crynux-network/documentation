@@ -18,25 +18,25 @@
             <td>Dymension</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1PRV5Kw80LumVbU5CK0vrNJFBMgdxZfgW&export=download">crynux-node-helium-v2.6.0-dymension-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1-zKQCqebBoJkQHZ-DAiXNDa0UZC64HjU&export=download">crynux-node-helium-v2.7.0-dymension-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Dymension</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.7.0/crynux-node-helium-v2.6.0-dymension-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-dymension-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.7.0/crynux-node-helium-v2.7.0-dymension-mac-arm64-unsigned.dmg">crynux-node-helium-v2.7.0-dymension-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=10DI53z8yj6cDctHCgAUk_RNPm9dePH8A&export=download">crynux-node-helium-v2.6.0-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=16MvUmx9KEnFkZp8trFtf0a3ECPydkR5O&export=download">crynux-node-helium-v2.7.0-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.7.0/crynux-node-helium-v2.6.0-near-mac-arm64-unsigned.dmg">crynux-node-helium-v2.6.0-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.7.0/crynux-node-helium-v2.7.0-near-mac-arm64-unsigned.dmg">crynux-node-helium-v2.7.0-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
