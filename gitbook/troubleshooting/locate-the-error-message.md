@@ -14,7 +14,15 @@ Go to the directory where you click `Crynux Node.exe`, there is a sub directory 
 {% endtab %}
 
 {% tab title="Mac" %}
-Open a Finder window, go to the `Applications` folder, right click on the `Crynux Node.app` and select `Show Package Content`, then go to the folder `Contents/Resources/data/logs`, and the log files are located inside.
+The log files of the Mac app locates inside your home folder at:
+
+`~/Library/Application\ Support/crynux.io/Crynux\ Node/`
+
+To access this folder, open a terminal window and type in the following command:
+
+`$ open ~/Library/Application\ Support/crynux.io/Crynux\ Node/`
+
+And the log files are located inside under the `logs` folder.
 {% endtab %}
 
 {% tab title="Docker" %}
@@ -61,7 +69,7 @@ The log file is located at `logs/crynux-server.log`, relative to the project roo
 {% endtab %}
 {% endtabs %}
 
-There are several log files inside the `log` folder. The content of each file is described below:
+There are several log files inside the `logs` folder. The content of each file is described below:
 
 * `crynux-server.log`: Node manager related logs.
 * `crynux-worker.log`: Task executor related logs.
