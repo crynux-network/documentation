@@ -70,13 +70,15 @@ $$
 
 To align a node's economic incentives with the long-term health and security of the network, the amount of staked tokens is a key factor in the selection probability. Nodes with a higher stake are given a higher probability of being assigned tasks.
 
-A Staking Score ($$S_i$$) for a node $$i$$ is calculated by normalizing its staked amount against the maximum stake in the network:
+A Staking Score ($$S_i$$) for a node $$i$$ is calculated by normalizing the square root of its staked amount against the maximum square root of stake in the network:
 
 $$
-S_i = \frac{ s_i} {max({s}_j | j \in N )}
+S_i = \frac{ \sqrt{s_i} } { \max( \sqrt{s_j} \mid j \in N ) }
 $$
 
-Where $$s_i$$ is the amount staked by node $$i$$, and $$max({s}_j | j \in N )$$ is the highest stake among all nodes $$N$$.
+Where $$s_i$$ is the amount staked by node $$i$$, and $$\max( \sqrt{s_j} \mid j \in N )$$ is the maximum square root of the staked amount among all nodes $$N$$.
+
+This square-root staking dampens the marginal advantage of very large stakes, similar in spirit to quadratic voting. Doubling the stake increases the score by only $$\sqrt{2}$$ rather than 2, which reduces large-holder dominance and helps prevent monopolization, while still rewarding meaningful economic commitment and preserving Sybil resistance.
 
 This design is fundamental to network security, as it significantly raises the cost of a successful Sybil attack. To successfully disrupt the network, an attacker's malicious nodes must be selected to perform tasks. Because the network prioritizes nodes with a higher stake for task assignment, an attacker cannot rely on a large number of cheap, low-stake nodes. Instead, they are forced to consolidate their capital into high-stake nodes just to be considered for selection.
 
