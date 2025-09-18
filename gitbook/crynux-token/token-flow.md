@@ -31,6 +31,10 @@ flowchart TD
 - When you stop the node and there is no Beneficial Address set, the stake refund goes back to the Node Wallet and will be visible there.
 - When withdrawing task fees in the Portal and there is no Beneficial Address set, withdrawals go to the Node Wallet.
 
+{% hint style="info" %}
+If you obtained test CNX via Discord, those are credits shown in the Node WebUI as CNX Balance and CNX Staked. They move between Balance and Staked when you start/stop the node and never appear in your on-chain wallet.
+{% endhint %}
+
 ### Stake Locked
 
 - What it is: the portion of tokens deducted from the Node Wallet at start and locked as stake by the node.
