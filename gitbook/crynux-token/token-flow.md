@@ -2,8 +2,12 @@
 
 This page explains, in simple terms, where your tokens are, when they move, and where you can see them. There are four main places/accounts involved:
 
-{% hint style="info" %}
+{% hint style="success" %}
 The [Crynux Portal](https://portal.crynux.io) now shows all token locations linked to your node wallet—Node Wallet, Beneficial Wallet, Stake Locked, and Relay Account—so you can review your entire token distribution in one place.
+{% endhint %}
+
+{% hint style="warning" %}
+If you obtained test CNX via Discord, those are Node Credits (not CNX tokens). In the Node WebUI, credits are combined with your CNX tokens and shown as CNX Balance or CNX Staked. They move between Balance and Staked when you start/stop the node and never appear in your on-chain wallet. In the [Crynux Portal](https://portal.crynux.io), they are shown separately as Credits.
 {% endhint %}
 
 | Place | Description | Visible in on-chain wallet? | Where to view | Network check |
@@ -13,10 +17,6 @@ The [Crynux Portal](https://portal.crynux.io) now shows all token locations link
 | Stake Locked | Tokens locked as stake after you start the node. | No | [Crynux Portal](https://portal.crynu.io), Node WebUI | Check both L2 blockchains (switch node versions) |
 | Relay Account | Task fees credited while your node executes tasks. Stored in the Crynux Relay. | No | [Crynux Portal](https://portal.crynu.io), Node WebUI | - |
 
-
-{% hint style="warning" %}
-If you obtained test CNX via Discord, those are credits shown in the Node WebUI as CNX Balance and CNX Staked. They move between Balance and Staked when you start/stop the node and never appear in your on-chain wallet.
-{% endhint %}
 
 ## Token Flowchart
 
@@ -43,10 +43,6 @@ flowchart TD
 - When you stop the node and there is no Beneficial Address set, the stake refund goes back to the Node Wallet and will be visible there.
 - When withdrawing task fees in the Portal and there is no Beneficial Address set, withdrawals go to the Node Wallet.
 
-{% hint style="info" %}
-If you obtained test CNX via Discord, those are credits shown in the Node WebUI as CNX Balance and CNX Staked. They move between Balance and Staked when you start/stop the node and never appear in your on-chain wallet.
-{% endhint %}
-
 ### Stake Locked
 
 - What it is: the portion of tokens deducted from the Node Wallet at start and locked as stake by the node.
@@ -70,4 +66,3 @@ If you obtained test CNX via Discord, those are credits shown in the Node WebUI 
 - How to withdraw: in the Portal, use Withdraw to move funds from the Relay Account to an on-chain address.
   - If a Beneficial Address is configured, withdrawals go to the Beneficial Wallet.
   - Otherwise, withdrawals go to the Node Wallet.
-
