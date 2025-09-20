@@ -56,8 +56,8 @@
 
 ## Crynux Token
 
-* [Wallet Configuration](crynux-token/wallet-configuration.md)
 * [Token Flow](crynux-token/token-flow.md)
+* [Wallet Configuration](crynux-token/wallet-configuration.md)
 
 ## Troubleshooting
 

@@ -90,7 +90,7 @@ Download the package according to your platform, and follow the tutorials below:
             <td>Dymension</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1llkqSn7ziEwOcIQt-1Hty8WxPhGH83Qb&export=download">crynux-node-helium-v2.7.0-dymension-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1bH3GCSqqU4v9x3Tc0tUQ3lnV6NAbDiDn&export=download">crynux-node-helium-v2.7.0-dymension-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Dymension</td>
@@ -102,7 +102,7 @@ Download the package according to your platform, and follow the tutorials below:
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1o9BV59iJ3BHu26w03pnD20RywpfPE6gN&export=download">crynux-node-helium-v2.7.0-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=16fSai46KBqW6Kw6wnU5vE4Wznm7qBhLP&export=download">crynux-node-helium-v2.7.0-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>

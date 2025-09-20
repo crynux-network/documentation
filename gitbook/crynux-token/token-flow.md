@@ -1,4 +1,4 @@
-## Token Flow in the Crynux System
+# Token Flow
 
 This page explains, in simple terms, where your tokens are, when they move, and where you can see them. There are four main places/accounts involved:
 
@@ -13,7 +13,14 @@ The [Crynux Portal](https://portal.crynux.io) now shows all token locations link
 | Stake Locked | Tokens locked as stake after you start the node. | No | [Crynux Portal](https://portal.crynu.io), Node WebUI | Check both L2 blockchains (switch node versions) |
 | Relay Account | Task fees credited while your node executes tasks. Stored in the Crynux Relay. | No | [Crynux Portal](https://portal.crynu.io), Node WebUI | - |
 
-```mermaid
+
+{% hint style="warning" %}
+If you obtained test CNX via Discord, those are credits shown in the Node WebUI as CNX Balance and CNX Staked. They move between Balance and Staked when you start/stop the node and never appear in your on-chain wallet.
+{% endhint %}
+
+## Token Flowchart
+
+```mermaid fullWidth="false"
 flowchart TD
   NW["Node Wallet"]
   BW["Beneficial Wallet"]
@@ -27,6 +34,7 @@ flowchart TD
   RA -->|"Withdraw (with Beneficial)"| BW
 ```
 
+## Token Movement
 
 ### Node Wallet
 
@@ -50,9 +58,9 @@ If you obtained test CNX via Discord, those are credits shown in the Node WebUI 
 
 ### Beneficial Wallet
 
-- If a Beneficial Address is configured for the Node Wallet, the stake refund after stopping the node is sent to the Beneficial Wallet. It will not appear in the Node Wallet; check the wallet that controls the Beneficial Address.
-- If a Beneficial Address is configured, Portal withdrawals of task fees are sent to the Beneficial Wallet.
-- Always verify balances using the wallet that holds the Beneficial Address.
+* If a Beneficial Address is configured for the Node Wallet, the stake refund after stopping the node is sent to the Beneficial Wallet. It will not appear in the Node Wallet; check the wallet that controls the Beneficial Address.
+* If a Beneficial Address is configured, Portal withdrawals of task fees are sent to the Beneficial Wallet.
+* Always verify balances using the wallet that holds the Beneficial Address.
 
 ### Relay Account
 
@@ -62,3 +70,4 @@ If you obtained test CNX via Discord, those are credits shown in the Node WebUI 
 - How to withdraw: in the Portal, use Withdraw to move funds from the Relay Account to an on-chain address.
   - If a Beneficial Address is configured, withdrawals go to the Beneficial Wallet.
   - Otherwise, withdrawals go to the Node Wallet.
+

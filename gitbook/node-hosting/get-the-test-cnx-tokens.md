@@ -4,7 +4,7 @@ Some test CNX tokens are required to start the node. The test CNX tokens can be 
 
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
 
-{% hint style="info" %}
+{% hint style="warning" %}
 The "test CNX" you receive from Discord are special, purpose-built Node Credits that can only be used to start a node. In the [Crynux Portal](https://portal.crynux.io), they are shown separately as Credits. In the Node WebUI, they are combined with your CNX tokens and displayed as CNX Balance or CNX Staked under Node Wallet. They cannot be transferred. If your node is slashed, these credits will be deducted; afterward they will no longer be available, and you will need to use regular CNX to start the node.
 {% endhint %}
 
@@ -13,7 +13,7 @@ The "test CNX" you receive from Discord are special, purpose-built Node Credits 
 The slash command can be used in two places:
 
 * A private chat window to the HappyAIGen bot
-* In the pubic channel `happy-aigen-discussions`&#x20;
+* In the pubic channel `happy-aigen-discussions`
 
 In most other public channels, the slash command is forbidden to maintain a better environment for discussion.
 
