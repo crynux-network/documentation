@@ -10,8 +10,6 @@ Go to the directory where you click `Crynux Node.exe`, there is a sub directory 
 {% endtab %}
 
 {% tab title="Mac" %}
-Open a Finder window, go to the `Applications` folder, right click on the `Crynux Node.app`  and select `Show Package Content`, then go to the folder `Contents/Resources/config`, and the config file is located inside as `config.yml`.
-
 The config folder of the Mac app locates inside your home diretory at:
 
 `~/Library/Application\ Support/crynux.io/Crynux\ Node/`
