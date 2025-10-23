@@ -31,7 +31,7 @@ You can also use the Crynux Portal at [portal.crynux.io](https://portal.crynux.i
 | Item           | Value                                  |
 | -------------- | -------------------------------------- |
 | JSON RPC       | https://json-rpc.testnet-dym.crynux.io |
-| Chain ID       | 10000                                  |
+| Chain ID       | 1313161573                             |
 | Token Symbol   | CNX                                    |
 | Decimal        | 18                                     |
 | Block Explorer | -                                      |
