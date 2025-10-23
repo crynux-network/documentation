@@ -45,3 +45,20 @@ You can also use the Crynux Portal at [portal.crynux.io](https://portal.crynux.i
 | Token Symbol   | CNX                                     |
 | Decimal        | 18                                      |
 | Block Explorer | -                                       |
+
+## Crynux Relay
+
+### Relay URL
+
+`https://relay.crynux.io`
+
+### Deposit Address
+
+{% hint style="danger" %}
+To prevent phishing, make sure to cross-check the deposit address in the [Crynux Discord](https://discord.gg/y8YKxb7uZk) and [Crynux Portal](https://portal.crynux.io/) before making the transfer.
+{% endhint %}
+
+```json
+0x2003D1F047C1948cfE12e449379e3ce487070765
+```
+
