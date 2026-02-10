@@ -7,18 +7,20 @@ While obtaining unstructured text responses is useful, building reliable AI appl
 OpenAI's official API offers native "JSON Mode" and "Structured Outputs" (via `response_format`), which guarantee that the output matches a specific JSON schema.
 
 However, **most open-source models and OpenAI-compatible APIs do not fully support these native strict modes**. If you simply ask an open-source model to "output JSON", it might:
-*   Add conversational text before or after the JSON.
-*   Make syntax errors (missing brackets, trailing commas).
-*   Hallucinate keys that aren't in your schema.
+
+* Add conversational text before or after the JSON.
+* Make syntax errors (missing brackets, trailing commas).
+* Hallucinate keys that aren't in your schema.
 
 ## The Solution: Simulating via Tool Use
 
-Fortunately, we can reliably achieve structured output by leveraging [**Tool Use (Function Calling)**](./tool-use.md).
+Fortunately, we can reliably achieve structured output by leveraging [**Tool Use (Function Calling)**](tool-use.md).
 
-Since models like `Qwen-2.5-7B-Instruct` are fine-tuned to generate valid JSON arguments for tool calls, we can "trick" the model into generating structured data by:
-1.  Defining a "tool" whose parameters match our desired output schema.
-2.  Forcing the model to "call" this tool.
-3.  Parsing the arguments of the tool call as our final output.
+Since models like `Qwen2.5-7B-Instruct` are fine-tuned to generate valid JSON arguments for tool calls, we can "trick" the model into generating structured data by:
+
+1. Defining a "tool" whose parameters match our desired output schema.
+2. Forcing the model to "call" this tool.
+3. Parsing the arguments of the tool call as our final output.
 
 **LangChain** makes this pattern extremely easy with the `.with_structured_output()` method. It automatically handles the schema conversion, tool binding, and output parsing for you.
 
@@ -32,7 +34,7 @@ The following examples show how to extract a structured `CalendarEvent` object f
 
 {% tabs %}
 {% tab title="LangChain-Crynux" %}
-The `langchain-crynux` package supports `with_structured_output` out of the box. It defaults to using **Tool Use** (method="function_calling") to ensure compatibility with open-source models on the Crynux Network.
+The `langchain-crynux` package supports `with_structured_output` out of the box. It defaults to using **Tool Use** (method="function\_calling") to ensure compatibility with open-source models on the Crynux Network.
 
 ```python
 from langchain_crynux import ChatCrynux
