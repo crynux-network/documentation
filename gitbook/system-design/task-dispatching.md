@@ -10,28 +10,20 @@ If no available nodes meet the criteria, the task will be added to the queue to 
 
 To optimize task execution speed while maintaining consensus strength, nodes are selected randomly from candidates with different probabilities. Factors influencing a node's selection probability include its local model cache and QoS score. Nodes with faster GPUs, superior networks, fewer timeouts, or locally cached models needed for the task will have a higher likelihood of selection.
 
-The details of the task dispatching algorithm are described in the following sections.
+## Node Selection Algorithm
 
-<figure><img src="../.gitbook/assets/fd705dac6f56dab6fcc30062a56561d.png" alt=""><figcaption><p>Task Dispatching Overview</p></figcaption></figure>
+The node selection algorithm first determines a pool of candidate nodes, then selects one from the pool using a weighted random process. If no candidates are available, the task is added to the queue.
 
-## Assigning Task to the Nodes
+### Candidate Pool
 
 The nodes on the blockchain are first grouped by their card model, such as the Nvidia RTX 4090 group and the RTX 3080 group. These card model groups are then further grouped by their VRAM size. For example, the 16GB VRAM group may include the RTX 4080, RTX 3080, and RTX 4000 Ada groups. The blockchain will use these card groups to select candidates for a task.
 
 If the application sets `Required GPU` in the task parameters, only the group with the required GPU model will be selected as the candidates. Otherwise, all the groups with VRAM equal to or larger than the task's requirement are chosen as candidates.
 
-The node will then be selected from all the candidates using the following algorithm:
-
-### Node Selection Algorithm
-
-To ensure the fastest possible task execution, the selection algorithm first considers the model storage of the candidate nodes:
-
-#### Model Storage
-
-When selecting nodes for a task, the system prioritizes nodes that already have the required models stored locally. Crynux Network uses a registry to determine which nodes have already downloaded the model, and applies the following logic:
+To ensure the fastest possible task execution, the system further narrows the candidate pool based on model locality. Crynux Network uses a registry to determine which nodes have already downloaded the required models, and applies the following logic:
 
 - If **at least one** eligible node has the required models locally, the selection is **restricted** to only those nodes with local models. Nodes without local models are excluded from the candidate pool entirely.
-- If **no** eligible nodes have the required models locally, the selection falls back to the full set of eligible nodes using only the base selection probability factors (staking and QoS).
+- If **no** eligible nodes have the required models locally, the selection falls back to the full set of eligible nodes.
 
 This ensures that tasks are preferentially routed to nodes that can begin execution immediately without downloading models, reducing startup latency for applications.
 
@@ -56,22 +48,30 @@ graph TD
     A --> I[Trigger Model Pre-download if needed];
 ```
 
+### Selection Weight
 
-#### Node Selection Probability
-
-Once a group of candidate nodes has been identified, one node is chosen to execute the task. The selection is made through a weighted random process, where each node's probability of being chosen is proportional to a weight calculated from the factors described below. This method ensures that nodes that are better suited for the task are more likely to be selected.
+Once the candidate pool has been determined, one node is chosen to execute the task. The selection is made through a weighted random process, where each node's probability of being chosen is proportional to a weight calculated from the factors described below. This method ensures that nodes that are better suited for the task are more likely to be selected.
 
 *1. Model Locality Boost*
 
-A task may require one or more models (e.g., a Stable Diffusion task might need a base model plus LoRA models; an LLM task typically needs a single model). The system boosts nodes based on how well their locally available models match the task's requirements.
+A task may require one or more models (e.g., a Stable Diffusion task might need a base model plus LoRA models; an LLM task typically needs a single model). The system boosts nodes based on how closely their local state matches the task's requirements to reduce startup latency.
 
-The Model Locality Boost ($$M_i$$) for a node $$i$$ is defined as:
+There are two levels of locality:
+*   **On-disk locality**: The model is already downloaded to the node's disk. This saves significant time and bandwidth by avoiding downloads.
+*   **In-memory locality**: The model is loaded in the GPU memory. This further reduces startup time by skipping the model loading process.
 
-- If the node's currently **in-use models match exactly** with the task's required models (i.e., the model is likely still in VRAM): $$M_i = 2$$
-- If the node has **some but not all** required models locally: $$M_i = 1 + \frac{matchCount}{totalRequired}$$ (between 1 and 2)
-- If the node has **none** of the required models locally: $$M_i = 1$$
+The Model Locality Boost ($$M_i$$) for a node $$i$$ is calculated as:
 
-Selecting a node that already has the model loaded in memory circumvents the model loading process, which significantly accelerates task startup. Nodes with partial local matches also benefit from reduced download time.
+$$
+M_i = 1 + 0.7 \times \frac{localCnt}{total} + 0.3 \times \frac{inUseCnt}{total}
+$$
+
+Where:
+*   $$localCnt$$ is the number of required models available locally on disk.
+*   $$inUseCnt$$ is the number of required models already loaded in GPU memory.
+*   $$total$$ is the total number of models required by the task.
+
+This formula gives more weight (0.7) to on-disk locality because avoiding downloads is the primary bottleneck, while in-memory locality provides an additional bonus (0.3).
 
 *2. Staking*
 
@@ -95,12 +95,7 @@ This directly ties the cost of an attack to the cost of controlling the network'
 
 A node's performance is determined by its underlying hardware; for example, GPUs with higher clock speeds execute tasks more quickly, and superior network connectivity leads to faster result submission. To encourage faster task execution, Crynux Network prioritizes faster nodes by giving them higher selection probabilities.
 
-To prevent nodes from reporting fake frequencies and GPU models, Crynux Network uses the measured task execution speed rather than self-reported hardware specs. The QoS system evaluates node quality through two components that operate at different time scales:
-
-- **Long-term performance score** ($$Q_i$$): Within validation task groups, nodes that complete the task faster receive a higher task score. The QoS score is a rolling average of the node's most recent 50 validation task scores, normalized against the maximum possible score: $$Q_i = Q_{node} / Q_{max}$$, where $$Q_{max} = 10$$. New nodes that have not yet completed any validation tasks are assigned a default QoS probability of **0.5**.
-- **Short-term reliability** ($$H_i$$): A health multiplier (range 0 to 1) that reacts immediately to timeout failures. Each timeout sharply reduces $$H_i$$, and nodes whose $$H_i$$ drops below a threshold are temporarily excluded from task selection entirely. The multiplier recovers automatically over time and through successful task completions.
-
-Together, $$Q_i$$ captures whether a node is consistently fast, while $$H_i$$ captures whether a node is currently reliable. Details about both components can be found in the following document:
+To prevent nodes from reporting fake frequencies and GPU models, Crynux Network uses the measured task execution speed rather than self-reported hardware specs. The QoS system produces a single score ($$QoS_i$$, range 0 to 1) for each node that reflects both its long-term performance and short-term reliability. It captures whether a node is consistently fast and whether it is currently dependable. Nodes that frequently time out or perform poorly will see their QoS score drop, reducing their chance of being selected for tasks. For more details on how the QoS score is calculated, see:
 
 {% content-ref url="quality-of-service-qos.md" %}
 [quality-of-service-qos.md](quality-of-service-qos.md)
@@ -110,10 +105,10 @@ Together, $$Q_i$$ captures whether a node is consistently fast, while $$H_i$$ ca
 
 The final selection weight for a node is calculated by combining all the scores from the factors above.
 
-To ensure a node is both secure (high stake) and performant (high QoS), the Staking and long-term QoS scores are first combined using the harmonic mean. This method penalizes imbalance; a node cannot compensate for a very low QoS score with a high stake, or vice-versa. The result is then multiplied by the Model Locality Boost and the QoS health multiplier.
+To ensure a node is both secure (high stake) and performant (high QoS), the Staking and QoS scores are first combined using the harmonic mean. This method penalizes imbalance; a node cannot compensate for a very low QoS score with a high stake, or vice-versa. The result is then multiplied by the Model Locality Boost.
 
 $$
-W_i = \frac{M_i \cdot S_i \cdot Q_i \cdot H_i}{S_i + Q_i}
+W_i = \frac{M_i \cdot S_i \cdot QoS_i}{S_i + QoS_i}
 $$
 
 Where:
@@ -121,8 +116,7 @@ Where:
 *   $$W_i$$ is the final selection weight for node $$i$$.
 *   $$M_i$$ is the node's Model Locality Boost (1 to 2).
 *   $$S_i$$ is the node's Staking Score (0 to 1).
-*   $$Q_i$$ is the node's long-term QoS Score (0 to 1).
-*   $$H_i$$ is the node's short-term QoS health multiplier (0 to 1).
+*   $$QoS_i$$ is the node's QoS Score (0 to 1), reflecting both long-term performance and short-term reliability.
 
 The probability of a node being selected is then its individual weight divided by the sum of the weights of all candidate nodes. Nodes are selected using weighted random sampling — higher-weighted nodes are more likely to be selected, but any eligible node can be chosen.
 
