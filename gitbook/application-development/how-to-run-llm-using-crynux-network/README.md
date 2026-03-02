@@ -94,6 +94,10 @@ For more advanced use cases like Tool Calling, Structured Output, and integratio
 [Structured Output](./structured-ouput.md)
 {% endcontent-ref %}
 
+{% content-ref url="vision-language-models.md" %}
+[Vision Language Models (VLM)](./vision-language-models.md)
+{% endcontent-ref %}
+
 {% content-ref url="langchain.md" %}
 [LangGraph/LangChain](./langchain.md)
 {% endcontent-ref %}

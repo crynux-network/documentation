@@ -44,6 +44,7 @@
   * [Supported Models](application-development/how-to-run-llm-using-crynux-network/supported-models.md)
   * [Tool Use/Function Calling](application-development/how-to-run-llm-using-crynux-network/tool-use.md)
   * [Structured Output](application-development/how-to-run-llm-using-crynux-network/structured-ouput.md)
+  * [Vision Language Models (VLM)](application-development/how-to-run-llm-using-crynux-network/vision-language-models.md)
   * [Integration with LangChain & LangGraph](application-development/how-to-run-llm-using-crynux-network/langchain.md)
 * [How to Fine-tune a Stable Diffusion Model using Crynux Network](application-development/how-to-finetune-a-stable-diffusion-model-using-crynux-network.md)
 * [Crynux Bridge](application-development/crynux-bridge.md)
