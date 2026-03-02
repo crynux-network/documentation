@@ -107,6 +107,15 @@ $ cd build
 
 The application wallet's private key will be loaded from a file in the build folder and stored as Docker secrets. For security, this file can be deleted once the container is created. Ensure to back up the private key, as it will be required again if the container needs to be recreated.
 
+When Crynux Bridge runs tasks, task fees are deducted from the wallet's Relay Account balance instead of being deducted directly from the wallet through on-chain transactions. The wallet is still required for Bridge startup and signing operations, but the wallet itself can have zero token balance as long as its corresponding Relay Account is funded in advance.
+
+To deposit into the Relay Account before starting production traffic:
+
+1. Open the [Crynux Portal](https://portal.crynux.io).
+2. Connect the same wallet you will use as the Bridge application wallet.
+3. Go to the wallet dashboard and locate the **Relay Account** section.
+4. Click **Deposit**, enter the amount, and confirm the on-chain transaction in your wallet.
+
 Create a file named `privkey.txt` and paste the private key into the file. The private key should be a hex string prefixed with `0x`.
 
 ```sh
