@@ -102,6 +102,10 @@ For more advanced use cases like Tool Calling, Structured Output, and integratio
 [LangGraph/LangChain](./langchain.md)
 {% endcontent-ref %}
 
+{% content-ref url="hermes-agent-integration.md" %}
+[Hermes Agent Integration](./hermes-agent-integration.md)
+{% endcontent-ref %}
+
 The API Key in the example code is for public demonstration purposes only and has a strict rate limit, making it unsuitable for production environments. To use the Crynux Network in production, choose one of the following methods:
 
 ## Method 1: Using the Official Crynux Bridge

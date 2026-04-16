@@ -46,6 +46,7 @@
   * [Structured Output](application-development/how-to-run-llm-using-crynux-network/structured-ouput.md)
   * [Vision Language Models (VLM)](application-development/how-to-run-llm-using-crynux-network/vision-language-models.md)
   * [Integration with LangChain & LangGraph](application-development/how-to-run-llm-using-crynux-network/langchain.md)
+  * [Hermes Agent Integration](application-development/how-to-run-llm-using-crynux-network/hermes-agent-integration.md)
 * [How to Fine-tune a Stable Diffusion Model using Crynux Network](application-development/how-to-finetune-a-stable-diffusion-model-using-crynux-network.md)
 * [Crynux Bridge](application-development/crynux-bridge.md)
 * [Application Workflow](application-development/application-workflow.md)
