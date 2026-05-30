@@ -19,10 +19,10 @@ jobs:
           chmod +x update-release-link.sh
           ./update-release-link.sh \
               "${{ github.event.client_payload.release-version }}" \
-              "${{ github.event.client_payload.mac-link-dymension }}" \
+              "${{ github.event.client_payload.mac-link-base }}" \
               "${{ github.event.client_payload.mac-link-near }}" \
-              "${{ github.event.client_payload.windows-download-link-dymension }}" \
-              "${{ github.event.client_payload.windows-preview-link-dymension }}" \
+              "${{ github.event.client_payload.windows-download-link-base }}" \
+              "${{ github.event.client_payload.windows-preview-link-base }}" \
               "${{ github.event.client_payload.windows-download-link-near }}" \
               "${{ github.event.client_payload.windows-preview-link-near }}" \
       - name: Commit the changes

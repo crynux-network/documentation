@@ -1,10 +1,10 @@
 #!/bin/bash
 
 release_version=$1
-mac_link_dymension=$2
+mac_link_base=$2
 mac_link_near=$3
-windows_download_link_dymension=$4
-windows_preview_link_dymension=$5
+windows_download_link_base=$4
+windows_preview_link_base=$5
 windows_download_link_near=$6
 windows_preview_link_near=$7
 
@@ -13,8 +13,8 @@ if [ -z "${release_version}" ]; then
   exit 0
 fi
 
-if [ -z "${mac_link_dymension}" ]; then
-  echo "Please specify the mac link for dymension"
+if [ -z "${mac_link_base}" ]; then
+  echo "Please specify the mac link for base"
   exit 0
 fi
 
@@ -24,13 +24,13 @@ if [ -z "${mac_link_near}" ]; then
 fi
 
 
-if [ -z "${windows_download_link_dymension}" ]; then
-  echo "Please specify the windows link for dymension"
+if [ -z "${windows_download_link_base}" ]; then
+  echo "Please specify the windows link for base"
   exit 0
 fi
 
-if [ -z "${windows_preview_link_dymension}" ]; then
-  echo "Please specify the windows preview link for dymension"
+if [ -z "${windows_preview_link_base}" ]; then
+  echo "Please specify the windows preview link for base"
   exit 0
 fi
 
@@ -46,11 +46,11 @@ fi
 
 
 
-mac_link_dymension_escaped=$(printf '%s\n' "$mac_link_dymension" | sed -e 's/[\/&]/\\&/g')
+mac_link_base_escaped=$(printf '%s\n' "$mac_link_base" | sed -e 's/[\/&]/\\&/g')
 mac_link_near_escaped=$(printf '%s\n' "$mac_link_near" | sed -e 's/[\/&]/\\&/g')
 
-windows_download_link_dymension_escaped=$(printf '%s\n' "$windows_download_link_dymension" | sed -e 's/[\/&]/\\&/g')
-windows_preview_link_dymension_escaped=$(printf '%s\n' "$windows_preview_link_dymension" | sed -e 's/[\/&]/\\&/g')
+windows_download_link_base_escaped=$(printf '%s\n' "$windows_download_link_base" | sed -e 's/[\/&]/\\&/g')
+windows_preview_link_base_escaped=$(printf '%s\n' "$windows_preview_link_base" | sed -e 's/[\/&]/\\&/g')
 
 windows_download_link_near_escaped=$(printf '%s\n' "$windows_download_link_near" | sed -e 's/[\/&]/\\&/g')
 windows_preview_link_near_escaped=$(printf '%s\n' "$windows_preview_link_near" | sed -e 's/[\/&]/\\&/g')
@@ -73,10 +73,10 @@ do
 
 	# replace file links
 	sed -i "s/RELEASE_VERSION/$release_version/g" "gitbook/$file"
-  sed -i "s/MAC_LINK_DYMENSION/$mac_link_dymension_escaped/g" "gitbook/$file"
+  sed -i "s/MAC_LINK_BASE/$mac_link_base_escaped/g" "gitbook/$file"
   sed -i "s/MAC_LINK_NEAR/$mac_link_near_escaped/g" "gitbook/$file"
-	sed -i "s/WINDOWS_DOWNLOAD_LINK_DYMENSION/$windows_download_link_dymension_escaped/g" "gitbook/$file"
-	sed -i "s/WINDOWS_PREVIEW_LINK_DYMENSION/$windows_preview_link_dymension_escaped/g" "gitbook/$file"
+	sed -i "s/WINDOWS_DOWNLOAD_LINK_BASE/$windows_download_link_base_escaped/g" "gitbook/$file"
+	sed -i "s/WINDOWS_PREVIEW_LINK_BASE/$windows_preview_link_base_escaped/g" "gitbook/$file"
 	sed -i "s/WINDOWS_DOWNLOAD_LINK_NEAR/$windows_download_link_near_escaped/g" "gitbook/$file"
 	sed -i "s/WINDOWS_PREVIEW_LINK_NEAR/$windows_preview_link_near_escaped/g" "gitbook/$file"
 	# sed -i "s/LINUX_DOWNLOAD_LINK/$linux_download_link_escaped/g" "gitbook/$file"

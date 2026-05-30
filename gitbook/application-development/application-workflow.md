@@ -101,13 +101,9 @@ The source code of the web UI of the AI Chatbot
 
 ### 1. Prepare the application wallet
 
-{% hint style="info" %}
-Crynux Network is currently deployed on the L2 blockchain of Dymension as a testnet Rollapp. **Test CNX tokens are used**. You could[ join the Discord Server of Crynux ](https://discord.gg/y8YKxb7uZk)to get the test tokens for free.
-{% endhint %}
-
 An Ethereum compatible wallet must be generated. Which will be used by the application to invoke the smart contracts on-chain.
 
-Ensure the wallet has sufficient Test CNX tokens to cover both task and transaction fees. The application should continuously monitor the wallet balance and alert admins to replenish tokens before it drops below the required amount for upcoming tasks.
+Ensure the wallet has sufficient CNX tokens to cover both task and transaction fees. The application should continuously monitor the wallet balance and alert admins to replenish tokens before it drops below the required amount for upcoming tasks.
 
 {% hint style="info" %}
 In the DApp, an application wallet is not required. The DApp will create the transaction and send it to Metamask for the user to sign directly in the browser.

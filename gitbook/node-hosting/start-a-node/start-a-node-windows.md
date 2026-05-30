@@ -20,7 +20,7 @@ Make sure you have already installed the latest NVIDIA driver from the [NVIDIA o
 
 Download the binary release version of the Crynux Node from the link below:
 
-For Dymension users:
+For Base users:
 
 {% embed url="https://drive.google.com/file/d/1YrtPweF9-QK8IdImlPbggyXycFLX6ZAq/view?usp=drivesdk" %}
 

@@ -38,8 +38,8 @@ Then bind the wallet address using the following command:
 **Remember to replace** `{wallet_address}` **with your real wallet address, and replace** `{blockchain}` **with the blockchain your node is running on.** For example:
 
 ```sh
-# Example for Dymension
-/node wallet dymension 0x2D49A3fb6C5d60fAe31efd6E5Fb743b8b87590EA
+# Example for Base
+/node wallet base 0x2D49A3fb6C5d60fAe31efd6E5Fb743b8b87590EA
 
 # Example for Near
 /node wallet near 0x2D49A3fb6C5d60fAe31efd6E5Fb743b8b87590EA
