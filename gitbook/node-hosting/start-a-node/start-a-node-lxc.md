@@ -119,15 +119,15 @@ Now, launch the container using the profile you created. This is a clean, single
 Launch the Crynux Node container. There are different images for different blockchain networks.
 
 {% tabs %}
-{% tab title="Dymension users" %}
-Use the `crynux-node:latest-dymension` image:
+{% tab title="Base users" %}
+Use the `crynux-node:latest-base` image:
 
 ```bash
 # Using LXD
-$ sudo lxc launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux-node
+$ sudo lxc launch crynux:crynux-node:latest-base crynux-node -p default -p crynux-node
 
 # Using Incus
-$ sudo incus launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux-node
+$ sudo incus launch crynux:crynux-node:latest-base crynux-node -p default -p crynux-node
 ```
 {% endtab %}
 
@@ -206,13 +206,13 @@ The difference between pausing and stopping is that pausing will not cause the s
 First, refresh your local image to pull the latest version from the remote server.
 
 {% tabs %}
-{% tab title="Dymension users" %}
+{% tab title="Base users" %}
 ```bash
 # Using LXD
-$ sudo lxc image refresh crynux:crynux-node:latest-dymension --alias
+$ sudo lxc image refresh crynux:crynux-node:latest-base --alias
 
 # Using Incus
-$ sudo incus image refresh crynux:crynux-node:latest-dymension --alias
+$ sudo incus image refresh crynux:crynux-node:latest-base --alias
 ```
 {% endtab %}
 {% tab title="Near users" %}
@@ -245,13 +245,13 @@ Don't worry, if you have mounted the data and config directories, your data will
 Follow the instructions in step 4 to launch a new container. It will now use the latest image you just pulled, and automatically apply the `crynux-node` profile with all your settings.
 
 {% tabs %}
-{% tab title="Dymension users" %}
+{% tab title="Base users" %}
 ```bash
 # Using LXD
-$ sudo lxc launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux-node
+$ sudo lxc launch crynux:crynux-node:latest-base crynux-node -p default -p crynux-node
 
 # Using Incus
-$ sudo incus launch crynux:crynux-node:latest-dymension crynux-node -p default -p crynux-node
+$ sudo incus launch crynux:crynux-node:latest-base crynux-node -p default -p crynux-node
 ```
 {% endtab %}
 {% tab title="Near users" %}

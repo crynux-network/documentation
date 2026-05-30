@@ -24,9 +24,9 @@ Open the `Terminal` app and run the following command. Make sure to replace `cry
 `$ xattr -d com.apple.quarantine ~/Downloads/crynux-node.dmg`
 {% endhint %}
 
-For Dymension users:
+For Base users:
 
-{% embed url="MAC_LINK_DYMENSION" %}
+{% embed url="MAC_LINK_BASE" %}
 
 For Near users:
 

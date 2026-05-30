@@ -100,16 +100,16 @@ If something goes wrong on the above steps, the problem is on the Docker or your
 #### a. Get the Crynux Docker Compose project
 
 {% tabs %}
-{% tab title="Dymension users" %}
-you can use Git to clone the branch for Dymension of the following repository:
+{% tab title="Base users" %}
+you can use Git to clone the branch for Base of the following repository:
 
 ```bash
-$ git clone -b dymension https://github.com/crynux-network/crynux-node-docker-compose.git
+$ git clone -b base https://github.com/crynux-network/crynux-node-docker-compose.git
 ```
 
 or simply download the files from GitHub:
 
-[https://github.com/crynux-network/crynux-node-docker-compose/tree/dymension](https://github.com/crynux-network/crynux-node-docker-compose/tree/dymension)
+[https://github.com/crynux-network/crynux-node-docker-compose/tree/base](https://github.com/crynux-network/crynux-node-docker-compose/tree/base)
 {% endtab %}
 
 {% tab title="Near users" %}

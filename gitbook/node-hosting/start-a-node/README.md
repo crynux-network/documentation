@@ -15,16 +15,16 @@
     </thead>
     <tbody>
         <tr>
-            <td>Dymension</td>
+            <td>Base</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1YrtPweF9-QK8IdImlPbggyXycFLX6ZAq&export=download">crynux-node-helium-v2.7.1-dymension-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1YrtPweF9-QK8IdImlPbggyXycFLX6ZAq&export=download">crynux-node-helium-v2.7.1-base-windows-x64.zip</a></td>
         </tr>
         <tr>
-            <td>Dymension</td>
+            <td>Base</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.7.1/crynux-node-helium-v2.7.1-dymension-mac-arm64-unsigned.dmg">crynux-node-helium-v2.7.1-dymension-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v2.7.1/crynux-node-helium-v2.7.1-base-mac-arm64-unsigned.dmg">crynux-node-helium-v2.7.1-base-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
