@@ -89,7 +89,7 @@ Download the package according to your platform, and follow the tutorials below:
         <tr>
             <td>Base</td>
             <td>Windows</td>
-            <td>Nvidia GPU with 16GB VRAM</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
             <td><a href="WINDOWS_DOWNLOAD_LINK_BASE">crynux-node-lithium-vRELEASE_VERSION-base-windows-x64.zip</a></td>
         </tr>
         <tr>
@@ -101,7 +101,7 @@ Download the package according to your platform, and follow the tutorials below:
         <tr>
             <td>Near</td>
             <td>Windows</td>
-            <td>Nvidia GPU with 16GB VRAM</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
             <td><a href="WINDOWS_DOWNLOAD_LINK_NEAR">crynux-node-lithium-vRELEASE_VERSION-near-windows-x64.zip</a></td>
         </tr>
         <tr>

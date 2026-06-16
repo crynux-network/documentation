@@ -17,7 +17,7 @@
         <tr>
             <td>Base</td>
             <td>Windows</td>
-            <td>Nvidia GPU with 16GB VRAM</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
             <td><a href="https://drive.google.com/uc?id=1RpqcInXOxmpJoN6A-mYzqxSGwf4uKE8L&export=download">crynux-node-lithium-v3.0.0-base-windows-x64.zip</a></td>
         </tr>
         <tr>
@@ -29,7 +29,7 @@
         <tr>
             <td>Near</td>
             <td>Windows</td>
-            <td>Nvidia GPU with 16GB VRAM</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
             <td>Coming soon. The Near network is still being deployed and will be available shortly.</td>
         </tr>
         <tr>
