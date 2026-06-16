@@ -1,5 +1,5 @@
 ---
-description: Use a wallet to transfer the test CNX tokens
+description: Use a wallet to transfer the CNX tokens
 ---
 
 # Wallet Configuration
