@@ -31,7 +31,6 @@
   * [Start a Node - LXC](node-hosting/start-a-node/start-a-node-lxc.md)
   * [Start a Node - Vast](node-hosting/start-a-node/start-a-node-vast.md)
   * [Start a Node - Octa](node-hosting/start-a-node/start-a-node-octa.md)
-* [Get the Test CNX Tokens](node-hosting/get-the-test-cnx-tokens.md)
 * [Private Key Security](node-hosting/private-key-security.md)
 * [Assign GPU to the Node](node-hosting/assign-gpu-to-the-node.md)
 * [Proxy Settings](node-hosting/proxy-settings.md)

@@ -65,23 +65,13 @@ To reduce potential loss, you **MUST** set up a **Beneficial Address** so that a
 [Private Key Security](../private-key-security.md)
 {% endhint %}
 
-A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
+A wallet with enough CNX tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys. Join the Crynux Discord to learn more about acquiring CNX tokens and starting a node.
 
 <figure><img src="../../.gitbook/assets/7b8bf34cf8eb9b7e850aad28e44b587.png" alt=""><figcaption></figcaption></figure>
 
-## 4. Get the test CNX tokens from the Discord Server
-
-Some test CNX tokens are required to start the node. The test CNX tokens can be acquired for free in the Discord server of Crynux:
-
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
 
-Follow the instructions in the following document to get the test tokens:
-
-{% content-ref url="../get-the-test-cnx-tokens.md" %}
-[get-the-test-cnx-tokens.md](../get-the-test-cnx-tokens.md)
-{% endcontent-ref %}
-
-## 5. Wait for the system initialization to finish
+## 4. Wait for the system initialization to finish
 
 If this is the first time you start a node, it could take quite a long while for the system to initialize. The most time consuming step is to download \~40GB of the commonly used model files from the Huggingface. The time may vary depending on your network speed.
 
@@ -89,7 +79,7 @@ After the models are downloaded, a test image generation task will be executed l
 
 <figure><img src="../../.gitbook/assets/1daf6bc8396c38c44072803a2924d09.png" alt=""><figcaption></figcaption></figure>
 
-## 6. Join the Crynux Network
+## 5. Join the Crynux Network
 
 The Crynux Node will try to join the network automatically every time it is started. After the transaction is confirmed on-chain, the node has successfully joined the network. When the node is selected by the network to execute a task, the task will start automatically, and the tokens will be transferred to the node wallet after the task is finished.
 
