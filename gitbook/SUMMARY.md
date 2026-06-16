@@ -4,6 +4,7 @@
 
 ## Releases
 
+* [Lithium Network](releases/lithium-network.md)
 * [Helium Network](releases/helium-network.md)
 * [Hydrogen Network](releases/hydrogen-network.md)
 
