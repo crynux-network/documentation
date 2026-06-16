@@ -113,15 +113,9 @@ or simply download the files from GitHub:
 {% endtab %}
 
 {% tab title="Near users" %}
-you can use Git to clone the branch for Near of the following repository:
-
-```bash
-$ git clone -b near https://github.com/crynux-network/crynux-node-docker-compose.git
-```
-
-or simply download the files from GitHub:
-
-[https://github.com/crynux-network/crynux-node-docker-compose/tree/near](https://github.com/crynux-network/crynux-node-docker-compose/tree/near)
+{% hint style="info" %}
+Coming soon. The Near network is still being deployed and will be available shortly.
+{% endhint %}
 {% endtab %}
 {% endtabs %}
 

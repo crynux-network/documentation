@@ -132,14 +132,9 @@ $ sudo incus launch crynux:crynux-node:latest-base crynux-node -p default -p cry
 {% endtab %}
 
 {% tab title="Near users" %}
-Use the `crynux-node:latest-near` image:
-```bash
-# Using LXD
-$ sudo lxc launch crynux:crynux-node:latest-near crynux-node -p default -p crynux-node
-
-# Using Incus
-$ sudo incus launch crynux:crynux-node:latest-near crynux-node -p default -p crynux-node
-```
+{% hint style="info" %}
+Coming soon. The Near network is still being deployed and will be available shortly.
+{% endhint %}
 {% endtab %}
 {% endtabs %}
 
@@ -216,13 +211,9 @@ $ sudo incus image refresh crynux:crynux-node:latest-base --alias
 ```
 {% endtab %}
 {% tab title="Near users" %}
-```bash
-# Using LXD
-$ sudo lxc image refresh crynux:crynux-node:latest-near --alias
-
-# Using Incus
-$ sudo incus image refresh crynux:crynux-node:latest-near --alias
-```
+{% hint style="info" %}
+Coming soon. The Near network is still being deployed and will be available shortly.
+{% endhint %}
 {% endtab %}
 {% endtabs %}
 
@@ -255,13 +246,9 @@ $ sudo incus launch crynux:crynux-node:latest-base crynux-node -p default -p cry
 ```
 {% endtab %}
 {% tab title="Near users" %}
-```bash
-# Using LXD
-$ sudo lxc launch crynux:crynux-node:latest-near crynux-node -p default -p crynux-node
-
-# Using Incus
-$ sudo incus launch crynux:crynux-node:latest-near crynux-node -p default -p crynux-node
-```
+{% hint style="info" %}
+Coming soon. The Near network is still being deployed and will be available shortly.
+{% endhint %}
 {% endtab %}
 {% endtabs %}
 

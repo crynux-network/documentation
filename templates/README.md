@@ -90,25 +90,25 @@ Download the package according to your platform, and follow the tutorials below:
             <td>Base</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="WINDOWS_DOWNLOAD_LINK_BASE">crynux-node-helium-vRELEASE_VERSION-base-windows-x64.zip</a></td>
+            <td><a href="WINDOWS_DOWNLOAD_LINK_BASE">crynux-node-lithium-vRELEASE_VERSION-base-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Base</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="MAC_LINK_BASE">crynux-node-helium-vRELEASE_VERSION-base-mac-arm64-signed.dmg</a></td>
+            <td><a href="MAC_LINK_BASE">crynux-node-lithium-vRELEASE_VERSION-base-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="WINDOWS_DOWNLOAD_LINK_NEAR">crynux-node-helium-vRELEASE_VERSION-near-windows-x64.zip</a></td>
+            <td><a href="WINDOWS_DOWNLOAD_LINK_NEAR">crynux-node-lithium-vRELEASE_VERSION-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="MAC_LINK_NEAR">crynux-node-helium-vRELEASE_VERSION-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="MAC_LINK_NEAR">crynux-node-lithium-vRELEASE_VERSION-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
