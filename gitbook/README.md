@@ -90,25 +90,25 @@ Download the package according to your platform, and follow the tutorials below:
             <td>Base</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1RpqcInXOxmpJoN6A-mYzqxSGwf4uKE8L&export=download">crynux-node-helium-v3.0.0-base-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1RpqcInXOxmpJoN6A-mYzqxSGwf4uKE8L&export=download">crynux-node-lithium-v3.0.0-base-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Base</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.0.0/crynux-node-lithium-v3.0.0-base-mac-arm64-unsigned.dmg">crynux-node-helium-v3.0.0-base-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.0.0/crynux-node-lithium-v3.0.0-base-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.0.0-base-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1kRjABbj-BGu0-yh7noXXgtBCuL9Apvld&export=download">crynux-node-helium-v3.0.0-near-windows-x64.zip</a></td>
+            <td>Coming soon. The Near network is still being deployed and will be available shortly.</td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.0.0/crynux-node-lithium-v3.0.0-near-mac-arm64-unsigned.dmg">crynux-node-helium-v3.0.0-near-mac-arm64-signed.dmg</a></td>
+            <td>Coming soon. The Near network is still being deployed and will be available shortly.</td>
         </tr>
     </tbody>
 </table>

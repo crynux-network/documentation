@@ -35,9 +35,9 @@ you could find the available tags at:&#x20;
 
 
 
-For example, if you want to run the 2.8.0 version of the Crynux Node under Near Network, use the image link below:
+For example, if you want to run the 3.0.0 version of the Crynux Node under Base Network, use the image link below:
 
-`ghcr.io/crynux-network/crynux-node:2.8.0-near`
+`ghcr.io/crynux-network/crynux-node:3.0.0-base`
 {% endhint %}
 
 Expose port `7412` for the remote access of the WebUI.

@@ -23,11 +23,9 @@ you could find the available tags at:&#x20;
 
 [**https://github.com/crynux-network/crynux-node/pkgs/container/crynux-node/versions**](https://github.com/crynux-network/crynux-node/pkgs/container/crynux-node/versions)
 
+For example, if you want to run the 3.0.0 version of the Crynux Node under Base Network, use the image link below:
 
-
-For example, if you want to run the 2.8.0 version of the Crynux Node under Near Network, use the image link below:
-
-`ghcr.io/crynux-network/crynux-node:2.8.0-near`
+`ghcr.io/crynux-network/crynux-node:3.0.0-base`
 {% endhint %}
 
 Some other config options that worth highlighting:
@@ -60,9 +58,8 @@ In this case, the URL of the WebUI is `http://213.181.122.2:40021`. Just open it
 {% hint style="danger" %}
 #### Security Warning: Private key on third‑party machines
 
-When you run a node on Vast, your Docker container is not on your own hardware. It runs on GPU machines owned and operated by other individual Vast users. Any private key you put into the container is therefore stored on those third‑party machines, where a malicious host or malware on the host system could read the key and immediately transfer all funds controlled by it.
+When you run a node on Vast, your Docker container is not on your own hardware. It runs on GPU machines owned and operated by other individual Vast users. Any private key you put into the container is therefore stored on those third-party machines, where a malicious host or malware on the host system could read the key and immediately transfer all funds controlled by it.
 
-\
 To reduce potential loss, you **MUST** set up a **Beneficial Address** so that all rewards and returned stake are paid to a separate cold wallet, and only keep the minimum necessary balance on the hot key used by the node. Please find the details of the Beneficial Address in the docs below:
 
 [Private Key Security](../private-key-security.md)
