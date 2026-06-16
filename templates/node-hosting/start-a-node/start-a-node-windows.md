@@ -40,21 +40,11 @@ Unzip the downloaded package, double-click on the `Crynux Node.exe` to start the
 
 ## 4. Prepare the wallet
 
-A wallet with enough test tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys.
+A wallet with enough CNX tokens must be provided to the node. If this is the first time you start a node, click the "Create New Wallet" button and follow the instructions to create a new wallet and finish the backup of the private keys. Join the Crynux Discord to learn more about acquiring CNX tokens and starting a node.
 
 <figure><img src="../../.gitbook/assets/Screenshot 2024-04-10 092216.png" alt=""><figcaption></figcaption></figure>
 
-### Get the test CNX tokens from the Discord Server
-
-Some test CNX tokens are required to start the node. The test CNX tokens can be acquired for free in the Discord server of Crynux:
-
 {% embed url="https://discord.gg/y8YKxb7uZk" %}
-
-Follow the instructions in the following document to get the test tokens:
-
-{% content-ref url="../get-the-test-cnx-tokens.md" %}
-[get-the-test-cnx-tokens.md](../get-the-test-cnx-tokens.md)
-{% endcontent-ref %}
 
 ## 5. Wait for the system initialization to finish
 
