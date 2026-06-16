@@ -6,10 +6,6 @@ This page explains, in simple terms, where your tokens are, when they move, and 
 The [Crynux Portal](https://portal.crynux.io) now shows all token locations linked to your node wallet—Node Wallet, Beneficial Wallet, Stake Locked, and Relay Account—so you can review your entire token distribution in one place.
 {% endhint %}
 
-{% hint style="warning" %}
-If you obtained test CNX via Discord, those are Node Credits (not CNX tokens). In the Node WebUI, credits are combined with your CNX tokens and shown as CNX Balance or CNX Staked. They move between Balance and Staked when you start/stop the node and never appear in your on-chain wallet. In the [Crynux Portal](https://portal.crynux.io), they are shown separately as Credits.
-{% endhint %}
-
 | Place | Description | Visible in on-chain wallet? | Where to view | Network check |
 | --- | --- | --- | --- | --- |
 | Node Wallet | Your on-chain node wallet (e.g., MetaMask). | Yes (except staked portion) | [Crynux Portal](https://portal.crynu.io), MetaMask (node address) | Check both L2 blockchains (switch networks) |
