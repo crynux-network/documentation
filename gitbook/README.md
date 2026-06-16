@@ -8,6 +8,8 @@ description: Truly permissionless DeAI on GPU@edge
 [![X](https://img.shields.io/badge/@crynuxio-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/crynuxio)
 [![GitHub Org's stars](https://img.shields.io/github/stars/crynux-network?style=for-the-badge&logo=github)](https://github.com/crynux-network)
 
+Crynux Network is a decentralized AI compute network that turns edge GPUs into a shared cloud for modern LLM/VLM inference and fine-tuning tasks. Its vssML consensus protocol keeps the network permissionless and open to large-scale node participation while making malicious behavior detectable and punishable, bringing decentralized execution close to centralized-platform efficiency. On top of this compute layer, Crynux enables model and data assets that can support new AI-native DeFi applications.
+
 ### Truly Permissionless
 
 The key component of Crynux is a robust consensus protocol that enables the permissionless joining and using of the decentralized network by millions.
@@ -36,38 +38,42 @@ Model tokens can be used as collateral in various DeFi applications. These appli
 
 By utilizing the Blockchain, Zero-knowledge Proofs and Privacy Preserving Computation technologies, Crynux aims to build a completely decentralized and trustless infrastructure that is always accessible to everyone.
 
-## Helium Network
+## Lithium Network
 
-Helium Network is the latest testnet of the Crynux Network. Helium Network implements a decentralized AI task execution engine that supports running the Stable Diffusion image generation tasks and the LLM text generation tasks.
+Lithium Network is the first mainnet release of Crynux Network. It turns Crynux into a production AI computing network where applications can use decentralized GPU nodes for LLM inference, vision-language model tasks, image generation, and model fine-tuning.
 
-Although called a testnet, the featured consensus protocol is robust enough to allow everyone to join at this moment. Everyone has an Nvidia GPU, or Mac with the Apple Silicon chips (M1, M2 and M3 series), could have already joined the network using our node software. And the applications could also use the network to run AI tasks such as LLM inference, Stable Diffusion image generation and fine-tuning already.
+### Production AI Workloads
 
-### LLM Text Generation
+Applications can use Crynux for LLM inference, Vision Language Model tasks, image generation, and model fine-tuning through familiar APIs.
 
-The OpenAI-compliant APIs for LLM inference are provided through the Crynux Bridge, the applications could use the official OpenAI SDKs with the Crynux Bridge API for LLM tasks. Most of the models using transformers on Huggingface could be used directly. Please read the following document for details:
-
-{% content-ref url="application-development/how-to-run-llm-using-crynux-network" %}
-[How to Run LLM Using Crynux Network](application-development/how-to-run-llm-using-crynux-network)
+{% content-ref url="application-development/how-to-run-llm-using-crynux-network/" %}
+[how-to-run-llm-using-crynux-network](application-development/how-to-run-llm-using-crynux-network/)
 {% endcontent-ref %}
 
-A chatbot web application has been developed as an example for the developers. The web application provides a simple chat UI in the browser, and connects to the [Crynux Bridge](https://github.com/crynux-network/crynux-bridge) at the backend to interact with the Crynux Network.
+### AI Ecosystem Integration
 
-The chatbot can be accessed at [https://chat.crynux.io](https://chat.crynux.io)
+Lithium integrates with the AI ecosystem developers already use. Through the OpenAI-compatible Crynux Bridge API, applications can connect Crynux to agent frameworks, tool-use workflows, LangChain, LangGraph, Hermes Agent, and Vision Language Model applications without rebuilding their stack around a new protocol.
 
-### Stable Diffusion Image Generation
+{% content-ref url="application-development/how-to-run-llm-using-crynux-network/vision-language-models.md" %}
+[vision-language-models.md](application-development/how-to-run-llm-using-crynux-network/vision-language-models.md)
+{% endcontent-ref %}
 
-The applications could now send the Stable Diffusion image generation tasks to the network using the inference API, and get the images back instantly.
+{% content-ref url="application-development/how-to-run-llm-using-crynux-network/hermes-agent-integration.md" %}
+[hermes-agent-integration.md](application-development/how-to-run-llm-using-crynux-network/hermes-agent-integration.md)
+{% endcontent-ref %}
 
-A showcase application has been developed to demonstrate the abilities. The app provides a web interface (just like [`stable-diffusion-webui`](https://github.com/AUTOMATIC1111/stable-diffusion-webui)) for the users to generate images in the browser. Thanks to the Helium Network, the users could use the application on any devices that do not have a capable GPU integrated.
+{% content-ref url="application-development/how-to-run-llm-using-crynux-network/langchain.md" %}
+[langchain.md](application-development/how-to-run-llm-using-crynux-network/langchain.md)
+{% endcontent-ref %}
 
-The complexity of the blockchain and tokens are taken care of at the backend using [Crynux Bridge](https://github.com/crynux-network/crynux-bridge). To the end users, this is just a traditional easy-to-use web application, nothing special.
+### Delegated Staking
 
-Give it a try at [https://ig.crynux.io](https://ig.crynux.io)
+Delegated staking lets CNX holders participate in network rewards without running a node. Stake CNX to reliable node operators through [Crynux Portal](https://portal.crynux.io), support the compute providers you trust, and start sharing in the rewards generated by the network.
 
-To read more about the Helium Network release, go to the following page:
+Read more about Lithium Network:
 
-{% content-ref url="releases/helium-network.md" %}
-[helium-network.md](releases/helium-network.md)
+{% content-ref url="releases/lithium-network.md" %}
+[lithium-network.md](releases/lithium-network.md)
 {% endcontent-ref %}
 
 ## Getting Started
