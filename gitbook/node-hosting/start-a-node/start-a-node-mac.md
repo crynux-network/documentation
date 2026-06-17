@@ -30,9 +30,7 @@ For Base users:
 
 For Near users:
 
-{% hint style="info" %}
-Coming soon. The Near network is still being deployed and will be available shortly.
-{% endhint %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v3.0.0/crynux-node-lithium-v3.0.0-near-mac-arm64-unsigned.dmg" %}
 
 ## 3. Start the node
 

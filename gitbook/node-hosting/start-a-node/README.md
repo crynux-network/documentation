@@ -18,7 +18,7 @@
             <td>Base</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1RpqcInXOxmpJoN6A-mYzqxSGwf4uKE8L&export=download">crynux-node-lithium-v3.0.0-base-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1_PLIoOfqCbz9YCL2TuDGifRKeqOQ5bGN&export=download">crynux-node-lithium-v3.0.0-base-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Base</td>
@@ -30,13 +30,13 @@
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td>Coming soon. The Near network is still being deployed and will be available shortly.</td>
+            <td><a href="https://drive.google.com/uc?id=1qUc56xNMY7L2vy3D2rt45LDEBJNUAfxw&export=download">crynux-node-lithium-v3.0.0-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td>Coming soon. The Near network is still being deployed and will be available shortly.</td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.0.0/crynux-node-lithium-v3.0.0-near-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.0.0-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
