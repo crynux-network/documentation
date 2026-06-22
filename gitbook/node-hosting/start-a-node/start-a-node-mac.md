@@ -30,7 +30,9 @@ For Base users:
 
 For Near users:
 
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v3.1.0/crynux-node-lithium-v3.1.0-near-mac-arm64-unsigned.dmg" %}
+{% hint style="info" %}
+Coming soon...
+{% endhint %}
 
 ## 3. Start the node
 
