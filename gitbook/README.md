@@ -4,7 +4,9 @@ description: Truly permissionless DeAI on GPU@edge
 
 # Crynux Network
 
-[![](https://dcbadge.limes.pink/api/server/https://discord.gg/y8YKxb7uZk)](https://discord.gg/y8YKxb7uZk) [![X](https://img.shields.io/badge/@crynuxio-%23000000.svg?style=for-the-badge\&logo=X\&logoColor=white)](https://x.com/crynuxio) [![GitHub Org's stars](https://img.shields.io/github/stars/crynux-network?style=for-the-badge\&logo=github)](https://github.com/crynux-network)
+[![](https://dcbadge.limes.pink/api/server/https://discord.gg/y8YKxb7uZk)](https://discord.gg/y8YKxb7uZk)
+[![X](https://img.shields.io/badge/@crynuxio-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/crynuxio)
+[![GitHub Org's stars](https://img.shields.io/github/stars/crynux-network?style=for-the-badge&logo=github)](https://github.com/crynux-network)
 
 Crynux Network is a decentralized AI compute network that turns edge GPUs into a shared cloud for modern LLM/VLM inference and fine-tuning tasks. Its vssML consensus protocol keeps the network permissionless and open to large-scale node participation while making malicious behavior detectable and punishable, bringing decentralized execution close to centralized-platform efficiency. On top of this compute layer, Crynux enables model and data assets that can support new AI-native DeFi applications.
 
@@ -80,7 +82,42 @@ Read more about Lithium Network:
 
 Download the package according to your platform, and follow the tutorials below:
 
-<table><thead><tr><th width="131">Blockchain</th><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Base</td><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/uc?id=1WkU270Tc0i5lvsF1X7yyy7yNEIkkZey1&#x26;export=download">https://drive.google.com/uc?id=1WkU270Tc0i5lvsF1X7yyy7yNEIkkZey1&#x26;export=download</a></td></tr><tr><td>Base</td><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.0.0/crynux-node-lithium-v3.0.0-base-mac-arm64-unsigned.dmg">https://github.com/crynux-network/crynux-node/releases/download/v3.0.0/crynux-node-lithium-v3.0.0-base-mac-arm64-unsigned.dmg</a></td></tr><tr><td>Near</td><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td></td></tr><tr><td>Near</td><td>Mac</td><td>M1/M2/M3 and later</td><td></td></tr></tbody></table>
+<table>
+    <thead>
+        <tr>
+            <th width="131">Blockchain</th>
+            <th width="131">Platform</th>
+            <th width="261">Requirements</th>
+            <th data-type="content-ref">Download Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Base</td>
+            <td>Windows</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="https://drive.google.com/uc?id=1qUfg8VnhNuW2Zj9HR4IdcRwdiXaEuvTY&export=download">crynux-node-lithium-v3.1.0-base-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Base</td>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.1.0/crynux-node-lithium-v3.1.0-base-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.1.0-base-mac-arm64-signed.dmg</a></td>
+        </tr>
+        <tr>
+            <td>Near</td>
+            <td>Windows</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="https://drive.google.com/uc?id=1nqFYoibpLIf_mZllbMDvDwAQS1Dgta99&export=download">crynux-node-lithium-v3.1.0-near-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Near</td>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.1.0/crynux-node-lithium-v3.1.0-near-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.1.0-near-mac-arm64-signed.dmg</a></td>
+        </tr>
+    </tbody>
+</table>
 
 To start a node on your Windows computer:
 
@@ -96,13 +133,13 @@ If you are using Mac with Apple Silicon Chips (M1/M2/M3 and later):
 
 To start a node on cloud services based on Docker:
 
-_Vast.ai_
+*Vast.ai*
 
 {% content-ref url="node-hosting/start-a-node/start-a-node-vast.md" %}
 [start-a-node-vast.md](node-hosting/start-a-node/start-a-node-vast.md)
 {% endcontent-ref %}
 
-_Octa.space_
+*Octa.space*
 
 {% content-ref url="node-hosting/start-a-node/start-a-node-octa.md" %}
 [start-a-node-octa.md](node-hosting/start-a-node/start-a-node-octa.md)
