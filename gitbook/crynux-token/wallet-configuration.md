@@ -8,18 +8,22 @@ The Crynux Network is built on a multi-chain architecture, operating across mult
 
 On each supported chain, Crynux runs as a dedicated Layer 2 blockchain. CNX is the native gas token on the Crynux Layer 2 network, similar to how ETH works on Ethereum mainnet. Each Crynux Layer 2 token is paired with a corresponding token on its Layer 1 network, such as the ERC20 Crynux token on Base. You can move tokens between Layer 1 and Layer 2 through bridges.
 
-```mermaid
-flowchart BT
-  MM_BASE["Wallets"] --> BASE_CHAIN["Crynux on Base (L2)<br/>(Arbitrum Orbit Chain)"]
+<pre class="language-mermaid"><code class="lang-mermaid"><strong>flowchart BT
+</strong>  MM_BASE["Wallets"] --> BASE_CHAIN["Crynux on Base (L2)&#x3C;br/>(Arbitrum Orbit Chain)"]
   NODE_BASE["Crynux Nodes"] --> BASE_CHAIN
   BASE_CHAIN --> BASE["Base (L1)"]
   MM2_BASE["Wallets"] --> BASE
+  STAKERS["Stakers"] --> BASE_CHAIN
 
+</code></pre>
+
+```mermaid
+flowchart BT
   MM_NEAR["Wallets"] --> VC["Crynux on Near (L2)<br/>(Virtual Chain by Aurora)"]
   NODE_NEAR["Crynux Nodes"] --> VC
   VC --> NEAR["Near (L1)"]
   MM2_NEAR["Wallets"] --> NEAR
-
+  STAKERS["Stakers"] --> VC
 ```
 
 You can choose your preferred blockchain and connect using MetaMask or any other EVM-compatible wallets.
