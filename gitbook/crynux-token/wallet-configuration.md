@@ -13,10 +13,12 @@ flowchart BT
   MM_BASE["Wallets"] --> BASE_CHAIN["Crynux on Base (L2)<br/>(Arbitrum Orbit Chain)"]
   NODE_BASE["Crynux Nodes"] --> BASE_CHAIN
   BASE_CHAIN --> BASE["Base (L1)"]
+  MM2_BASE["Wallets"] --> BASE
 
   MM_NEAR["Wallets"] --> VC["Crynux on Near (L2)<br/>(Virtual Chain by Aurora)"]
   NODE_NEAR["Crynux Nodes"] --> VC
   VC --> NEAR["Near (L1)"]
+  MM2_NEAR["Wallets"] --> NEAR
 
 ```
 
@@ -28,29 +30,41 @@ You can also use the Crynux Portal at [portal.crynux.io](https://portal.crynux.i
 
 ### Crynux on Base
 
-| Item           | Value                                  |
-| -------------- | -------------------------------------- |
-| JSON RPC       | https://json-rpc.base.crynux.io        |
-| Chain ID       | 18896214                               |
-| Token Symbol   | CNX                                    |
-| Decimal        | 18                                     |
-| Block Explorer | -                                      |
+| Item           | Value                           |
+| -------------- | ------------------------------- |
+| JSON RPC       | https://json-rpc.base.crynux.io |
+| Chain ID       | 18896214                        |
+| Token Symbol   | CNX                             |
+| Decimal        | 18                              |
+| Block Explorer | -                               |
 
-`Crynux on Base` uses CNX as its native token. All native CNX on `Crynux on Base` is bridged from the ERC20 Crynux Token on Base. The ERC20 Crynux Token address on Base is:
-
-Crynux Token on Base: [0x0cba9e7585f91A758fa399B1A1dB148ADfE8cfd5](https://basescan.org/token/0x0cba9e7585f91A758fa399B1A1dB148ADfE8cfd5)
+`Crynux on Base` uses CNX as its native token. All native CNX on `Crynux on Base` is bridged from the ERC20 Crynux Token on Base.
 
 [Crynux Portal](https://portal.crynux.io) supports direct deposits from Base Network and withdrawals to Base Network. It can also be used to transfer CNX between Base and `Crynux on Base` without directly interacting with the native bridge contracts.
 
-Base is an Ethereum Layer 2 chain. All ERC20 Crynux Tokens on Base are bridged from the ERC20 Crynux Token on Ethereum. The ERC20 Crynux Token address on Ethereum is:
+Base is an Ethereum Layer 2 chain using Optimism. The Crynux Token on Base is created through the standard Optimism bridge token factory on Base, and bridged from the ERC20 Crynux Token on Ethereum.
 
-Crynux Token on Ethereum: [0x19d8A7584830fbbB163E25e5691dc84c58467C2f](https://etherscan.io/token/0x19d8a7584830fbbb163e25e5691dc84c58467c2f)
+```mermaid
+flowchart BT
+  BASE_CNX["CNX on Base<br/>(OptimismMintableERC20)"] <-- Standard Optimism Token Bridge --> ETH_CNX["CNX on Ethereum<br/>(ERC20)"]
+  
+  CNX_PORTAL(("Crynux Portal")) <-- Deposit/Withdraw --> BASE_CNX
+  CNX_ON_BASE["CNX on 'Crynux on Base'<br/>(Native Token)"] <-- Standard Aribitrum Token Bridge --> BASE_CNX
+  CNX_PORTAL <-- Deposit/Withdraw --> CNX_ON_BASE
+  
+```
 
-Crynux Portal does not support direct deposits and withdrawals to Ethereum Network. To move CNX between Base and Ethereum, use their standard ERC20 bridge contracts.
+{% hint style="warning" %}
+Crynux Portal does NOT support direct deposits and withdrawals to Ethereum Network. To move CNX between Base and Ethereum, use their standard ERC20 bridge contracts.
+{% endhint %}
+
+<table><thead><tr><th width="186">Network</th><th>Crynux Token CA</th></tr></thead><tbody><tr><td>Base</td><td><a href="https://basescan.org/token/0x9557DD9E241bc9636732623B672B4090AF519396">0x9557DD9E241bc9636732623B672B4090AF519396</a></td></tr><tr><td>Ethereum</td><td><a href="https://etherscan.io/token/0xa97998Bf97f5A6A96393b85B4e02A0440AE220F2">0xa97998Bf97f5A6A96393b85B4e02A0440AE220F2</a></td></tr></tbody></table>
 
 ### Crynux on Near
 
+{% hint style="info" %}
 Coming soon. The Near network is still being deployed and will be available shortly.
+{% endhint %}
 
 ## Crynux Relay
 
