@@ -4,42 +4,7 @@
 2. ~~Join waitlist and wait for the email from us~~ \[<mark style="color:blue;">**No waitlist, just install the Crynux Node app, you can start earning CNX tokens right away**</mark>]
 3. Just download the package according to your platform, and follow the tutorials below:
 
-<table>
-    <thead>
-        <tr>
-            <th width="131">Blockchain</th>
-            <th width="131">Platform</th>
-            <th width="261">Requirements</th>
-            <th data-type="content-ref">Download Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Base</td>
-            <td>Windows</td>
-            <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1aFsaakzQJK0LFcbp16P207ZNmz2Aw5li&export=download">crynux-node-lithium-v3.2.0-base-windows-x64.zip</a></td>
-        </tr>
-        <tr>
-            <td>Base</td>
-            <td>Mac</td>
-            <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.2.0/crynux-node-lithium-v3.2.0-base-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.2.0-base-mac-arm64-signed.dmg</a></td>
-        </tr>
-        <tr>
-            <td>Near</td>
-            <td>Windows</td>
-            <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1TKEjrQ_afCEcKPYzeHTWwM5cpnJI3mSX&export=download">crynux-node-lithium-v3.2.0-near-windows-x64.zip</a></td>
-        </tr>
-        <tr>
-            <td>Near</td>
-            <td>Mac</td>
-            <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.2.0/crynux-node-lithium-v3.2.0-near-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.2.0-near-mac-arm64-signed.dmg</a></td>
-        </tr>
-    </tbody>
-</table>
+<table><thead><tr><th width="131">Blockchain</th><th width="131">Platform</th><th width="261">Requirements</th><th data-type="content-ref">Download Link</th></tr></thead><tbody><tr><td>Base</td><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td><a href="https://drive.google.com/uc?id=1aFsaakzQJK0LFcbp16P207ZNmz2Aw5li&#x26;export=download">https://drive.google.com/uc?id=1aFsaakzQJK0LFcbp16P207ZNmz2Aw5li&#x26;export=download</a></td></tr><tr><td>Base</td><td>Mac</td><td>M1/M2/M3 and later</td><td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.2.0/crynux-node-lithium-v3.2.0-base-mac-arm64-unsigned.dmg">https://github.com/crynux-network/crynux-node/releases/download/v3.2.0/crynux-node-lithium-v3.2.0-base-mac-arm64-unsigned.dmg</a></td></tr><tr><td>Near</td><td>Windows</td><td>Nvidia GPU with 8GB VRAM</td><td></td></tr><tr><td>Near</td><td>Mac</td><td>M1/M2/M3 and later</td><td></td></tr></tbody></table>
 
 ## Tutorials
 
@@ -57,13 +22,13 @@
 
 ### Cloud services based on Docker
 
-*Vast.ai*
+_Vast.ai_
 
 {% content-ref url="start-a-node-vast.md" %}
 [start-a-node-vast.md](start-a-node-vast.md)
 {% endcontent-ref %}
 
-*Octa.space*
+_Octa.space_
 
 {% content-ref url="start-a-node-octa.md" %}
 [start-a-node-octa.md](start-a-node-octa.md)
