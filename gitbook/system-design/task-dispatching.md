@@ -126,7 +126,7 @@ If there are not enough candidate nodes to be selected from, the task will be ad
 
 Tasks added to the queue are grouped based on VRAM and GPU model requirements. Initially, tasks are sorted into VRAM groups (e.g., 16GB, 24GB). Within these groups, tasks are further categorized by GPU model (e.g., 4090, A100). If no specific GPU model is required, tasks are placed in an "Any" group.
 
-Tasks within the same group are sorted by **task value**. When a task is taken from the queue, the task with the highest value is prioritized. The task value, represented as "CNX per second", is calculated by dividing the task fee by the estimated execution time. For more details on task value estimation, refer to the following document:
+Tasks within the same group are sorted by **task priority**. When a task is taken from the queue, the task with the highest priority is prioritized. The task priority is calculated by dividing the task fee by the estimated resource consumption of the task. For more details on task priority calculation, refer to the following document:
 
 {% content-ref url="task-pricing.md" %}
 [task-pricing.md](task-pricing.md)
@@ -147,7 +147,7 @@ Depending on the GPU model and the VRAM size of the node, the candidate task gro
 * The task group of the same GPU model
 * The "Any" groups that have a equal or smaller VRAM requirement
 
-The first tasks of each candidate group are compared, and the task with the highest value is selected.
+The first tasks of each candidate group are compared, and the task with the highest priority is selected.
 
 ### Max Size of the Task Queue
 
@@ -159,4 +159,4 @@ $$
 
 Where $$N$$ is the number of nodes in the network, and $$\alpha$$ is a fixed multiplier that will be set as the network parameter.
 
-If the max size is reached, when a new task is sent to the task queue, the task with the lowest task value in the queue will be removed and aborted. The task creator of the removed task will receive the `TaskAborted` event.
+If the max size is reached, when a new task is sent to the task queue, the task with the lowest priority in the queue will be removed and aborted. The task creator of the removed task will receive the `TaskAborted` event.
