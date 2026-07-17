@@ -59,10 +59,10 @@
 * [API Specification of the Relay](application-development/api-specification-of-the-relay.md)
 * [Crynux SDK](application-development/crynux-sdk.md)
 
-## Crynux Token
+## Crynux Blockchains
 
-* [Token Flow](crynux-token/token-flow.md)
-* [Wallet Configuration](crynux-token/wallet-configuration.md)
+* [Multi-chain Architecture](crynux-blockchains/multi-chain.md)
+* [Token Flow](crynux-blockchains/token-flow.md)
 
 ## Troubleshooting
 

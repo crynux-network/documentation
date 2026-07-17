@@ -60,6 +60,6 @@ Lithium works with the tools developers already use. Through the OpenAI-compatib
 
 Lithium launches Crynux as a multi-chain network. Crynux runs as dedicated Layer 2 blockchains, uses CNX bridged from the corresponding Layer 1 chain as the native gas token, and keeps the wallet experience EVM-compatible. Users can connect wallets, add networks, and move CNX between networks through Crynux Portal.
 
-{% content-ref url="../crynux-token/wallet-configuration.md" %}
-[wallet-configuration.md](../crynux-token/wallet-configuration.md)
+{% content-ref url="../crynux-blockchains/multi-chain.md" %}
+[multi-chain.md](../crynux-blockchains/multi-chain.md)
 {% endcontent-ref %}

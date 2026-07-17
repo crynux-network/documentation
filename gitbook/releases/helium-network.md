@@ -89,6 +89,6 @@ To start a node on Mac, just follow the tutorial below:
 
 Crynux now supports applications and nodes running on multiple blockchains. Base and Near are now supported, and more will follow. Please visit the following document for details:
 
-{% content-ref url="../crynux-token/wallet-configuration.md" %}
-[wallet-configuration.md](../crynux-token/wallet-configuration.md)
+{% content-ref url="../crynux-blockchains/multi-chain.md" %}
+[multi-chain.md](../crynux-blockchains/multi-chain.md)
 {% endcontent-ref %}

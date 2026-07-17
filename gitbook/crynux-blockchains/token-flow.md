@@ -8,10 +8,10 @@ The [Crynux Portal](https://portal.crynux.io) now shows all token locations link
 
 | Place | Description | Visible in on-chain wallet? | Where to view | Network check |
 | --- | --- | --- | --- | --- |
-| Node Wallet | Your on-chain node wallet (e.g., MetaMask). | Yes (except staked portion) | [Crynux Portal](https://portal.crynu.io), MetaMask (node address) | Check both L2 blockchains (switch networks) |
-| Beneficial Wallet | On-chain beneficial wallet (if configured) that receives refunds and withdrawals. | Yes (when used) | [Crynux Portal](https://portal.crynu.io), MetaMask (beneficial address) | Check both L2 blockchains (switch networks) |
-| Stake Locked | Tokens locked as stake after you start the node. | No | [Crynux Portal](https://portal.crynu.io), Node WebUI | Check both L2 blockchains (switch node versions) |
-| Relay Account | Task fees credited while your node executes tasks. Stored in the Crynux Relay. | No | [Crynux Portal](https://portal.crynu.io), Node WebUI | - |
+| Node Wallet | Your on-chain node wallet (e.g., MetaMask). | Yes (except staked portion) | [Crynux Portal](https://portal.crynux.io), MetaMask (node address) | Check both L2 blockchains (switch networks) |
+| Beneficial Wallet | On-chain beneficial wallet (if configured) that receives refunds and withdrawals. | Yes (when used) | [Crynux Portal](https://portal.crynux.io), MetaMask (beneficial address) | Check both L2 blockchains (switch networks) |
+| Stake Locked | Tokens locked as stake after you start the node. | No | [Crynux Portal](https://portal.crynux.io), Node WebUI | Check both L2 blockchains (switch node versions) |
+| Relay Account | Task fees credited while your node executes tasks. Stored in the Crynux Relay. | No | [Crynux Portal](https://portal.crynux.io), Node WebUI | - |
 
 
 ## Token Flowchart
