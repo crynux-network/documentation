@@ -2,7 +2,7 @@
 description: Crynux Multi-chain Architecture
 ---
 
-# Crynux Multi-chain Architecture
+# Multi-chain Architecture
 
 The Crynux Network is built on a multi-chain architecture, operating across multiple EVM-compatible blockchains. It currently supports Base and Near, with future plans to expand the ecosystem to more blockchains.
 
@@ -26,13 +26,10 @@ You can use the Crynux Portal at [portal.crynux.io](https://portal.crynux.io) to
 
 Ethereum is the top layer of the architecture. It hosts the canonical CNX ERC20 token, which defines the total CNX supply across all networks, and the Emission contract, which releases new CNX to the network participants according to the emission schedule. CNX on every other network is a bridged representation of the canonical token on Ethereum.
 
-| Contract          | Address                                                                                                               |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Crynux Token      | [0xa97998Bf97f5A6A96393b85B4e02A0440AE220F2](https://etherscan.io/token/0xa97998Bf97f5A6A96393b85B4e02A0440AE220F2)     |
-| Emission Contract | [0x72666bA4dE68bB46b4dE59641af99346318016DD](https://etherscan.io/address/0x72666bA4dE68bB46b4dE59641af99346318016DD) |
+<table><thead><tr><th width="190.800048828125">Contract</th><th>Address</th></tr></thead><tbody><tr><td>Crynux Token</td><td><a href="https://etherscan.io/token/0xa97998Bf97f5A6A96393b85B4e02A0440AE220F2">0xa97998Bf97f5A6A96393b85B4e02A0440AE220F2</a></td></tr><tr><td>Emission Contract</td><td><a href="https://etherscan.io/address/0x72666bA4dE68bB46b4dE59641af99346318016DD">0x72666bA4dE68bB46b4dE59641af99346318016DD</a></td></tr></tbody></table>
 
 {% hint style="warning" %}
-Crynux Portal does NOT support direct deposits and withdrawals to Ethereum Network. To move CNX between Base and Ethereum, use their standard ERC20 bridge contracts.
+Crynux Portal does NOT support direct deposits and withdrawals to Ethereum Network. To move CNX between L1s and Ethereum, use their standard ERC20 bridge contracts.
 {% endhint %}
 
 ## Crynux Relay
@@ -55,17 +52,9 @@ flowchart BT
 
 The Relay uses a set of system wallets on-chain:
 
-| Wallet             | Purpose                                                                                                                                                                                                                                                                                                                                          |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Relay Deposit Address    | Pooled user deposits. This is where users send CNX to top up their Relay accounts. Its balance is simply the aggregate deposits of all Relay users, not funds owned by the team.                                                                                                                                                                   |
-| Relay Hot Wallet  | Pays out Relay withdrawals. Its key lives on a server, and since any online key is a potential attack target, the hot wallet only keeps a small working balance.                                                                                                                                                                                   |
-| Relay Cold Wallet | The Relay's cold-storage reserve. The key is kept fully offline. When the hot wallet runs low, it is manually refilled from cold storage. Even if the withdrawal server were fully compromised, only the small hot-wallet float would be at risk — never the main reserve.                                                                          |
+<table><thead><tr><th width="199.5999755859375">Wallet</th><th>Purpose</th></tr></thead><tbody><tr><td>Relay Deposit Address</td><td>Pooled user deposits. This is where users send CNX to top up their Relay accounts. Its balance is simply the aggregate deposits of all Relay users.</td></tr><tr><td>Relay Hot Wallet</td><td>Pays out Relay withdrawals. Its key lives on a server, and since any online key is a potential attack target, the hot wallet only keeps a small working balance.</td></tr><tr><td>Relay Cold Wallet</td><td>The Relay's cold-storage reserve. The key is kept fully offline. When the hot wallet runs low, it is manually refilled from cold storage. Even if the withdrawal server were fully compromised, only the small hot-wallet float would be at risk — never the main reserve.</td></tr></tbody></table>
 
-The Relay deposit address and system wallets exist on every L1 and L2 network that supports Relay deposits and withdrawals. The addresses on each network are listed in the blockchain sections below. Currently, the Relay uses the same set of wallet addresses on Ethereum and Base.
-
-{% hint style="danger" %}
-To prevent phishing, make sure to cross-check the deposit address in the [Crynux Discord](https://discord.gg/y8YKxb7uZk) and [Crynux Portal](https://portal.crynux.io/) before making the transfer.
-{% endhint %}
+The Relay deposit address and system wallets exist on every L1 and L2 network that supports Relay deposits and withdrawals. The addresses on each network are listed in the blockchain sections below.
 
 ## Crynux Blockchains
 
@@ -75,32 +64,17 @@ To prevent phishing, make sure to cross-check the deposit address in the [Crynux
 
 Base is an Ethereum Layer 2 chain using Optimism. In the Crynux architecture, Base serves as an L1 network. The Relay uses the same set of wallet addresses on Base as on Ethereum.
 
-| Item                     | Address                                                                                                             |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| Crynux Token CA          | [0x9557DD9E241bc9636732623B672B4090AF519396](https://basescan.org/token/0x9557DD9E241bc9636732623B672B4090AF519396) |
-| Relay Deposit Address    | [0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0](https://basescan.org/address/0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0) |
-| Relay Hot Wallet  | [0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9](https://basescan.org/address/0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9) |
-| Relay Cold Wallet | [0x552A7D01C9e854244cC04Fd3e6C47f9036132f74](https://basescan.org/address/0x552A7D01C9e854244cC04Fd3e6C47f9036132f74) |
+<table><thead><tr><th width="200.2000732421875">Item</th><th>Address</th></tr></thead><tbody><tr><td>Crynux Token CA</td><td><a href="https://basescan.org/token/0x9557DD9E241bc9636732623B672B4090AF519396">0x9557DD9E241bc9636732623B672B4090AF519396</a></td></tr><tr><td>Relay Deposit Address</td><td><a href="https://basescan.org/address/0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0">0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0</a></td></tr><tr><td>Relay Hot Wallet</td><td><a href="https://basescan.org/address/0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9">0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9</a></td></tr><tr><td>Relay Cold Wallet</td><td><a href="https://basescan.org/address/0x552A7D01C9e854244cC04Fd3e6C47f9036132f74">0x552A7D01C9e854244cC04Fd3e6C47f9036132f74</a></td></tr></tbody></table>
 
 ### Crynux on Base (L2)
 
 `Crynux on Base` is an Arbitrum Orbit chain launched on top of Base. It uses CNX as its native gas token.
 
-| Item           | Value                           |
-| -------------- | ------------------------------- |
-| JSON RPC       | https://json-rpc.base.crynux.io |
-| Chain ID       | 18896214                        |
-| Token Symbol   | CNX                             |
-| Decimal        | 18                              |
-| Block Explorer | https://cnxscan.base.crynux.io  |
+<table><thead><tr><th width="200.199951171875">Item</th><th>Value</th></tr></thead><tbody><tr><td>JSON RPC</td><td>https://json-rpc.base.crynux.io</td></tr><tr><td>Chain ID</td><td>18896214</td></tr><tr><td>Token Symbol</td><td>CNX</td></tr><tr><td>Decimal</td><td>18</td></tr><tr><td>Block Explorer</td><td><a href="https://cnxscan.base.crynux.io/">https://cnxscan.base.crynux.io</a></td></tr></tbody></table>
 
 The Crynux Relay uses the following wallet addresses on `Crynux on Base`:
 
-| Wallet             | Address                                    |
-| ------------------ | ------------------------------------------ |
-| Relay Deposit Address    | [0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0](https://cnxscan.base.crynux.io/address/0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0) |
-| Relay Hot Wallet  | [0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9](https://cnxscan.base.crynux.io/address/0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9) |
-| Relay Cold Wallet | [0x552A7D01C9e854244cC04Fd3e6C47f9036132f74](https://cnxscan.base.crynux.io/address/0x552A7D01C9e854244cC04Fd3e6C47f9036132f74) |
+<table><thead><tr><th width="200.2000732421875">Wallet</th><th>Address</th></tr></thead><tbody><tr><td>Relay Deposit Address</td><td><a href="https://cnxscan.base.crynux.io/address/0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0">0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0</a></td></tr><tr><td>Relay Hot Wallet</td><td><a href="https://cnxscan.base.crynux.io/address/0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9">0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9</a></td></tr><tr><td>Relay Cold Wallet</td><td><a href="https://cnxscan.base.crynux.io/address/0x552A7D01C9e854244cC04Fd3e6C47f9036132f74">0x552A7D01C9e854244cC04Fd3e6C47f9036132f74</a></td></tr></tbody></table>
 {% endtab %}
 
 {% tab title="Near" %}
