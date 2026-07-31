@@ -29,15 +29,13 @@ Select the GPU that fits your need. And then click "Configure".
 {% hint style="success" %}
 **Please use the latest version tag to start the container**
 
-you could find the available tags at:&#x20;
+you could find the available tags at:
 
 [**https://github.com/crynux-network/crynux-node/pkgs/container/crynux-node/versions**](https://github.com/crynux-network/crynux-node/pkgs/container/crynux-node/versions)
 
+For example, if you want to run the 3.5.0 version of the Crynux Node under Base Network, use the image link below:
 
-
-For example, if you want to run the 3.0.0 version of the Crynux Node under Base Network, use the image link below:
-
-`ghcr.io/crynux-network/crynux-node:3.0.0-base`
+`ghcr.io/crynux-network/crynux-node:3.5.0-base`
 {% endhint %}
 
 Expose port `7412` for the remote access of the WebUI.
