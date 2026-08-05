@@ -26,41 +26,37 @@ A task with a low priority will not wait forever: if it is still in the queue wh
 
 ## Task Execution Time
 
-The duration required to complete a task can fluctuate greatly based on the type of the task and the parameters involved. For example, generating 9 images in a Stable Diffusion task takes considerably longer than generating just 1 image. However, the increase in time is not directly proportional (i.e., not 9 times longer), because a significant portion of the processing time is devoted to network transportation, consensus protocol, and other non-generation activities.
+Relay estimates only the selected node's execution time, from task start until the node submits a score or reports a task error. Waiting for application validation and uploading a validated result are separate deadline stages and are not included in this estimate.
 
-The table below shows the calculation of task priority if we take only the image generation time into consideration. The first row is an SD task that generates 1 image, whose fee is set to 10 CNX by the user, and the second row is an SD task that generates 2 images, whose fee is set to 15 CNX:
+For Stable Diffusion inference, the workload is:
 
-<table><thead><tr><th>Task fee</th><th width="116">No. Images</th><th>Image time</th><th>Task Priority</th></tr></thead><tbody><tr><td>10 CNX</td><td>1</td><td>20s</td><td>0.5 CNX/s</td></tr><tr><td>15 CNX</td><td>2</td><td>40s</td><td>0.375 CNX/s</td></tr></tbody></table>
+$$
+sd\_units = num\_images \times image\_width \times image\_height \times steps
+$$
 
-Apparently the second task takes 2 times longer than the first one. According to the calculation, the first task will be chosen to execute first because its priority is higher.
+The estimated node time is the fixed execution overhead plus `sd_units` multiplied by the calibrated seconds per pixel-step.
 
-However, if we take the non-generation time into account, as shown in the table below, the second task becomes more worthy to be executed first:
+For LLM inference, Relay deterministically encodes `messages`, `tools`, and `template_args` and measures the UTF-8 byte length as `input_bytes`. The estimated node time is:
 
-| Task fee | No. Images | Image time | Non-image time | Task Priority |
-| -------- | ---------- | ---------- | -------------- | ------------- |
-| 10 CNX   | 1          | 20s        | 30s            | 0.2 CNX/s     |
-| 15 CNX   | 2          | 40s        | 30s            | 0.214 CNX/s   |
+$$
+T = constant\_seconds + input\_bytes \times seconds\_per\_input\_byte + max\_new\_tokens \times seconds\_per\_output\_token
+$$
 
-To maximize the utilization of the node time, all the time-consuming activities must be taken into account when estimating the task execution time. The estimated execution time is therefore composed of two parts: a fixed overhead time, plus a workload-dependent generation time.
+The generation configuration uses its declared `max_new_tokens`, or the configured default when it is absent. Queue ordering does not reduce this value based on historical early stopping.
 
-The overhead time covers the activities that are not related to the task arguments or the task type:
-
-* Task arguments downloading
-* Model preparation
-* Waiting for the result verification
-* Uploading the result to the relay
-
-The generation time is estimated from the workload described in the task arguments, depending on the task type:
-
-* **Image generation tasks**: the workload is measured by the number of images and the resolution of each image. Generating more images, or images at a higher resolution, is counted as a proportionally larger workload.
-* **Text generation tasks**: the workload is measured by the maximum number of tokens the task is allowed to generate.
-* **Fine-tuning tasks**: the execution timeout set by the task creator is used directly as the estimated execution time. Since a task is aborted once it exceeds its timeout, understating the timeout to gain a higher priority only causes the task to fail before completion, so the creator has no incentive to cheat on this value.
+Stable Diffusion fine-tuning keeps its creator-supplied timeout and existing pricing rule.
 
 ### Automatic Calibration
 
-The estimation of how long a unit of workload takes—such as the time to generate one image, or one token—is not a hard-coded constant. The network continuously measures the actual execution time of the completed tasks, and uses these measurements to keep the estimation aligned with the real speed of the nodes.
+Relay calibrates execution parameters from completed, validated tasks for each exact `(GPUName, GPUVram)` variant. A task that explicitly requires a GPU variant uses that variant's parameters directly.
 
-As the nodes in the network upgrade their hardware, or the inference engines become faster, the time estimation adapts automatically, so the priority calculation always reflects the current real-world execution speed.
+A task without `RequiredGPU` uses an in-memory aggregate for its task type and VRAM demand. The aggregate includes calibrated variants whose VRAM is at least the demand and gives each compatible GPU variant equal weight. A successful calibration sample updates its exact GPU variant and immediately recalculates every initialized aggregate that includes that variant.
+
+The parameter key intentionally excludes model ID, model architecture, dtype, quantization, scheduler, and other model configuration. Different models on the same exact GPU variant can therefore execute faster or slower than the estimate. This error affects queue priority and the Relay-owned execution timeout only. It does not affect validation, consensus, fee settlement, or slashing.
+
+The priority and its workload values are fixed when the task is created. Later calibration changes do not reorder an existing queued task.
+
+Queue priority changes only dispatch order. It does not extend or shorten the queue deadline.
 
 ## Node Capacity Weight
 

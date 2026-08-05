@@ -50,7 +50,9 @@ To measure performance objectively, the network uses **validation task groups** 
 Faster submissions earn a higher task score, directly rewarding nodes for improving all factors that affect submission speed — GPU performance, network quality, memory bandwidth, and system optimization.
 
 {% hint style="info" %}
-If a node's task is aborted before the group validation completes, it receives a task score of 0. If **all 3 tasks** in a group are aborted (likely due to a misconfigured or invalid application task), the scores are set to NULL and excluded from the rolling average entirely, so that application-caused failures do not penalize any node.
+When group validation completes, an aborted member receives a task score of 0. If group validation determines that **all 3 tasks** must be aborted because the task cannot produce an accepted result, the scores are set to NULL and excluded from the rolling average.
+
+`TaskAbortCreatorValidationTimeout` does not create a validation rank and does not update the rolling average. It means the creator failed to complete validation while the task was in `ScoreReady` or `ErrorReported`. If any group member has this reason, Relay permanently rejects validation of that group, and no partial group ranking is produced.
 {% endhint %}
 
 #### Rolling Average
@@ -80,14 +82,19 @@ The short-term reliability factor addresses this gap. It is designed to balance 
 
 The mechanism achieves both by sharply reducing a failing node's QoS score on each timeout (protecting applications), while allowing the score to recover automatically over time and through successful task completions (protecting nodes). Each node carries a short-term reliability factor $$H$$ (range 0.0 to 1.0, default 1.0). This factor directly scales the node's QoS score:
 
-- On each **timeout failure**, $$H$$ is immediately multiplied by a penalty factor (0.3), causing a sharp drop in the QoS score. Consecutive timeouts compound rapidly — two timeouts reduce the score to less than 10% of its original value.
+- On each **node-owned timeout failure**, $$H$$ is immediately multiplied by a penalty factor (0.3), causing a sharp drop in the QoS score. Execution timeout and result-upload timeout are node-owned. A queue timeout has no selected node, and a creator-validation timeout is owned by the creator, so neither penalizes a node.
 - When $$H$$ drops below a **hard exclusion threshold** (0.1), the node is completely excluded from task selection. It receives zero tasks, which from the application's perspective is equivalent to the node being offline.
 - The penalty is **temporary**. $$H$$ recovers through two complementary mechanisms: passive time-based recovery (exponential decay back toward 1.0) and active success-based recovery (a discrete boost for each successfully completed task).
 - When a node **joins or re-joins** the network, $$H$$ is reset to 1.0.
 
-#### Penalty on Timeout
+#### Penalty on Node-Owned Timeout
 
-Every time a task assigned to a node ends with a timeout, the short-term reliability factor is reduced:
+The short-term reliability factor is reduced when a selected node misses either of its Relay-owned deadlines:
+
+- `Started` or `ParametersUploaded`: the node does not submit a score or report an error by the execution deadline.
+- `Validated` or `GroupValidated`: the node does not upload the result by the result-upload deadline.
+
+In either case:
 
 $$
 H_{new} = H_{current} \times 0.3
@@ -101,6 +108,10 @@ The penalty compounds rapidly with consecutive timeouts:
 | 1 | 0.30 | 70% reduction in QoS score |
 | 2 | 0.09 | Effectively excluded (below threshold) |
 | 3 | 0.027 | Deep exclusion |
+
+No health penalty applies when a queued task expires before node selection. No health penalty applies when a task in `ScoreReady` or `ErrorReported` expires with `TaskAbortCreatorValidationTimeout`.
+
+For `TaskAbortCreatorValidationTimeout`, the task remains aborted, but its fee is distributed using the successful-task fee split to compensate the node operator and eligible delegators for execution and waiting time already occupied. This payment does not mean the result was correct. It does not add a validation rank, update `Q_long`, or apply a successful-result-upload boost.
 
 #### Hard Exclusion
 
@@ -118,7 +129,7 @@ $$
 
 Where $$\tau = 30$$ minutes. This means approximately 63% recovery after 30 minutes, 86% after 60 minutes, and 95% after 90 minutes. Passive recovery is critical because it is the **only** mechanism that works in the exclusion zone (where the node receives no tasks and therefore cannot earn success boosts).
 
-**2. Active success-based recovery.** Every time the node completes a task successfully, the factor receives a discrete boost:
+**2. Active success-based recovery.** Every time the node completes a task successfully and uploads its validated result, the factor receives a discrete boost:
 
 $$
 H_{new} = \min(1.0, \ H_{current} + 0.15)
