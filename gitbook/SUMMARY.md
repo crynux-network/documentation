@@ -18,6 +18,7 @@
 * [Task Lifecycle](system-design/task-lifecycle/README.md)
   * [Task State Transitions](system-design/task-lifecycle/task-state-transitions.md)
 * [Task Dispatching](system-design/task-dispatching.md)
+* [Task Execution Time Estimation](system-design/task-execution-time.md)
 * [Task Pricing](system-design/task-pricing.md)
 * [Quality of Service (QoS)](system-design/quality-of-service-qos.md)
 * [Model Distribution](system-design/model-distribution.md)

@@ -190,7 +190,7 @@ function createTask(
 * `taskHash` is the keccak256 hash of the JSON string of the task arguments.
 * `dataHash` is reserved for the future features and is not used right now. The application could just pass 32 zero bytes to it.
 * `vramLimit` indicates the minimum VRAM required to execute the task. The Crynux Network will select the capable nodes based on this value.
-* `cap` indicates the task size. It is used to estimate the task execution time by the Crynux Network. It should be set to the number of images in the SD task, and 0 in a GPT task.
+* `cap` is a legacy task-size argument on the contract. Relay no longer uses it to estimate execution time; the estimate is derived from the task workload and calibrated execution-time parameters. See [Task Execution Time Estimation](../system-design/task-execution-time.md).
 
 In addition to the arguments listed above, the task fee should be set in the `value` field of the transaction. The application is free to choose any task fee value, a higher task fee will result in a faster task execution, while lower task fee will result in longer waiting time.
 
