@@ -33,8 +33,8 @@
   * [Start a Node - Vast](node-hosting/start-a-node/start-a-node-vast.md)
   * [Start a Node - Octa](node-hosting/start-a-node/start-a-node-octa.md)
 * [Private Key Security](node-hosting/private-key-security.md)
-* [Assign GPU to the Node](node-hosting/assign-gpu-to-the-node.md)
 * [Proxy Settings](node-hosting/proxy-settings.md)
+* [Multi-GPU Node](node-hosting/multi-gpu-node.md)
 * [Docker Compose Options](node-hosting/docker-compose-options.md)
 * [Advanced Configuration](node-hosting/advanced-configuration.md)
 
