@@ -38,17 +38,15 @@ The details can be found in the doc:
 
 [Quality of Service (QoS)](../system-design/quality-of-service-qos.md)
 
-Meanwhile, we are developing the new feature to support the concurrent task execution on powerful GPUs and multiple GPUs, which will fully utilize the local capabilities.
-
 </details>
 
 <details>
 
 <summary>Can I start a node on multiple GPUs?</summary>
 
-No. The node can execute one task on one GPU at the same time. If you have Multiple GPUs, you can start multiple nodes on the device, and assign each GPU to a different node. The tutorial can be found at:
+Yes. A single Crynux Node can automatically use multiple GPUs on the same machine. The node selects the largest group of identical GPU models and uses them together. Details are in:
 
-[Assign GPU to the Node](../node-hosting/assign-gpu-to-the-node.md)
+[Multi-GPU Node](../node-hosting/multi-gpu-node.md)
 
 </details>
 
