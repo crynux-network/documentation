@@ -24,39 +24,19 @@ The priority is calculated once when the task is created, and stays fixed while 
 
 A task with a low priority will not wait forever: if it is still in the queue when its queue deadline is reached, the task is aborted and the task fee is fully refunded to the creator.
 
+Queue priority changes only dispatch order. It does not extend or shorten the queue deadline.
+
 ## Task Execution Time
 
-Relay estimates only the selected node's execution time, from task start until the node submits a score or reports a task error. Waiting for application validation and uploading a validated result are separate deadline stages and are not included in this estimate.
+$$T$$ is Relay's estimate of how long the selected node will spend from task start until it submits a score or reports a task error. The estimate is calibrated from successful tasks, separately for each GPU variant and model configuration. Stable Diffusion fine-tuning does not use this estimate; it keeps the creator-supplied timeout.
 
-For Stable Diffusion inference, the workload is:
+How the estimate is built, how Stable Diffusion and LLM workloads are measured, and how to query the current coefficients from Relay are described here:
 
-$$
-sd\_units = num\_images \times image\_width \times image\_height \times steps
-$$
-
-The estimated node time is the fixed execution overhead plus `sd_units` multiplied by the calibrated seconds per pixel-step.
-
-For LLM inference, Relay deterministically encodes `messages`, `tools`, and `template_args` and measures the UTF-8 byte length as `input_bytes`. The estimated node time is:
-
-$$
-T = constant\_seconds + input\_bytes \times seconds\_per\_input\_byte + max\_new\_tokens \times seconds\_per\_output\_token
-$$
-
-The generation configuration uses its declared `max_new_tokens`, or the configured default when it is absent. Queue ordering does not reduce this value based on historical early stopping.
-
-Stable Diffusion fine-tuning keeps its creator-supplied timeout and existing pricing rule.
-
-### Automatic Calibration
-
-Relay calibrates execution parameters from completed, validated tasks for each exact `(GPUName, GPUVram)` variant. A task that explicitly requires a GPU variant uses that variant's parameters directly.
-
-A task without `RequiredGPU` uses an in-memory aggregate for its task type and VRAM demand. The aggregate includes calibrated variants whose VRAM is at least the demand and gives each compatible GPU variant equal weight. A successful calibration sample updates its exact GPU variant and immediately recalculates every initialized aggregate that includes that variant.
-
-The parameter key intentionally excludes model ID, model architecture, dtype, quantization, scheduler, and other model configuration. Different models on the same exact GPU variant can therefore execute faster or slower than the estimate. This error affects queue priority and the Relay-owned execution timeout only. It does not affect validation, consensus, fee settlement, or slashing.
+{% content-ref url="task-execution-time.md" %}
+[task-execution-time.md](task-execution-time.md)
+{% endcontent-ref %}
 
 The priority and its workload values are fixed when the task is created. Later calibration changes do not reorder an existing queued task.
-
-Queue priority changes only dispatch order. It does not extend or shorten the queue deadline.
 
 ## Node Capacity Weight
 

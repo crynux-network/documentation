@@ -59,7 +59,13 @@ Only the row matching the current state applies. A state transition invalidates 
 | `ScoreReady` or `ErrorReported` | `ScoreReadyTime + app_validation_timeout_seconds` | Current state `→ EndAborted`, reason `TaskAbortCreatorValidationTimeout` | No refund; distribute this task's fee using the successful-task fee split | No penalty, then release |
 | `Validated` or `GroupValidated` | `ValidatedTime + result_upload_timeout_seconds` | Current state `→ EndAborted`, reason `TaskAbortResultUploadTimeout` | Full refund | Result-upload-timeout health penalty, then release |
 
-For ordinary GPT and Stable Diffusion tasks, Relay calculates execution `Timeout` after selecting the exact GPU variant. The execution parameters are estimates only; they do not determine validation, consensus, payment, or slashing.
+For ordinary GPT and Stable Diffusion tasks, Relay calculates execution `Timeout` after selecting the exact GPU variant, from the calibrated execution-time estimate for that GPU and model. The estimate and timeout conversion are described here:
+
+{% content-ref url="../task-execution-time.md" %}
+[task-execution-time.md](../task-execution-time.md)
+{% endcontent-ref %}
+
+The execution parameters are estimates only; they do not determine validation, consensus, payment, or slashing.
 
 `TaskAbortCreatorValidationTimeout` means the creator did not complete validation by the deadline. Its fee distribution compensates the node operator and eligible delegators for node time already occupied. The task remains `EndAborted`, and the distribution does not mean the result was correct. This applies to both `ScoreReady` and `ErrorReported`.
 

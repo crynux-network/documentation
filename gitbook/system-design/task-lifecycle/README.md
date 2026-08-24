@@ -92,6 +92,12 @@ And the pricing related parameters:
 [task-pricing.md](../task-pricing.md)
 {% endcontent-ref %}
 
+Execution-time estimation used by pricing and by the execution deadline:
+
+{% content-ref url="../task-execution-time.md" %}
+[task-execution-time.md](../task-execution-time.md)
+{% endcontent-ref %}
+
 The task lifecycle is modeled and implemented as the [Finite State Machine (FSM)](https://en.wikipedia.org/wiki/Finite-state\_machine) in the smart contract. All the states and possible transitions are given in the document below:
 
 {% content-ref url="task-state-transitions.md" %}

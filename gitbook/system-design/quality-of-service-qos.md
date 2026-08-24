@@ -87,6 +87,21 @@ The mechanism achieves both by sharply reducing a failing node's QoS score on ea
 - The penalty is **temporary**. $$H$$ recovers through two complementary mechanisms: passive time-based recovery (exponential decay back toward 1.0) and active success-based recovery (a discrete boost for each successfully completed task).
 - When a node **joins or re-joins** the network, $$H$$ is reset to 1.0.
 
+#### Why Execution Timeout Length Matters
+
+When a task reaches a deadline and aborts, Relay must decide whose responsibility that failure is. The consequences are not the same for the application and for the node:
+
+- If the failure is attributed to the **application** — for example, the creator does not finish validation in time — Relay still pays the node for the time already occupied, and the node's short-term QoS score is not reduced.
+- If the failure is attributed to the **node** — for example, the node misses the execution deadline or the result-upload deadline — Relay refunds the application, and the node's short-term QoS score is reduced. That lowers the node's chance of receiving later tasks and rewards.
+
+Because of this split, the length of the execution timeout is part of the fairness of the system. A timeout that is too short causes honest nodes to miss deadlines they could have met, so they lose fees and QoS score for work that was not really their fault. A timeout that is too long lets slow or failing nodes keep capacity occupied, delays applications, and weakens the short-term reliability signal.
+
+Relay therefore derives the execution timeout from the calibrated task execution-time estimate for the selected GPU and model, instead of using a single fixed value for every task. How that estimate is produced is described here:
+
+{% content-ref url="task-execution-time.md" %}
+[task-execution-time.md](task-execution-time.md)
+{% endcontent-ref %}
+
 #### Penalty on Node-Owned Timeout
 
 The short-term reliability factor is reduced when a selected node misses either of its Relay-owned deadlines:

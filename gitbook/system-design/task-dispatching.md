@@ -132,6 +132,10 @@ Tasks within the same group are sorted by **task priority**. When a task is take
 [task-pricing.md](task-pricing.md)
 {% endcontent-ref %}
 
+{% content-ref url="task-execution-time.md" %}
+[task-execution-time.md](task-execution-time.md)
+{% endcontent-ref %}
+
 ### Dequeue a Task for a Newly Available Node
 
 The blockchain will try to retrieve a task from the task queue when a new node becomes available. Which will happen when one of the following situations occurs:
