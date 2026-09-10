@@ -84,7 +84,7 @@ If this parameter is omitted, the Crynux Bridge defaults to `24` (GB). Therefore
 
 ## Advanced Usage
 
-For more advanced use cases like Tool Calling, Structured Output, and integrations with LangChain/LangGraph, please refer to the following guides:
+For more advanced use cases like Tool Calling, Structured Output, Responses API, and integrations with LangChain/LangGraph, please refer to the following guides:
 
 {% content-ref url="tool-use.md" %}
 [Tool Use/Function Calling](./tool-use.md)
@@ -96,6 +96,10 @@ For more advanced use cases like Tool Calling, Structured Output, and integratio
 
 {% content-ref url="vision-language-models.md" %}
 [Vision Language Models (VLM)](./vision-language-models.md)
+{% endcontent-ref %}
+
+{% content-ref url="responses-api.md" %}
+[Responses API](./responses-api.md)
 {% endcontent-ref %}
 
 {% content-ref url="langchain.md" %}
