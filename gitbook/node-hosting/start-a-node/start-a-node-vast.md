@@ -23,13 +23,9 @@ you could find the available tags at:
 
 [**https://github.com/crynux-network/crynux-node/pkgs/container/crynux-node/versions**](https://github.com/crynux-network/crynux-node/pkgs/container/crynux-node/versions)
 
-For example, if you want to run the 3.5.1 version of the Crynux Node under Robinhood Network, use the image link below:
+For example, if you want to run the 3.6.0 version of the Crynux Node under Robinhood Network, use the image link below:
 
-`ghcr.io/crynux-network/crynux-node:3.5.1-rh`
-
-For Base Network, use the image link below:
-
-`ghcr.io/crynux-network/crynux-node:3.5.1-base`
+`ghcr.io/crynux-network/crynux-node:3.6.0-rh`
 {% endhint %}
 
 Some other config options that worth highlighting:
