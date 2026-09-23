@@ -20,12 +20,6 @@ Make sure you have already installed the latest NVIDIA driver from the [NVIDIA o
 
 Download the binary release version of the Crynux Node from the link below:
 
-For Robinhood users:
-
-{% hint style="info" %}
-Coming soon...
-{% endhint %}
-
 For Base users:
 
 {% embed url="https://drive.google.com/file/d/11xaq4TYq9N4cYP70o8OEjH4MaP1I3GhN/view?usp=drivesdk" %}
