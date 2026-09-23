@@ -14,7 +14,7 @@ The architecture has three layers:
 
 ```mermaid
 flowchart BT
-  CRYNUX_RH["Crynux on Robinhood (L2)<br/>(Arbitrum Orbit Chain)<br/>Native Token"] <-- Standard Arbitrum Token Bridge --> RH["Robinhood Chain (L1)<br/>Bridged CNX"]
+  CRYNUX_RH["Crynux on Robinhood (L2)<br/>(Arbitrum Orbit Chain)<br/>Native Token"] <-- Standard Arbitrum Token Bridge --> RH["Robinhood Chain (L1)<br/>StandardArbERC20"]
   CRYNUX_BASE["Crynux on Base (L2)<br/>(Arbitrum Orbit Chain)<br/>Native Token"] <-- Standard Arbitrum Token Bridge --> BASE["Base (L1)<br/>OptimismMintableERC20"]
   CRYNUX_NEAR["Crynux on Near (L2)<br/>(Virtual Chain by Aurora)<br/>Native Token"] <-- Token Bridge --> NEAR["Near (L1)<br/>NEP-141"]
   RH <-- Arbitrum Canonical Bridge --> ETH["Ethereum (L0)<br/>ERC20 + Emission"]
@@ -101,6 +101,10 @@ Base is an Ethereum Layer 2 chain using Optimism. In the Crynux architecture, Ba
 The Crynux Relay uses the following wallet addresses on `Crynux on Base`:
 
 <table><thead><tr><th width="200.2000732421875">Wallet</th><th>Address</th></tr></thead><tbody><tr><td>Relay Deposit Address</td><td><a href="https://cnxscan.base.crynux.io/address/0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0">0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0</a></td></tr><tr><td>Relay Hot Wallet</td><td><a href="https://cnxscan.base.crynux.io/address/0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9">0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9</a></td></tr><tr><td>Relay Cold Wallet</td><td><a href="https://cnxscan.base.crynux.io/address/0x552A7D01C9e854244cC04Fd3e6C47f9036132f74">0x552A7D01C9e854244cC04Fd3e6C47f9036132f74</a></td></tr></tbody></table>
+
+The Crynux node contracts on `Crynux on Base`:
+
+<table><thead><tr><th width="200.2000732421875">Contract</th><th>Address</th></tr></thead><tbody><tr><td>NodeStaking</td><td><a href="https://cnxscan.base.crynux.io/address/0xAc4d943B41e117E9EB116AA8E13F614cd4Afc13c">0xAc4d943B41e117E9EB116AA8E13F614cd4Afc13c</a></td></tr><tr><td>DelegatedStaking</td><td><a href="https://cnxscan.base.crynux.io/address/0x702C10BEbA6Aa2D888636a42C16B35b0dad97FA2">0x702C10BEbA6Aa2D888636a42C16B35b0dad97FA2</a></td></tr><tr><td>BenefitAddress</td><td><a href="https://cnxscan.base.crynux.io/address/0x6FeB51C9602AA0a2Db3eC0cCEb950dF481b82CCA">0x6FeB51C9602AA0a2Db3eC0cCEb950dF481b82CCA</a></td></tr></tbody></table>
 {% endtab %}
 
 {% tab title="Near" %}
