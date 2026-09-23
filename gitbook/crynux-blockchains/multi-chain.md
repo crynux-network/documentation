@@ -4,19 +4,21 @@ description: Crynux Multi-chain Architecture
 
 # Multi-chain Architecture
 
-The Crynux Network is built on a multi-chain architecture, operating across multiple EVM-compatible blockchains. It currently supports Base and Near, with future plans to expand the ecosystem to more blockchains.
+The Crynux Network is built on a multi-chain architecture, operating across multiple EVM-compatible blockchains. It currently supports Robinhood, Base, and Near, with future plans to expand the ecosystem to more blockchains.
 
 The architecture has three layers:
 
 * **L0 — Ethereum**: the canonical CNX ERC20 token lives on Ethereum, together with the Emission contract that releases new CNX according to the emission schedule. All CNX in circulation originates from this layer.
-* **L1 — Base and Near**: CNX is bridged from Ethereum to each supported L1 network, where it becomes the CNX token on that network. On Base, this is done through the standard Optimism token bridge; on Near, through the Rainbow Bridge.
-* **L2 — Crynux Blockchains**: on each L1, Crynux runs a dedicated L2 blockchain. CNX on the L1 is bridged to the L2, where it becomes the native gas token of the chain, similar to how ETH works on Ethereum mainnet. `Crynux on Base` is launched on top of Base using Arbitrum Orbit, and `Crynux on Near` will be launched on top of Near as a Virtual Chain by Aurora.
+* **L1 — Robinhood Chain, Base, and Near**: CNX is bridged from Ethereum to each supported L1 network, where it becomes the CNX token on that network. On Robinhood Chain, this is done through the Arbitrum canonical bridge for Robinhood Chain; on Base, through the standard Optimism token bridge; on Near, through the Rainbow Bridge.
+* **L2 — Crynux Blockchains**: on each L1, Crynux runs a dedicated L2 blockchain. CNX on the L1 is bridged to the L2, where it becomes the native gas token of the chain, similar to how ETH works on Ethereum mainnet. For example, `Crynux on Robinhood` is launched on top of Robinhood Chain using Arbitrum Orbit.
 
 ```mermaid
 flowchart BT
+  CRYNUX_RH["Crynux on Robinhood (L2)<br/>(Arbitrum Orbit Chain)<br/>Native Token"] <-- Standard Arbitrum Token Bridge --> RH["Robinhood Chain (L1)<br/>Bridged CNX"]
   CRYNUX_BASE["Crynux on Base (L2)<br/>(Arbitrum Orbit Chain)<br/>Native Token"] <-- Standard Arbitrum Token Bridge --> BASE["Base (L1)<br/>OptimismMintableERC20"]
   CRYNUX_NEAR["Crynux on Near (L2)<br/>(Virtual Chain by Aurora)<br/>Native Token"] <-- Token Bridge --> NEAR["Near (L1)<br/>NEP-141"]
-  BASE <-- Standard Optimism Token Bridge --> ETH["Ethereum (L0)<br/>ERC20 + Emission"]
+  RH <-- Arbitrum Canonical Bridge --> ETH["Ethereum (L0)<br/>ERC20 + Emission"]
+  BASE <-- Standard Optimism Token Bridge --> ETH
   NEAR <-- Rainbow Bridge --> ETH
 ```
 
@@ -38,11 +40,13 @@ Payments in Crynux go through the Crynux Relay: users deposit CNX into their Rel
 
 The Relay also makes cross-chain transfers easier for users: since deposits and withdrawals are supported on multiple networks, a user can deposit CNX on one network and withdraw it on another, without interacting with the underlying bridges directly. To serve withdrawals on every supported network, the Relay maintains a reserve of CNX on each of them, so its system wallets also hold the tokens backing these cross-chain reserves.
 
-[Crynux Portal](https://portal.crynux.io) is the web frontend of the Relay. Through the Portal, users can access the Relay's cross-chain features: it supports direct deposits and withdrawals on Base and `Crynux on Base`, and can also be used to transfer CNX between Base and `Crynux on Base` without directly interacting with the native bridge contracts.
+[Crynux Portal](https://portal.crynux.io) is the web frontend of the Relay. Through the Portal, users can access the Relay's cross-chain features: it supports direct deposits and withdrawals on every supported L1 and Crynux L2, and can transfer CNX between any two of those networks without directly interacting with the native bridge contracts. For example, a user can deposit on Base and withdraw to `Crynux on Robinhood`.
 
 ```mermaid
 flowchart BT
-  RELAY(("Crynux Relay")) <-- Deposit/Withdraw --> BASE["Base (L1)"]
+  RELAY(("Crynux Relay")) <-- Deposit/Withdraw --> RH["Robinhood Chain (L1)"]
+  RELAY <-- Deposit/Withdraw --> CRYNUX_RH["Crynux on Robinhood (L2)"]
+  RELAY <-- Deposit/Withdraw --> BASE["Base (L1)"]
   RELAY <-- Deposit/Withdraw --> CRYNUX_BASE["Crynux on Base (L2)"]
   RELAY <-. Coming Soon .-> NEAR["Near (L1)"]
   RELAY <-. Coming Soon .-> CRYNUX_NEAR["Crynux on Near (L2)"]
@@ -59,12 +63,34 @@ The Relay deposit address and system wallets exist on every L1 and L2 network th
 ## Crynux Blockchains
 
 {% tabs %}
+{% tab title="Robinhood" %}
+### Robinhood Chain (L1)
+
+Robinhood Chain is an Ethereum Layer 2 chain. In the Crynux architecture, Robinhood Chain serves as an L1 network. The Crynux Token on Robinhood Chain is bridged from the canonical CNX ERC20 token on Ethereum through the Arbitrum canonical bridge for Robinhood Chain. The Relay uses the same set of wallet addresses on Robinhood Chain as on Ethereum.
+
+<table><thead><tr><th width="200.2000732421875">Item</th><th>Address</th></tr></thead><tbody><tr><td>Crynux Token CA</td><td><a href="https://robinscan.io/token/0x0A020A1B61b4315df6E1338BE93b7d986147729E">0x0A020A1B61b4315df6E1338BE93b7d986147729E</a></td></tr><tr><td>BenefitAddress</td><td><a href="https://robinscan.io/address/0x273bAB72600947ff07367d12fAfd1EAFC2ba2079">0x273bAB72600947ff07367d12fAfd1EAFC2ba2079</a></td></tr><tr><td>Relay Deposit Address</td><td><a href="https://robinscan.io/address/0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0">0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0</a></td></tr><tr><td>Relay Hot Wallet</td><td><a href="https://robinscan.io/address/0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9">0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9</a></td></tr><tr><td>Relay Cold Wallet</td><td><a href="https://robinscan.io/address/0x552A7D01C9e854244cC04Fd3e6C47f9036132f74">0x552A7D01C9e854244cC04Fd3e6C47f9036132f74</a></td></tr></tbody></table>
+
+### Crynux on Robinhood (L2)
+
+`Crynux on Robinhood` is an Arbitrum Orbit chain launched on top of Robinhood Chain. It uses CNX as its native gas token.
+
+<table><thead><tr><th width="200.199951171875">Item</th><th>Value</th></tr></thead><tbody><tr><td>JSON RPC</td><td>https://json-rpc.rh.crynux.io</td></tr><tr><td>Chain ID</td><td>18896215</td></tr><tr><td>Token Symbol</td><td>CNX</td></tr><tr><td>Decimal</td><td>18</td></tr><tr><td>Block Explorer</td><td><a href="https://cnxscan.rh.crynux.io/">https://cnxscan.rh.crynux.io</a></td></tr></tbody></table>
+
+The Crynux Relay uses the following wallet addresses on `Crynux on Robinhood`:
+
+<table><thead><tr><th width="200.2000732421875">Wallet</th><th>Address</th></tr></thead><tbody><tr><td>Relay Deposit Address</td><td><a href="https://cnxscan.rh.crynux.io/address/0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0">0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0</a></td></tr><tr><td>Relay Hot Wallet</td><td><a href="https://cnxscan.rh.crynux.io/address/0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9">0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9</a></td></tr><tr><td>Relay Cold Wallet</td><td><a href="https://cnxscan.rh.crynux.io/address/0x552A7D01C9e854244cC04Fd3e6C47f9036132f74">0x552A7D01C9e854244cC04Fd3e6C47f9036132f74</a></td></tr></tbody></table>
+
+The Crynux node contracts on `Crynux on Robinhood`:
+
+<table><thead><tr><th width="200.2000732421875">Contract</th><th>Address</th></tr></thead><tbody><tr><td>NodeStaking</td><td><a href="https://cnxscan.rh.crynux.io/address/0xFc80e019d00f0d06CbebdE648990A89c5a25B425">0xFc80e019d00f0d06CbebdE648990A89c5a25B425</a></td></tr><tr><td>DelegatedStaking</td><td><a href="https://cnxscan.rh.crynux.io/address/0x19d8A7584830fbbB163E25e5691dc84c58467C2f">0x19d8A7584830fbbB163E25e5691dc84c58467C2f</a></td></tr><tr><td>BenefitAddress</td><td><a href="https://cnxscan.rh.crynux.io/address/0xd2EA1749399B1d9D12B03B5443F3B9Bd059DFfDE">0xd2EA1749399B1d9D12B03B5443F3B9Bd059DFfDE</a></td></tr></tbody></table>
+{% endtab %}
+
 {% tab title="Base" %}
 ### Base (L1)
 
 Base is an Ethereum Layer 2 chain using Optimism. In the Crynux architecture, Base serves as an L1 network. The Relay uses the same set of wallet addresses on Base as on Ethereum.
 
-<table><thead><tr><th width="200.2000732421875">Item</th><th>Address</th></tr></thead><tbody><tr><td>Crynux Token CA</td><td><a href="https://basescan.org/token/0x9557DD9E241bc9636732623B672B4090AF519396">0x9557DD9E241bc9636732623B672B4090AF519396</a></td></tr><tr><td>Relay Deposit Address</td><td><a href="https://basescan.org/address/0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0">0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0</a></td></tr><tr><td>Relay Hot Wallet</td><td><a href="https://basescan.org/address/0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9">0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9</a></td></tr><tr><td>Relay Cold Wallet</td><td><a href="https://basescan.org/address/0x552A7D01C9e854244cC04Fd3e6C47f9036132f74">0x552A7D01C9e854244cC04Fd3e6C47f9036132f74</a></td></tr></tbody></table>
+<table><thead><tr><th width="200.2000732421875">Item</th><th>Address</th></tr></thead><tbody><tr><td>Crynux Token CA</td><td><a href="https://basescan.org/token/0x9557DD9E241bc9636732623B672B4090AF519396">0x9557DD9E241bc9636732623B672B4090AF519396</a></td></tr><tr><td>BenefitAddress</td><td><a href="https://basescan.org/address/0x74Df778FF9705502a94ddd5aCE64a66689953e0C">0x74Df778FF9705502a94ddd5aCE64a66689953e0C</a></td></tr><tr><td>Relay Deposit Address</td><td><a href="https://basescan.org/address/0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0">0x95dAd4af9aCaDEaf1704d3C980e7f571A9c5C5a0</a></td></tr><tr><td>Relay Hot Wallet</td><td><a href="https://basescan.org/address/0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9">0x2Dc0538727d569cD40f7a2FcfD2749A3D62f44d9</a></td></tr><tr><td>Relay Cold Wallet</td><td><a href="https://basescan.org/address/0x552A7D01C9e854244cC04Fd3e6C47f9036132f74">0x552A7D01C9e854244cC04Fd3e6C47f9036132f74</a></td></tr></tbody></table>
 
 ### Crynux on Base (L2)
 
