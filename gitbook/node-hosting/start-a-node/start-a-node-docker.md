@@ -100,6 +100,18 @@ If something goes wrong on the above steps, the problem is on the Docker or your
 #### a. Get the Crynux Docker Compose project
 
 {% tabs %}
+{% tab title="Robinhood users" %}
+you can use Git to clone the branch for Robinhood of the following repository:
+
+```bash
+$ git clone -b rh https://github.com/crynux-network/crynux-node-docker-compose.git
+```
+
+or simply download the files from GitHub:
+
+[https://github.com/crynux-network/crynux-node-docker-compose/tree/rh](https://github.com/crynux-network/crynux-node-docker-compose/tree/rh)
+{% endtab %}
+
 {% tab title="Base users" %}
 you can use Git to clone the branch for Base of the following repository:
 

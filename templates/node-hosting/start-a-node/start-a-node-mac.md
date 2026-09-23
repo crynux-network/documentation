@@ -24,6 +24,10 @@ Open the `Terminal` app and run the following command. Make sure to replace `cry
 `$ xattr -d com.apple.quarantine ~/Downloads/crynux-node.dmg`
 {% endhint %}
 
+For Robinhood users:
+
+{% embed url="MAC_LINK_RH" %}
+
 For Base users:
 
 {% embed url="MAC_LINK_BASE" %}

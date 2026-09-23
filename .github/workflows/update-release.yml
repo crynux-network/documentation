@@ -25,6 +25,9 @@ jobs:
               "${{ github.event.client_payload.windows-preview-link-base }}" \
               "${{ github.event.client_payload.windows-download-link-near }}" \
               "${{ github.event.client_payload.windows-preview-link-near }}" \
+              "${{ github.event.client_payload.mac-link-rh }}" \
+              "${{ github.event.client_payload.windows-download-link-rh }}" \
+              "${{ github.event.client_payload.windows-preview-link-rh }}" \
       - name: Commit the changes
         uses: EndBug/add-and-commit@v9
         with:

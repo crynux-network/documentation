@@ -93,6 +93,18 @@ Download the package according to your platform, and follow the tutorials below:
     </thead>
     <tbody>
         <tr>
+            <td>Robinhood</td>
+            <td>Windows</td>
+            <td>Nvidia GPU with 8GB VRAM</td>
+            <td><a href="WINDOWS_DOWNLOAD_LINK_RH">crynux-node-lithium-vRELEASE_VERSION-rh-windows-x64.zip</a></td>
+        </tr>
+        <tr>
+            <td>Robinhood</td>
+            <td>Mac</td>
+            <td>M1/M2/M3 and later</td>
+            <td><a href="MAC_LINK_RH">crynux-node-lithium-vRELEASE_VERSION-rh-mac-arm64-signed.dmg</a></td>
+        </tr>
+        <tr>
             <td>Base</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
