@@ -96,7 +96,7 @@ Download the package according to your platform, and follow the tutorials below:
             <td>Robinhood</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1cxuHw4NlVg6nnNkc4KLVoiETjPYZdDlW&export=download">crynux-node-lithium-v3.7.0-rh-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1IE-5MMpdqp2b1UtteV3-9Ud18nu7DJPG&export=download">crynux-node-lithium-v3.7.0-rh-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Robinhood</td>
@@ -108,7 +108,7 @@ Download the package according to your platform, and follow the tutorials below:
             <td>Base</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1dRhUQSl2uOjN2PnJ2MEIxuHjbcY1TjiZ&export=download">crynux-node-lithium-v3.7.0-base-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=14TGa_wXlORmV52BRQoQJfTUbXcRzy_6w&export=download">crynux-node-lithium-v3.7.0-base-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Base</td>
@@ -120,7 +120,7 @@ Download the package according to your platform, and follow the tutorials below:
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1eDIf3NWTFDc_HI1xuleunduprCfPwt5_&export=download">crynux-node-lithium-v3.7.0-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=13_WTMa2-QQNF5AylB4FsIwd79cD-6xO4&export=download">crynux-node-lithium-v3.7.0-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
