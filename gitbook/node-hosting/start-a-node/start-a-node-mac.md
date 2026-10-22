@@ -26,15 +26,15 @@ Open the `Terminal` app and run the following command. Make sure to replace `cry
 
 For Robinhood users:
 
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v3.7.0/crynux-node-lithium-v3.7.0-rh-mac-arm64-unsigned.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v3.7.1/crynux-node-lithium-v3.7.1-rh-mac-arm64-unsigned.dmg" %}
 
 For Base users:
 
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v3.7.0/crynux-node-lithium-v3.7.0-base-mac-arm64-unsigned.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v3.7.1/crynux-node-lithium-v3.7.1-base-mac-arm64-unsigned.dmg" %}
 
 For Near users:
 
-{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v3.7.0/crynux-node-lithium-v3.7.0-near-mac-arm64-unsigned.dmg" %}
+{% embed url="https://github.com/crynux-network/crynux-node/releases/download/v3.7.1/crynux-node-lithium-v3.7.1-near-mac-arm64-unsigned.dmg" %}
 
 ## 3. Start the node
 

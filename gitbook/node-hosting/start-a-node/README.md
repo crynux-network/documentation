@@ -18,37 +18,37 @@
             <td>Robinhood</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=1IE-5MMpdqp2b1UtteV3-9Ud18nu7DJPG&export=download">crynux-node-lithium-v3.7.0-rh-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=18yUfKfjh8Q2-Gtus9V_4hVaLAkXIfV0b&export=download">crynux-node-lithium-v3.7.1-rh-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Robinhood</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.7.0/crynux-node-lithium-v3.7.0-rh-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.7.0-rh-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.7.1/crynux-node-lithium-v3.7.1-rh-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.7.1-rh-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Base</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=14TGa_wXlORmV52BRQoQJfTUbXcRzy_6w&export=download">crynux-node-lithium-v3.7.0-base-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1msZ6OG_bTpk8gxdJBbz5HGfmzXssqM5k&export=download">crynux-node-lithium-v3.7.1-base-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Base</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.7.0/crynux-node-lithium-v3.7.0-base-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.7.0-base-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.7.1/crynux-node-lithium-v3.7.1-base-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.7.1-base-mac-arm64-signed.dmg</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Windows</td>
             <td>Nvidia GPU with 8GB VRAM</td>
-            <td><a href="https://drive.google.com/uc?id=13_WTMa2-QQNF5AylB4FsIwd79cD-6xO4&export=download">crynux-node-lithium-v3.7.0-near-windows-x64.zip</a></td>
+            <td><a href="https://drive.google.com/uc?id=1Anzhrn0t8aF0sy7NOQGI2dbKhGuljzvV&export=download">crynux-node-lithium-v3.7.1-near-windows-x64.zip</a></td>
         </tr>
         <tr>
             <td>Near</td>
             <td>Mac</td>
             <td>M1/M2/M3 and later</td>
-            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.7.0/crynux-node-lithium-v3.7.0-near-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.7.0-near-mac-arm64-signed.dmg</a></td>
+            <td><a href="https://github.com/crynux-network/crynux-node/releases/download/v3.7.1/crynux-node-lithium-v3.7.1-near-mac-arm64-unsigned.dmg">crynux-node-lithium-v3.7.1-near-mac-arm64-signed.dmg</a></td>
         </tr>
     </tbody>
 </table>
