@@ -55,8 +55,10 @@ Synchronous APIs such as `/v1/chat/completions` hold one HTTP request until the 
 | `estimated_completion_at` | Present when `phase` is `running` and an estimate is known |
 | `error_message` | Present only when `status` is `failed` and an error was stored |
 
-### Create, poll, and download (Python)
+### Create, poll, and download
 
+{% tabs %}
+{% tab title="Python" %}
 ```python
 import json
 import time
@@ -122,65 +124,9 @@ result = requests.get(
 result.raise_for_status()
 print(result.json())
 ```
+{% endtab %}
 
-### Batch create and batch status (Python)
-
-```python
-import json
-import requests
-
-BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1"
-HEADERS = {
-    "Authorization": "Bearer your-api-key",
-    "Content-Type": "application/json",
-}
-
-def make_task(prompt: str) -> dict:
-    task_args = {
-        "version": "3.7.1",
-        "model": "Qwen/Qwen2.5-7B-Instruct",
-        "messages": [{"role": "user", "content": prompt}],
-        "generation_config": {"max_new_tokens": 64},
-        "dtype": "auto",
-    }
-    return {
-        "task_type": 1,
-        "task_args": json.dumps(task_args),
-        "min_vram": 24,
-        "queue_timeout": 43200,
-    }
-
-batch = requests.post(
-    f"{BASE}/inference_tasks/batch",
-    headers=HEADERS,
-    json={
-        "tasks": [
-            make_task("Name one European capital."),
-            make_task("Name one Asian capital."),
-        ]
-    },
-    timeout=60,
-)
-batch.raise_for_status()
-items = batch.json()["data"]
-task_ids = [
-    item["client_task"]["id"]
-    for item in items
-    if item.get("client_task") is not None
-]
-
-status = requests.post(
-    f"{BASE}/inference_tasks/batch/status",
-    headers=HEADERS,
-    json={"client_task_ids": task_ids},
-    timeout=60,
-)
-status.raise_for_status()
-print(status.json())
-```
-
-### Create, poll, and download (JavaScript)
-
+{% tab title="JavaScript" %}
 ```javascript
 const BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1";
 const HEADERS = {
@@ -249,6 +195,122 @@ if (!resultRes.ok) {
 }
 console.log(await resultRes.json());
 ```
+{% endtab %}
+{% endtabs %}
+
+### Batch create and batch status
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+import json
+import requests
+
+BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1"
+HEADERS = {
+    "Authorization": "Bearer your-api-key",
+    "Content-Type": "application/json",
+}
+
+def make_task(prompt: str) -> dict:
+    task_args = {
+        "version": "3.7.1",
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "messages": [{"role": "user", "content": prompt}],
+        "generation_config": {"max_new_tokens": 64},
+        "dtype": "auto",
+    }
+    return {
+        "task_type": 1,
+        "task_args": json.dumps(task_args),
+        "min_vram": 24,
+        "queue_timeout": 43200,
+    }
+
+batch = requests.post(
+    f"{BASE}/inference_tasks/batch",
+    headers=HEADERS,
+    json={
+        "tasks": [
+            make_task("Name one European capital."),
+            make_task("Name one Asian capital."),
+        ]
+    },
+    timeout=60,
+)
+batch.raise_for_status()
+items = batch.json()["data"]
+task_ids = [
+    item["client_task"]["id"]
+    for item in items
+    if item.get("client_task") is not None
+]
+
+status = requests.post(
+    f"{BASE}/inference_tasks/batch/status",
+    headers=HEADERS,
+    json={"client_task_ids": task_ids},
+    timeout=60,
+)
+status.raise_for_status()
+print(status.json())
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+const BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1";
+const HEADERS = {
+  Authorization: "Bearer your-api-key",
+  "Content-Type": "application/json",
+};
+
+function makeTask(prompt) {
+  const taskArgs = {
+    version: "3.7.1",
+    model: "Qwen/Qwen2.5-7B-Instruct",
+    messages: [{ role: "user", content: prompt }],
+    generation_config: { max_new_tokens: 64 },
+    dtype: "auto",
+  };
+  return {
+    task_type: 1,
+    task_args: JSON.stringify(taskArgs),
+    min_vram: 24,
+    queue_timeout: 43200,
+  };
+}
+
+const batchRes = await fetch(`${BASE}/inference_tasks/batch`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({
+    tasks: [
+      makeTask("Name one European capital."),
+      makeTask("Name one Asian capital."),
+    ],
+  }),
+});
+if (!batchRes.ok) {
+  throw new Error(await batchRes.text());
+}
+const items = (await batchRes.json()).data;
+const taskIds = items
+  .filter((item) => item.client_task != null)
+  .map((item) => item.client_task.id);
+
+const statusRes = await fetch(`${BASE}/inference_tasks/batch/status`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({ client_task_ids: taskIds }),
+});
+if (!statusRes.ok) {
+  throw new Error(await statusRes.text());
+}
+console.log(await statusRes.json());
+```
+{% endtab %}
+{% endtabs %}
 
 ## `task_args` (`GPTTaskArgs`) Definition
 
@@ -347,7 +409,7 @@ Integer seed for reproducible sampling. If omitted on [Crynux AS](https://crynux
 
 ### `quantization_config`
 
-Optional object or `null` for task-time quantization. The legacy `quantize_bits` field is removed.
+Optional object or `null` for task-time quantization.
 
 ```json
 {

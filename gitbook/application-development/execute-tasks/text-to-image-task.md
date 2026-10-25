@@ -55,8 +55,10 @@ Synchronous OpenAI Images APIs hold one HTTP request until the job finishes (abo
 | `estimated_completion_at` | Present when `phase` is `running` and an estimate is known |
 | `error_message` | Present only when `status` is `failed` and an error was stored |
 
-### Create, poll, and download (Python)
+### Create, poll, and download
 
+{% tabs %}
+{% tab title="Python" %}
 ```python
 import json
 import time
@@ -123,9 +125,9 @@ with open("output.png", "wb") as f:
     f.write(image.content)
 print("saved output.png")
 ```
+{% endtab %}
 
-### Create, poll, and download (JavaScript)
-
+{% tab title="JavaScript" %}
 ```javascript
 import fs from "fs";
 
@@ -198,6 +200,132 @@ if (!imageRes.ok) {
 fs.writeFileSync("output.png", Buffer.from(await imageRes.arrayBuffer()));
 console.log("saved output.png");
 ```
+{% endtab %}
+{% endtabs %}
+
+### Batch create and batch status
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+import json
+import requests
+
+BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1"
+HEADERS = {
+    "Authorization": "Bearer your-api-key",
+    "Content-Type": "application/json",
+}
+
+def make_task(prompt: str) -> dict:
+    task_args = {
+        "version": "3.7.1",
+        "base_model": {"name": "Qwen/Qwen-Image-2.1", "revision": None},
+        "dtype": "bfloat16",
+        "prompt": prompt,
+        "task_config": {
+            "image_width": 1024,
+            "image_height": 1024,
+            "steps": 40,
+            "num_images_per_prompt": 1,
+        },
+    }
+    return {
+        "task_type": 0,
+        "task_args": json.dumps(task_args),
+        "min_vram": 24,
+        "queue_timeout": 43200,
+    }
+
+batch = requests.post(
+    f"{BASE}/inference_tasks/batch",
+    headers=HEADERS,
+    json={
+        "tasks": [
+            make_task("A product photo of a white ceramic cup on a wooden table"),
+            make_task("A watercolor painting of a mountain lake at sunrise"),
+        ]
+    },
+    timeout=60,
+)
+batch.raise_for_status()
+items = batch.json()["data"]
+task_ids = [
+    item["client_task"]["id"]
+    for item in items
+    if item.get("client_task") is not None
+]
+
+status = requests.post(
+    f"{BASE}/inference_tasks/batch/status",
+    headers=HEADERS,
+    json={"client_task_ids": task_ids},
+    timeout=60,
+)
+status.raise_for_status()
+print(status.json())
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+const BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1";
+const HEADERS = {
+  Authorization: "Bearer your-api-key",
+  "Content-Type": "application/json",
+};
+
+function makeTask(prompt) {
+  const taskArgs = {
+    version: "3.7.1",
+    base_model: { name: "Qwen/Qwen-Image-2.1", revision: null },
+    dtype: "bfloat16",
+    prompt,
+    task_config: {
+      image_width: 1024,
+      image_height: 1024,
+      steps: 40,
+      num_images_per_prompt: 1,
+    },
+  };
+  return {
+    task_type: 0,
+    task_args: JSON.stringify(taskArgs),
+    min_vram: 24,
+    queue_timeout: 43200,
+  };
+}
+
+const batchRes = await fetch(`${BASE}/inference_tasks/batch`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({
+    tasks: [
+      makeTask("A product photo of a white ceramic cup on a wooden table"),
+      makeTask("A watercolor painting of a mountain lake at sunrise"),
+    ],
+  }),
+});
+if (!batchRes.ok) {
+  throw new Error(await batchRes.text());
+}
+const items = (await batchRes.json()).data;
+const taskIds = items
+  .filter((item) => item.client_task != null)
+  .map((item) => item.client_task.id);
+
+const statusRes = await fetch(`${BASE}/inference_tasks/batch/status`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({ client_task_ids: taskIds }),
+});
+if (!statusRes.ok) {
+  throw new Error(await statusRes.text());
+}
+console.log(await statusRes.json());
+```
+{% endtab %}
+{% endtabs %}
 
 ## `task_args` Schema (`ImageTaskArgs`)
 

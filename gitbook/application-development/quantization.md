@@ -22,8 +22,6 @@ See [How to Run LLM using Crynux Network](how-to-run-llm-using-crynux-network/RE
 
 Put `quantization_config` (and optional `components` for image tasks) inside the `task_args` JSON string on `POST /inference_tasks`. See [Text-to-Text Task](execute-tasks/text-to-text-task.md) and [Text-to-Image Task](execute-tasks/text-to-image-task.md).
 
-The legacy LLM field `quantize_bits` is removed. Use `quantization_config` instead.
-
 ## LLM Quantization
 
 ### Task-time quantization shape
@@ -322,10 +320,8 @@ Use a complete Nunchaku Lite Diffusers pipeline as `base_model`. Do not set `com
 | --- | --- | --- |
 | LLM BitsAndBytes / FP8 | Supported | Supported |
 | Image BitsAndBytes / GGUF | Supported | Supported |
-| LLM AWQ / GPTQ / GPTQModel | Not scheduled | Supported (Relay routes only to Linux / Docker CUDA) |
-| Image Nunchaku Lite | Not scheduled | Supported (Relay routes only to Linux / Docker CUDA) |
-
-Relay detects Linux-CUDA-only loads from TaskArgs and Hub metadata. You do not need to filter nodes yourself.
+| LLM AWQ / GPTQ / GPTQModel | Not scheduled | Supported |
+| Image Nunchaku Lite | Not scheduled | Supported |
 
 Common rejection cases:
 
