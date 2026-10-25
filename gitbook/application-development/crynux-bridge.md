@@ -12,9 +12,9 @@ Self-hosting Crynux Bridge is an advanced option. For most applications, [Crynux
 
 ## Features
 
-1. **Automatic VSS task validation** — When the network selects multi-node validation for a task, Bridge creates the validation members, runs score comparison, and advances the task through the protocol validation flow without extra application logic.
+1. **Automatic VSS task validation** — When VRF selects multi-node validation for a task, Bridge creates the extra validation members, waits until the group is ready, and submits single-task or group validation to Relay. The application only creates the task and polls for the result; it does not implement validation-group logic.
 2. **Repeat tasks for higher success rate and faster completion** — Bridge can run multiple concurrent primary submissions for one logical task (`task.repeat_num` in Bridge config). The first successful result wins. This is Bridge configuration, not an API parameter.
-3. **Wallet and Relay fee management** — Bridge loads the application wallet, signs Relay and chain operations, and deducts task fees from the wallet's Relay Account balance.
+3. **Wallet and Relay fee management** — Bridge loads the application wallet and signs Relay and chain operations on its behalf.
 4. **Raw Task API and Batch Task API** — Create one task or up to 100 tasks per request, poll status (including batch status), and download image PNG or LLM JSON results.
 5. **Multi-user support and Role-Based Access Control (RBAC)** — API keys with roles, use quotas, and rate limits so multiple clients can share one Bridge instance with controlled access.
 
@@ -59,7 +59,7 @@ Bridge exposes asynchronous task APIs under `/v1`. Authenticate with `Authorizat
 | --- | --- | --- |
 | `task_type` | Yes | `0` Image (SD), `1` LLM |
 | `task_args` | Yes | JSON **string** of `ImageTaskArgs` or `GPTTaskArgs` |
-| `task_fee` | Yes | Final task fee in Wei as a decimal string. Deducted from the Bridge wallet Relay Account (per primary submission) |
+| `task_fee` | Yes | Final task fee in Wei as a decimal string |
 | `min_vram` | No | Minimum GPU VRAM in GB |
 | `required_gpu` + `required_gpu_vram` | No | Exact GPU selection; provide both together |
 | `queue_timeout` | No | Queue wait budget in seconds for ordinary Image and LLM tasks |
@@ -354,7 +354,7 @@ $ cd build
 
 The application wallet's private key will be loaded from a file in the build folder and stored as Docker secrets. For security, this file can be deleted once the container is created. Ensure to back up the private key, as it will be required again if the container needs to be recreated.
 
-When Crynux Bridge runs tasks, task fees are deducted from the wallet's Relay Account balance instead of being deducted directly from the wallet through on-chain transactions. The wallet is still required for Bridge startup and signing operations, but the wallet itself can have zero token balance as long as its corresponding Relay Account is funded in advance.
+When Crynux Bridge runs tasks, Relay deducts task fees from the wallet's Relay Account balance instead of charging the wallet through on-chain transactions. The wallet is still required for Bridge startup and signing operations, but the wallet itself can have zero token balance as long as its corresponding Relay Account is funded in advance.
 
 To deposit into the Relay Account before starting production traffic:
 
