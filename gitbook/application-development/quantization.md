@@ -45,7 +45,7 @@ Supported `quant_kwargs` include `load_in_4bit`, `bnb_4bit_quant_type` (`"nf4"` 
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
     timeout=120,
     max_retries=1,
@@ -187,7 +187,7 @@ res = client.chat.completions.create(
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
     timeout=300,
     max_retries=1,

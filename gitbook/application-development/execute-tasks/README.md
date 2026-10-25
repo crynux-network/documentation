@@ -1,8 +1,8 @@
 # Execute Tasks
 
-Crynux Network executes work as typed Raw Tasks. Each task carries a `task_type` and a `task_args` JSON string that matches the schema for that type. Applications usually submit tasks through Crynux AS, which prices the job, reserves Credits, and forwards the task to the network.
+Crynux Network executes work as typed Raw Tasks. Each task carries a `task_type` and a `task_args` JSON string that matches the schema for that type. Applications usually submit tasks through [Crynux AS](https://crynux-as.xyz), which prices the job, reserves Credits, and forwards the task to the network.
 
-## Crynux AS Raw Task endpoints
+## [Crynux AS](https://crynux-as.xyz) Raw Task endpoints
 
 Under `/api/<endpoint_token>/v1`:
 

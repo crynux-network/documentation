@@ -8,10 +8,10 @@ A GPT Task is a JSON document (`GPTTaskArgs`) that describes one LLM generation 
 
 If you only need standard chat, tool calling, structured output, or the Responses API, use the [OpenAI-compatible LLM API](../how-to-run-llm-using-crynux-network/README.md). Use the Raw Task API when you need full `GPTTaskArgs` control, batch create, exact GPU selection, or a create-and-poll flow you manage yourself.
 
-## Sending Text-to-Text Tasks via Crynux AS (Raw Task API)
+## Sending Text-to-Text Tasks via [Crynux AS](https://crynux-as.xyz) (Raw Task API)
 
 {% hint style="info" %}
-Replace `https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1` and `your-api-key` with your project Base URL and API key from the Crynux AS dashboard.
+Replace `<endpoint_token>` and `your-api-key` with your project endpoint token and API key from the [Crynux AS](https://crynux-as.xyz) dashboard.
 {% endhint %}
 
 | Operation | Method and path |
@@ -30,12 +30,12 @@ Authenticate with `Authorization: Bearer <api-key-or-owner-jwt>`.
 | --- | --- | --- |
 | `task_type` | Yes | Must be `1` for LLM tasks |
 | `task_args` | Yes | JSON **string** of `GPTTaskArgs` |
-| `min_vram` | No | Minimum GPU VRAM in GB. When omitted, Crynux AS matches the loaded-models cache using model id plus `quantization_config` / `dtype` when present; otherwise it selects the row with the greatest `min_vram` for that model |
+| `min_vram` | No | Minimum GPU VRAM in GB. When omitted, [Crynux AS](https://crynux-as.xyz) matches the loaded-models cache using model id plus `quantization_config` / `dtype` when present; otherwise it selects the row with the greatest `min_vram` for that model |
 | `required_gpu` + `required_gpu_vram` | No | Exact GPU model name and VRAM. Provide both together. Do not combine with `min_vram` |
 | `task_version` | No | Task version string, for example `"3.7.1"` |
 | `queue_timeout` | No | Queue wait budget in seconds (Flexible Pricing). Positive integer. Not part of `task_args` |
 
-Do not send `task_fee`. Crynux AS owns pricing from the project Cost Level.
+Do not send `task_fee`. [Crynux AS](https://crynux-as.xyz) owns pricing from the project Cost Level.
 
 #### Flexible Pricing with `queue_timeout`
 
@@ -62,7 +62,7 @@ import json
 import time
 import requests
 
-BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1"
+BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1"
 HEADERS = {
     "Authorization": "Bearer your-api-key",
     "Content-Type": "application/json",
@@ -129,7 +129,7 @@ print(result.json())
 import json
 import requests
 
-BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1"
+BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1"
 HEADERS = {
     "Authorization": "Bearer your-api-key",
     "Content-Type": "application/json",
@@ -182,7 +182,7 @@ print(status.json())
 ### Create, poll, and download (JavaScript)
 
 ```javascript
-const BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1";
+const BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1";
 const HEADERS = {
   Authorization: "Bearer your-api-key",
   "Content-Type": "application/json",
@@ -296,7 +296,7 @@ Schema version string, for example `"3.7.1"`.
 
 ### `model` and `revision`
 
-`model` is a Hugging Face model ID suitable for text generation or chat. `revision` is an optional branch name or commit. Absolute URLs are rejected on Crynux AS.
+`model` is a Hugging Face model ID suitable for text generation or chat. `revision` is an optional branch name or commit. Absolute URLs are rejected on [Crynux AS](https://crynux-as.xyz).
 
 ### `messages`
 
@@ -339,7 +339,7 @@ Optional object passed to the Hugging Face chat template, for example `{"enable_
 
 ### `seed`
 
-Integer seed for reproducible sampling. If omitted on Crynux AS create, AS fills a random integer from `0` through `2147483647`.
+Integer seed for reproducible sampling. If omitted on [Crynux AS](https://crynux-as.xyz) create, AS fills a random integer from `0` through `2147483647`.
 
 ### `dtype`
 

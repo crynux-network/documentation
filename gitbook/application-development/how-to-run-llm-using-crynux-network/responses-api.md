@@ -12,7 +12,7 @@ Crynux supports:
 * `previous_response_id` to continue a conversation from a completed response
 
 {% hint style="info" %}
-The code examples below use the official OpenAI SDK. The only required change is pointing the client `base_url` at your Crynux API endpoint, the same way as in the [parent guide](./README.md).
+The code examples below use the official OpenAI SDK. Point `base_url` at `https://api.crynux-as.xyz/api/<endpoint_token>/v1` and replace `<endpoint_token>` and `your-api-key` with values from [Crynux AS](https://crynux-as.xyz), the same way as in the [parent guide](./README.md).
 {% endhint %}
 
 ## Using the OpenAI SDK with Background Polling
@@ -26,7 +26,7 @@ import time
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.crynux-as.xyz/v1/llm",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
     timeout=60,
     max_retries=1,
@@ -60,7 +60,7 @@ else:
 import OpenAI from "openai";
 
 const client = new OpenAI({
-  baseURL: "https://api.crynux-as.xyz/v1/llm",
+  baseURL: "https://api.crynux-as.xyz/api/<endpoint_token>/v1",
   apiKey: "your-api-key",
   timeout: 60000,
   maxRetries: 1,
@@ -122,7 +122,7 @@ pip install langchain-crynux
 from langchain_crynux import ChatCrynux
 
 chat = ChatCrynux(
-    base_url="https://api.crynux-as.xyz/v1/llm",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
     model="Qwen/Qwen2.5-7B-Instruct",
     vram_limit=24,
@@ -166,7 +166,7 @@ import time
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api.crynux-as.xyz/v1/llm",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
 )
 
@@ -204,7 +204,7 @@ print(second.output_text)
 import OpenAI from "openai";
 
 const client = new OpenAI({
-  baseURL: "https://api.crynux-as.xyz/v1/llm",
+  baseURL: "https://api.crynux-as.xyz/api/<endpoint_token>/v1",
   apiKey: "your-api-key",
 });
 
