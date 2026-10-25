@@ -8,6 +8,8 @@ A GPT Task is a JSON document (`GPTTaskArgs`) that describes one LLM generation 
 
 If you only need standard chat, tool calling, structured output, or the Responses API, use the [OpenAI-compatible LLM API](../how-to-run-llm-using-crynux-network/README.md). Use the Raw Task API when you need full `GPTTaskArgs` control, batch create, exact GPU selection, or a create-and-poll flow you manage yourself.
 
+For most applications, submit Raw Tasks through [Crynux AS](https://crynux-as.xyz) as shown below. If you need more complex control—such as managing your own wallet and Relay `task_fee`, Bridge-side repeat tasks, or operating without Crynux AS—deploy your own [Crynux Bridge](../crynux-bridge.md) and call its Raw Task and Batch Task APIs.
+
 ## Sending Text-to-Text Tasks via [Crynux AS](https://crynux-as.xyz) (Raw Task API)
 
 {% hint style="info" %}

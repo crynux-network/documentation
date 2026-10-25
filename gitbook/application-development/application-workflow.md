@@ -5,22 +5,20 @@ description: Use the Crynux Network as the inference API
 # Application Workflow
 
 {% hint style="info" %}
-The easiest method to connect an application to the Crynux Network is to deploy a Crynux Bridge, and connect the application to the bridge using API. The Crynux Bridge will take care of the application wallet, and all the interactions with the blockchain and Relay. The tutorial can be found in the following document:
+The easiest way to connect an application to the Crynux Network is to use [Crynux AS](https://crynux-as.xyz). It provides OpenAI-compatible LLM and Image APIs, a managed Raw Task API, Credits billing, and project API keys, so the application does not manage a wallet or talk to the blockchain and Relay directly.
 
-[Crynux Bridge](crynux-bridge.md)
+See:
 
-Another convenient method is to use the SDK to embed the workflow directly into the application. The details of the SDKs are explained in the following document:
+* [How to Run LLM using Crynux Network](how-to-run-llm-using-crynux-network/README.md)
+* [OpenAI-Compatible Image API](openai-compatible-image-api.md)
+* [Execute Tasks](execute-tasks/README.md)
 
-[Crynux SDK](crynux-sdk.md)
+If you need more direct control over the application wallet, Relay fees, or Bridge-side task settings, deploy your own [Crynux Bridge](crynux-bridge.md). Self-hosting Bridge is a more advanced option than using Crynux AS.
 {% endhint %}
 
-The application can utilize the Crynux Network as an API service. It sends inference tasks to the network and receives images or texts in return. Two types of inference tasks are supported: Stable Diffusion image generation and GPT text generation.
+The application can use the Crynux Network as an API service. It sends tasks to the network and receives images or texts in return. LLM text generation and Diffusers image generation are supported.
 
-The application interacts with two network components: the blockchain node and the Relay. To send tasks successfully, it must have a wallet with sufficient Test CNX tokens for payment. Test CNX tokens can be acquired for free on the [Discord Server of Crynux](https://discord.gg/y8YKxb7uZk).
-
-Reference applications are provided for both image generation and text generation tasks. The source code can be found on the GitHub.
-
-As the first step, we will provide a high-level overview of the complete workflow, outlining the main steps involved in the process.
+Most applications should stop at [Crynux AS](https://crynux-as.xyz) or, when needed, a self-hosted [Crynux Bridge](crynux-bridge.md). The rest of this page describes the underlying network workflow that those services implement: interacting with the blockchain and the Relay, paying task fees, and downloading results.
 
 ## Overview
 
@@ -75,29 +73,11 @@ For a detailed workflow involving all network participants, please refer to the 
 [task-lifecycle](../system-design/task-lifecycle/)
 {% endcontent-ref %}
 
-## The Reference Applications
-
-The workflow has been fully implemented in the showcase applications: the Image Generator and the AI Chatbot. Which can be accessed at:
-
-The Image Generator: [https://ig.crynux.io](https://ig.crynux.io)
-
-The AI Chatbot: [https://chat.crynux.io](https://chat.crynux.io)
-
-Both applications utilize the Crynux Bridge as the backend. The Crynux Bridge includes a built-in wallet to cover task fees, eliminating the need for applications to manage their own wallets. Additionally, it isolates the blockchain and Relay from the applications. This allows applications to simply submit task parameters via API and await the result without further action.
-
-The Crynux Bridge can be used by all the applications. The source code of the Crynux Bridge can be found at:
-
-{% embed url="https://github.com/crynux-network/crynux-bridge" %}
-
-The source code of the web UI of the Image Generator:
-
-{% embed url="https://github.com/crynux-network/ig-web" %}
-
-The source code of the web UI of the AI Chatbot
-
-{% embed url="https://github.com/crynux-network/chat-web" %}
-
 ## Application Workflow Step by Step
+
+{% hint style="info" %}
+The steps below are the network-level workflow. Applications that use [Crynux AS](https://crynux-as.xyz) or [Crynux Bridge](crynux-bridge.md) do not implement these steps themselves.
+{% endhint %}
 
 ### 1. Prepare the application wallet
 

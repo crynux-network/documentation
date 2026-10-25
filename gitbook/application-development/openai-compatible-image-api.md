@@ -133,6 +133,8 @@ The multipart form accepts one or more file parts named `image` or `image[]`. Yo
 
 ### JSON request with data URLs
 
+{% tabs %}
+{% tab title="Python" %}
 ```python
 import base64
 import requests
@@ -158,6 +160,40 @@ response = requests.post(
 
 print(response.json())
 ```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+import fs from "fs";
+
+const dataUrl =
+  "data:image/png;base64," + fs.readFileSync("input.png").toString("base64");
+
+const response = await fetch(
+  "https://api.crynux-as.xyz/api/<endpoint_token>/v1/images/edits",
+  {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer your-api-key",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "Qwen/Qwen-Image-2.1",
+      prompt: "Change the background to a snowy mountain landscape",
+      images: [{ image_url: dataUrl }],
+      size: "1024x1024",
+      response_format: "b64_json",
+    }),
+  },
+);
+
+if (!response.ok) {
+  throw new Error(await response.text());
+}
+console.log(await response.json());
+```
+{% endtab %}
+{% endtabs %}
 
 JSON requests must use `images` as a non-empty array of objects. Each object provides exactly one `image_url` as a `data:image/<type>;base64,...` data URL. Absolute `http` and `https` URLs are not supported. The total size of all `images` strings must not exceed 1 MB (`1,048,576` bytes).
 
@@ -293,7 +329,7 @@ These values return HTTP 400 with an OpenAI invalid-request error shape:
 
 ## Need More Complex Features? Use the Raw Task API
 
-Use the OpenAI-compatible Images APIs when you want a simple generation or edit call. Use the Raw Task API when you need finer control, for example:
+Use the OpenAI-compatible Images APIs when you want a simple generation or edit call. Use the [Crynux AS](https://crynux-as.xyz) Raw Task API when you need finer control, for example:
 
 * custom `steps`, `negative_prompt`, `guidance_scale`, fixed `seed`, or img2img `strength`
 * LoRA adapters (`lora`)
@@ -304,6 +340,8 @@ Use the OpenAI-compatible Images APIs when you want a simple generation or edit 
 {% content-ref url="execute-tasks/text-to-image-task.md" %}
 [Text-to-Image Task](execute-tasks/text-to-image-task.md)
 {% endcontent-ref %}
+
+If you need still more direct control over the wallet, Relay `task_fee`, Bridge-side repeat tasks, or the task lifecycle without Crynux AS, deploy your own [Crynux Bridge](crynux-bridge.md).
 
 ## Checking Available Image Models
 

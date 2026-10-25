@@ -8,6 +8,8 @@ An Image Task is a JSON document (`ImageTaskArgs`) that describes one Diffusers 
 
 If you only need a simple OpenAI-style generate or edit call, use the [OpenAI-Compatible Image API](../openai-compatible-image-api.md). Use the Raw Task API when you need full `ImageTaskArgs` control, batch create, long `queue_timeout` Flexible Pricing, or fields such as `steps`, `negative_prompt`, `lora`, `dtype`, and `required_gpu`.
 
+The examples below use the [Crynux AS](https://crynux-as.xyz) Raw Task API. If you need more complex control—such as setting `task_fee` yourself, owning the application wallet and Relay Account, or configuring Bridge repeat tasks—you can deploy your own [Crynux Bridge](../crynux-bridge.md) and call its Raw / Batch APIs directly.
+
 ## Sending Image Tasks via [Crynux AS](https://crynux-as.xyz) (Raw Task API)
 
 {% hint style="info" %}
