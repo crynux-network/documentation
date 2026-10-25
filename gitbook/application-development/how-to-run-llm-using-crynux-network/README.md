@@ -201,7 +201,7 @@ main();
 
 ## Need More Complex Features? Use the Raw Task API
 
-Use the OpenAI-compatible LLM APIs when you want chat completions, tool calling, structured output, or Responses. Use the Raw Task API when you need finer control, for example:
+Use the OpenAI-compatible LLM APIs when you want chat completions, tool calling, structured output, or Responses. Use the [Crynux AS](https://crynux-as.xyz) Raw Task API when you need finer control, for example:
 
 * batch create up to 100 tasks with `POST /inference_tasks/batch` and batch status polling
 * a specific GPU model through `required_gpu` and `required_gpu_vram`
@@ -211,6 +211,8 @@ Use the OpenAI-compatible LLM APIs when you want chat completions, tool calling,
 {% content-ref url="../execute-tasks/text-to-text-task.md" %}
 [Text-to-Text Task](../execute-tasks/text-to-text-task.md)
 {% endcontent-ref %}
+
+If you need still more direct control over the wallet, Relay `task_fee`, Bridge-side repeat tasks, or the task lifecycle without Crynux AS, deploy your own [Crynux Bridge](../crynux-bridge.md).
 
 ## Advanced Usage
 

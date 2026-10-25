@@ -329,7 +329,7 @@ These values return HTTP 400 with an OpenAI invalid-request error shape:
 
 ## Need More Complex Features? Use the Raw Task API
 
-Use the OpenAI-compatible Images APIs when you want a simple generation or edit call. Use the Raw Task API when you need finer control, for example:
+Use the OpenAI-compatible Images APIs when you want a simple generation or edit call. Use the [Crynux AS](https://crynux-as.xyz) Raw Task API when you need finer control, for example:
 
 * custom `steps`, `negative_prompt`, `guidance_scale`, fixed `seed`, or img2img `strength`
 * LoRA adapters (`lora`)
@@ -340,6 +340,8 @@ Use the OpenAI-compatible Images APIs when you want a simple generation or edit 
 {% content-ref url="execute-tasks/text-to-image-task.md" %}
 [Text-to-Image Task](execute-tasks/text-to-image-task.md)
 {% endcontent-ref %}
+
+If you need still more direct control over the wallet, Relay `task_fee`, Bridge-side repeat tasks, or the task lifecycle without Crynux AS, deploy your own [Crynux Bridge](crynux-bridge.md).
 
 ## Checking Available Image Models
 

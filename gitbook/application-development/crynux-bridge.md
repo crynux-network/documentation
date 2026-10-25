@@ -4,89 +4,336 @@ description: How to Start a Crynux Bridge Locally
 
 # Crynux Bridge
 
-Crynux Bridge is middleware that connects traditional applications to the Crynux Network. It simplifies using the Crynux Network for applications by handling all complex interactions with the Crynux Network. The application only needs to interact with the Crynux Bridge by sending task parameters and waiting for the result images or texts.
+Crynux Bridge is middleware that connects applications to the Crynux Network. It owns the application wallet, signs Relay and blockchain requests, runs the full task lifecycle, and exposes asynchronous Raw Task and Batch Task HTTP APIs. The application sends task parameters and polls for results; it does not sign Relay requests or submit on-chain transactions itself.
 
-More specifically, the Crynux Bridge:
-
-1. Manages the application wallet, signs the underlying transactions and API requests.
-2. Interacts with the blockchain and Relay to execute the entire task workflow.
-3. Provides simpler APIs to the application to execute tasks using only the task parameters(no blockchain transactions or signatures).
-
-Check out this simple webpage that lets users create images from text prompts. Tasks are sent to the Crynux Bridge API, and the generated image is returned:
-
-{% embed url="https://codepen.io/Luke-Weber/pen/ExBqGrK" %}
-
-And the following webpage that implements a chatbot using the OpenAI-compliant LLM API:
-
-{% embed url="https://codepen.io/Luke-Weber/pen/RNWaOgL" %}
+{% hint style="info" %}
+Self-hosting Crynux Bridge is an advanced option. For most applications, [Crynux AS](https://crynux-as.xyz) is easier: it manages Credits, project API keys, and pricing, and it provides OpenAI-compatible LLM and Image APIs as well as an AS-facing Raw Task API. Prefer [Crynux AS](https://crynux-as.xyz) unless you need to run your own Bridge and control wallet, fees, and task lifecycle directly.
+{% endhint %}
 
 ## Features
 
-### OpenAI-Compliant APIs for LLM text generation
+1. **Automatic VSS task validation** — When the network selects multi-node validation for a task, Bridge creates the validation members, runs score comparison, and advances the task through the protocol validation flow without extra application logic.
+2. **Repeat tasks for higher success rate and faster completion** — Bridge can run multiple concurrent primary submissions for one logical task (`task.repeat_num` in Bridge config). The first successful result wins. This is Bridge configuration, not an API parameter.
+3. **Wallet and Relay fee management** — Bridge loads the application wallet, signs Relay and chain operations, and deducts task fees from the wallet's Relay Account balance.
+4. **Raw Task API and Batch Task API** — Create one task or up to 100 tasks per request, poll status (including batch status), and download image PNG or LLM JSON results.
+5. **Multi-user support and Role-Based Access Control (RBAC)** — API keys with roles, use quotas, and rate limits so multiple clients can share one Bridge instance with controlled access.
 
-The Crynux Bridge provides OpenAI-compliant LLM APIs that support both chat completions and text completions. These APIs allow you to interact with various Large Language Models (LLMs) in a conversational manner.
+## Prefer [Crynux AS](https://crynux-as.xyz) for most applications
 
-#### Chat Completions API
+Deploying your own Bridge means operating Docker, a database, a funded application wallet / Relay Account, API keys, and Bridge configuration (including optional repeat tasks). That is more complex than using the hosted [Crynux AS](https://crynux-as.xyz) service.
 
-The chat completions API (`/v1/llm/chat/completions`) supports the following key parameters:
+Use [Crynux AS](https://crynux-as.xyz) when you want:
 
-* `model`: The model to use (e.g., "Qwen/Qwen2.5-7B")
-* `messages`: An array of message objects with `role` and `content`
-* `temperature`: Controls randomness in the output (range: 0.0 to 2.0)
-* `max_tokens`: Maximum number of tokens to generate
-* `top_p`: Nucleus sampling parameter (range: 0.0 to 1.0)
-* `top_k`: Top-k sampling parameter (range: 1 to Infinity)
-* `min_p`: Minimum probability threshold (range: 0.0 to 1.0)
-* `repetition_penalty`: Penalty for repeating tokens (range: 0.0 to 2.0)
-* `frequency_penalty`: Penalty for frequent tokens (range: -2.0 to 2.0)
-* `presence_penalty`: Penalty for token presence (range: -2.0 to 2.0)
-* `seed`: Seed for deterministic outputs
-* `n`: Number of completions to generate (default: 1)
-* `stream`: Whether to stream the response (default: false)
-* `stop`: Array of strings that stop generation when encountered
+* OpenAI-compatible Chat Completions, Completions, Responses, and Image APIs
+* Credits-based billing and project Cost Level without setting `task_fee` yourself
+* A managed Raw Task API under `/api/<endpoint_token>/v1/inference_tasks`
 
-#### Text Completions API
+Use a self-hosted Bridge when you need direct control over the wallet, Relay fees, repeat-task settings, or the Bridge Raw / Batch APIs without going through Crynux AS.
 
-The text completions API (`/v1/llm/completions`) provides a simpler interface for non-chat use cases. It's ideal for tasks like text completion, summarization, or single-turn text generation. The API supports the following key parameters:
+For OpenAI-compatible usage, see:
 
-* `model`: The model to use (e.g., "Qwen/Qwen2.5-7B")
-* `prompt`: The text prompt to generate a completion for
-* `temperature`: Controls randomness in the output (range: 0.0 to 2.0)
-* `max_tokens`: Maximum number of tokens to generate
-* `top_p`: Nucleus sampling parameter (range: 0.0 to 1.0)
-* `top_k`: Top-k sampling parameter (range: 1 to Infinity)
-* `min_p`: Minimum probability threshold (range: 0.0 to 1.0)
-* `repetition_penalty`: Penalty for repeating tokens (range: 0.0 to 2.0)
-* `frequency_penalty`: Penalty for frequent tokens (range: -2.0 to 2.0)
-* `presence_penalty`: Penalty for token presence (range: -2.0 to 2.0)
-* `seed`: Seed for deterministic outputs
-* `n`: Number of completions to generate (default: 1)
-* `stream`: Whether to stream the response (default: false)
-* `stop`: Array of strings that stop generation when encountered
+{% content-ref url="how-to-run-llm-using-crynux-network/README.md" %}
+[How to Run LLM using Crynux Network](how-to-run-llm-using-crynux-network/README.md)
+{% endcontent-ref %}
 
-### Image Generation APIs
+{% content-ref url="openai-compatible-image-api.md" %}
+[OpenAI-Compatible Image API](openai-compatible-image-api.md)
+{% endcontent-ref %}
 
-The Crynux Bridge provides an OpenAI-compatible image generation API that uses Stable Diffusion models. The API (`/v1/images`) supports the following key parameters:
+## Raw Task API and Batch Task API
 
-* `model`: The model to use (default: "crynux-network/sdxl-turbo")
-* `prompt`: Text description of the desired image
-* `n`: Number of images to generate (default: 1)
-* `size`: Image dimensions (default: "512x512", options: "256x256", "512x512", "1024x1024")
-* `response_format`: Response format (default: "b64\_json")
-* `output_format`: Image format (default: "png")
+Bridge exposes asynchronous task APIs under `/v1`. Authenticate with `Authorization: Bearer <api_key>`.
 
-The response includes:
+| Operation | Method and path |
+| --- | --- |
+| Create one task | `POST /v1/inference_tasks` |
+| Create up to 100 tasks | `POST /v1/inference_tasks/batch` |
+| Get status | `GET /v1/inference_tasks/<client_task_id>` |
+| Batch status | `POST /v1/inference_tasks/batch/status` |
+| Download image PNG | `GET /v1/inference_tasks/<client_task_id>/images/<index>` |
+| Download LLM JSON | `GET /v1/inference_tasks/<client_task_id>/llm` |
 
-* `created`: Timestamp of when the image was generated
-* `data`: Array of generated images, each containing:
-  * `b64_json`: Base64-encoded image data
-  * `url`: URL to the generated image (if response\_format is "url")
-  * `revised_prompt`: The prompt after any automatic modifications
-* `usage`: Token usage statistics
+### Create fields
 
-### Multi-user Support and Role-Based Access Control
+| Field | Required | Notes |
+| --- | --- | --- |
+| `task_type` | Yes | `0` Image (SD), `1` LLM |
+| `task_args` | Yes | JSON **string** of `ImageTaskArgs` or `GPTTaskArgs` |
+| `task_fee` | Yes | Final task fee in Wei as a decimal string. Deducted from the Bridge wallet Relay Account (per primary submission) |
+| `min_vram` | No | Minimum GPU VRAM in GB |
+| `required_gpu` + `required_gpu_vram` | No | Exact GPU selection; provide both together |
+| `queue_timeout` | No | Queue wait budget in seconds for ordinary Image and LLM tasks |
 
-The Crynux Bridge is designed to support multiple users, enabling seamless collaboration and improved management of access to both the image generation and LLM APIs. With Role-Based Access Control (RBAC), administrators can define specific roles with varying permissions, ensuring that each user can only access those features necessary for their tasks.
+Create returns immediately with a client task `id` and `phase` `queued`. Poll until `status` is `success` or `failed`, then download the result.
+
+Task argument schemas are documented in:
+
+{% content-ref url="execute-tasks/text-to-image-task.md" %}
+[Text-to-Image Task](execute-tasks/text-to-image-task.md)
+{% endcontent-ref %}
+
+{% content-ref url="execute-tasks/text-to-text-task.md" %}
+[Text-to-Text Task](execute-tasks/text-to-text-task.md)
+{% endcontent-ref %}
+
+### Create, poll, and download
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+import json
+import time
+import requests
+
+BASE = "http://127.0.0.1:5028/v1"
+HEADERS = {
+    "Authorization": "Bearer your-api-key",
+    "Content-Type": "application/json",
+}
+
+task_args = {
+    "version": "3.7.1",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "messages": [
+        {"role": "user", "content": "What is the capital of France?"}
+    ],
+    "generation_config": {
+        "max_new_tokens": 128,
+        "temperature": 0.7,
+        "top_p": 0.9,
+    },
+    "dtype": "auto",
+}
+
+create = requests.post(
+    f"{BASE}/inference_tasks",
+    headers=HEADERS,
+    json={
+        "task_type": 1,
+        "task_args": json.dumps(task_args),
+        "task_fee": "1000000000000000000",
+        "min_vram": 24,
+        "queue_timeout": 3600,
+    },
+    timeout=60,
+)
+create.raise_for_status()
+task_id = create.json()["data"]["id"]
+print("created", task_id)
+
+while True:
+    status = requests.get(
+        f"{BASE}/inference_tasks/{task_id}",
+        headers=HEADERS,
+        timeout=60,
+    )
+    status.raise_for_status()
+    data = status.json()["data"]
+    print(data["status"], data["phase"])
+    if data["status"] in ("success", "failed"):
+        break
+    time.sleep(5)
+
+if data["status"] != "success":
+    raise RuntimeError(data.get("error_message") or "task failed")
+
+result = requests.get(
+    f"{BASE}/inference_tasks/{task_id}/llm",
+    headers=HEADERS,
+    timeout=120,
+)
+result.raise_for_status()
+print(result.json())
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+const BASE = "http://127.0.0.1:5028/v1";
+const HEADERS = {
+  Authorization: "Bearer your-api-key",
+  "Content-Type": "application/json",
+};
+
+const taskArgs = {
+  version: "3.7.1",
+  model: "Qwen/Qwen2.5-7B-Instruct",
+  messages: [{ role: "user", content: "What is the capital of France?" }],
+  generation_config: {
+    max_new_tokens: 128,
+    temperature: 0.7,
+    top_p: 0.9,
+  },
+  dtype: "auto",
+};
+
+async function sleep(ms) {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+const createRes = await fetch(`${BASE}/inference_tasks`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({
+    task_type: 1,
+    task_args: JSON.stringify(taskArgs),
+    task_fee: "1000000000000000000",
+    min_vram: 24,
+    queue_timeout: 3600,
+  }),
+});
+if (!createRes.ok) {
+  throw new Error(await createRes.text());
+}
+const taskId = (await createRes.json()).data.id;
+console.log("created", taskId);
+
+let data;
+for (;;) {
+  const statusRes = await fetch(`${BASE}/inference_tasks/${taskId}`, {
+    headers: { Authorization: HEADERS.Authorization },
+  });
+  if (!statusRes.ok) {
+    throw new Error(await statusRes.text());
+  }
+  data = (await statusRes.json()).data;
+  console.log(data.status, data.phase);
+  if (data.status === "success" || data.status === "failed") {
+    break;
+  }
+  await sleep(5000);
+}
+
+if (data.status !== "success") {
+  throw new Error(data.error_message || "task failed");
+}
+
+const resultRes = await fetch(`${BASE}/inference_tasks/${taskId}/llm`, {
+  headers: { Authorization: HEADERS.Authorization },
+});
+if (!resultRes.ok) {
+  throw new Error(await resultRes.text());
+}
+console.log(await resultRes.json());
+```
+{% endtab %}
+{% endtabs %}
+
+### Batch create and batch status
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+import json
+import requests
+
+BASE = "http://127.0.0.1:5028/v1"
+HEADERS = {
+    "Authorization": "Bearer your-api-key",
+    "Content-Type": "application/json",
+}
+
+def make_task(prompt: str) -> dict:
+    task_args = {
+        "version": "3.7.1",
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "messages": [{"role": "user", "content": prompt}],
+        "generation_config": {"max_new_tokens": 64},
+        "dtype": "auto",
+    }
+    return {
+        "task_type": 1,
+        "task_args": json.dumps(task_args),
+        "task_fee": "1000000000000000000",
+        "min_vram": 24,
+        "queue_timeout": 43200,
+    }
+
+batch = requests.post(
+    f"{BASE}/inference_tasks/batch",
+    headers=HEADERS,
+    json={
+        "tasks": [
+            make_task("Name one European capital."),
+            make_task("Name one Asian capital."),
+        ]
+    },
+    timeout=60,
+)
+batch.raise_for_status()
+items = batch.json()["data"]
+task_ids = [
+    item["client_task"]["id"]
+    for item in items
+    if item.get("client_task") is not None
+]
+
+status = requests.post(
+    f"{BASE}/inference_tasks/batch/status",
+    headers=HEADERS,
+    json={"client_task_ids": task_ids},
+    timeout=60,
+)
+status.raise_for_status()
+print(status.json())
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+const BASE = "http://127.0.0.1:5028/v1";
+const HEADERS = {
+  Authorization: "Bearer your-api-key",
+  "Content-Type": "application/json",
+};
+
+function makeTask(prompt) {
+  const taskArgs = {
+    version: "3.7.1",
+    model: "Qwen/Qwen2.5-7B-Instruct",
+    messages: [{ role: "user", content: prompt }],
+    generation_config: { max_new_tokens: 64 },
+    dtype: "auto",
+  };
+  return {
+    task_type: 1,
+    task_args: JSON.stringify(taskArgs),
+    task_fee: "1000000000000000000",
+    min_vram: 24,
+    queue_timeout: 43200,
+  };
+}
+
+const batchRes = await fetch(`${BASE}/inference_tasks/batch`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({
+    tasks: [
+      makeTask("Name one European capital."),
+      makeTask("Name one Asian capital."),
+    ],
+  }),
+});
+if (!batchRes.ok) {
+  throw new Error(await batchRes.text());
+}
+const items = (await batchRes.json()).data;
+const taskIds = items
+  .filter((item) => item.client_task != null)
+  .map((item) => item.client_task.id);
+
+const statusRes = await fetch(`${BASE}/inference_tasks/batch/status`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({ client_task_ids: taskIds }),
+});
+if (!statusRes.ok) {
+  throw new Error(await statusRes.text());
+}
+console.log(await statusRes.json());
+```
+{% endtab %}
+{% endtabs %}
 
 ## Start a Crynux Bridge Locally
 
@@ -170,176 +417,18 @@ Enter your local Crynux Bridge IP address and port (default is 5028), along with
 
 ### 6. Use the APIs
 
-Once you have created and configured your API key, you can start using the APIs. Here are examples for both LLM and SD APIs:
-
-#### **Use the LLM API**
-
-{% tabs %}
-{% tab title="Python" %}
-```python
-import requests
-import json
-
-# API configuration
-API_URL = "https://bridge.crynux.io/v1/llm/chat/completions"
-API_KEY = "your-api-key-here"  # Replace with your API key
-
-# Request headers
-headers = {
-    "Authorization": f"Bearer {API_KEY}",
-    "Content-Type": "application/json"
-}
-
-# Request payload
-payload = {
-    "model": "Qwen/Qwen2.5-7B",
-    "messages": [
-        {
-            "role": "user",
-            "content": "What is the capital of France?"
-        }
-    ],
-    "stream": False
-}
-
-# Make the request
-response = requests.post(
-    API_URL,
-    headers=headers,
-    json=payload,
-    timeout=180
-)
-
-# Print the response
-print(response.json())
-```
-{% endtab %}
-
-{% tab title="JavaScript" %}
-```javascript
-async function getChatCompletion() {
-    try {
-        const API_URL = "https://bridge.crynux.io/v1/llm/chat/completions";
-        const API_KEY = "your-api-key-here";  // Replace with your API key
-
-        const response = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${API_KEY}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: "Qwen/Qwen2.5-7B",
-                messages: [
-                    {
-                        role: "user",
-                        content: "What is the capital of France?"
-                    }
-                ],
-                stream: false
-            })
-        });
-
-        const data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
-getChatCompletion();
-```
-{% endtab %}
-{% endtabs %}
-
-#### **Use the image generation API**
-
-{% tabs %}
-{% tab title="Python" %}
-```python
-import requests
-import json
-
-# API configuration
-API_URL = "https://bridge.crynux.io/v1/images"
-API_KEY = "your-api-key-here"  # Replace with your API key
-
-# Request headers
-headers = {
-    "Authorization": f"Bearer {API_KEY}",
-    "Content-Type": "application/json"
-}
-
-# Request payload
-payload = {
-    "model": "crynux-network/sdxl-turbo",
-    "prompt": "a beautiful landscape",
-    "n": 1,
-    "size": "512x512"
-}
-
-# Make the request
-response = requests.post(
-    API_URL,
-    headers=headers,
-    json=payload,
-    timeout=180
-)
-
-# Print the response
-print(response.json())
-```
-{% endtab %}
-
-{% tab title="JavaScript" %}
-```javascript
-async function generateImage() {
-    try {
-        const API_URL = "https://bridge.crynux.io/v1/images";
-        const API_KEY = "your-api-key-here"; // Replace with your API key
-
-        const response = await fetch(API_URL, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${API_KEY}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: "crynux-network/sdxl-turbo",
-                prompt: "A beautiful sunset over a calm ocean",
-                n: 1,
-                size: "512x512"
-            })
-        });
-
-        const data = await response.json();
-        console.log(data);
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
-generateImage();
-```
-{% endtab %}
-{% endtabs %}
+Use the Raw Task and Batch Task examples above with your Bridge base URL (for example `http://127.0.0.1:5028/v1`) and the API key from step 5.
 
 ## API List
 
 The description of the APIs can be accessed as the OpenAPI Specification on the started Crynux Bridge instance. Assume the IP address of the instance is 192.168.1.2, the JSON schema of the specification can be accessed at:
 
 ```
-http://192.168.1.2/openapi.json
+http://192.168.1.2:5028/openapi.json
 ```
 
 And a human readable documentation can be accessed at:
 
 ```
-http://192.168.1.2/static/api_docs.html
+http://192.168.1.2:5028/static/api_docs.html
 ```
-
-As an example, the URLs of the Crynux Bridge used by the showcase applications online are:
-
-{% embed url="https://api_ig.crynux.ai/openapi.json" %}
-
-{% embed url="https://api_ig.crynux.ai/static/api_docs.html" %}
