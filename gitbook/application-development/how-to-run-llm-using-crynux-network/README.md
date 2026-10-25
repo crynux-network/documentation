@@ -242,6 +242,6 @@ For more advanced use cases like Tool Calling, Structured Output, Responses API,
 [Hermes Agent Integration](./hermes-agent-integration.md)
 {% endcontent-ref %}
 
-## Get Started with [Crynux AS](https://crynux-as.xyz)
+## Get Started with Crynux AS
 
 To use the Crynux Network in production, create a project on [Crynux AS](https://crynux-as.xyz), obtain your project Base URL and API key, deposit Credits, and call the OpenAI-compatible APIs as shown above.

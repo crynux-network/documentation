@@ -10,7 +10,7 @@ If you only need a simple OpenAI-style generate or edit call, use the [OpenAI-Co
 
 The examples below use the [Crynux AS](https://crynux-as.xyz) Raw Task API. If you need more complex control—such as setting `task_fee` yourself, owning the application wallet and Relay Account, or configuring Bridge repeat tasks—you can deploy your own [Crynux Bridge](../crynux-bridge.md) and call its Raw / Batch APIs directly.
 
-## Sending Image Tasks via [Crynux AS](https://crynux-as.xyz) (Raw Task API)
+## Sending Image Tasks via Crynux AS (Raw Task API)
 
 {% hint style="info" %}
 Replace `<endpoint_token>` and `your-api-key` with your project endpoint token and API key from the [Crynux AS](https://crynux-as.xyz) dashboard.
