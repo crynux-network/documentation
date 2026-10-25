@@ -49,6 +49,8 @@
   * [Responses API](application-development/how-to-run-llm-using-crynux-network/responses-api.md)
   * [Integration with LangChain & LangGraph](application-development/how-to-run-llm-using-crynux-network/langchain.md)
   * [Hermes Agent Integration](application-development/how-to-run-llm-using-crynux-network/hermes-agent-integration.md)
+* [OpenAI-Compatible Image API](application-development/openai-compatible-image-api.md)
+* [Model Quantization](application-development/quantization.md)
 * [How to Fine-tune a Stable Diffusion Model using Crynux Network](application-development/how-to-finetune-a-stable-diffusion-model-using-crynux-network.md)
 * [Crynux Bridge](application-development/crynux-bridge.md)
 * [Application Workflow](application-development/application-workflow.md)

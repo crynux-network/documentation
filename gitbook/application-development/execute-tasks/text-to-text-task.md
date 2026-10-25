@@ -1,213 +1,408 @@
 ---
-description: How to define a text-to-text task
+description: How to define and submit a text-to-text Raw Task
 ---
 
 # Text-to-Text Task
 
-The GPT Task framework has two components:
+A GPT Task is a JSON document (`GPTTaskArgs`) that describes one LLM generation job. Crynux nodes load the Hugging Face model, apply the chat template, run generation, and return a structured JSON result.
 
-1. A generalized schema to define a llm text generation task.
-2. An execution engine that runs the task defined in the above schema.
+If you only need standard chat, tool calling, structured output, or the Responses API, use the [OpenAI-compatible LLM API](../how-to-run-llm-using-crynux-network/README.md). Use the Raw Task API when you need full `GPTTaskArgs` control, batch create, exact GPU selection, or a create-and-poll flow you manage yourself.
 
-The task definition is represented in the key-value pairs that can be transformed into, among many other formats, a JSON string, which can be validated using a JSON schema. And the validation tools exist for most of the popular programming languages.
-
-The execution engine is integrated into the node of the Helium Network, and the JSON string format of the task definition is used to send tasks in the Helium Network.
-
-## GPT Task definition
-
-The following is an intuitive look at a task definition:
-
-```json
-{
-    "model": "gpt2",
-	"messages": [
-		{
-			"role": "user",
-			"content": "I want to create a chat bot. Any suggestions?"
-		}
-	],
-	"generation_config": {
-		"max_new_tokens": 30,
-		"do_sample": true,
-		"num_beams": 1,
-		"temperature": 1.0,
-		"typical_p": 1.0,
-		"top_k": 20,
-		"top_p": 1.0,
-		"repetition_penalty": 1.0,
-		"num_return_sequences": 1
-	},
-	"seed": 42,
-	"dtype": "auto",
-	"quantize_bits": 4
-}
-```
-
-More examples of the different GPT tasks can be found [in the GitHub repository](https://github.com/crynux-network/gpt-task/tree/main/examples).
-
-### Model
-
-The base model could be any large language model suitable for text generation task.
-
-The model should be a Huggingface model ID.
-
-All huggingface models list in the [huggingface models page](https://huggingface.co/models?pipeline\_tag=text-generation\&sort=trending) can be used for base model.
-
-For example:
-
-```json
-{
-    "model": "mistralai/Mistral-7B-v0.1"
-}
-```
-
-### Messages
-
-Messages is a list of message objects comprising the conversation so far.
-
-For example:
-
-```json
-{
-	"messages": [
-		{
-			"role": "user",
-			"content": "I want to create a chat bot. Any suggestions?"
-		}
-	]
-}
-```
-
-#### Message Object
-
-Message object has two fields: `role` and `content`.
-
-The field `role` represents the role of message author, can be `user`, `assistant` and `system`.
-
-The field `content` is the message content.
-
-During execution, the messages will be formatted to a plain string using the model's chat template, and then be send to the model as input prompt. Accroding to the different message role, different tags defined by the model will be added around each message. However, some models have no chat template, in this situation all the message contents will be simply joined to a single string.
-
-### Generation Config
-
-Generation config is a set of parameters to control the text generation behavior of the model.
-
-For example:
-
-```json
-{
-   "generation_config": {
-		"max_new_tokens": 30,
-		"do_sample": true,
-		"num_beams": 1,
-		"temperature": 1.0,
-		"typical_p": 1.0,
-		"top_k": 20,
-		"top_p": 1.0,
-		"repetition_penalty": 1.0,
-		"num_return_sequences": 1
-	},
-}
-```
-
-The meaning of each parameters in generation config can be found in the [huggingface generation config](https://huggingface.co/docs/transformers/main\_classes/text\_generation#transformers.GenerationConfig).
-
-#### max\_new\_tokens
-
-The maximum numbers of tokens to generate, ignoring the number of tokens in the input prompt.
-
-#### do\_sample
-
-Whether or not to use sampling ; use greedy decoding otherwise.
-
-#### num\_beams
-
-Number of beams for beam search. 1 means no beam search.
-
-#### temperature
-
-The value used to modulate the next token probabilities. The higher the temperature, the flattering the next token probabilities. When the temperature equals 0, the sampling will be downgraded to greedy decoding.
-
-#### typical\_p
-
-Local typicality measures how similar the conditional probability of predicting a target token next is to the expected conditional probability of predicting a random token next, given the partial text already generated. If set to float < 1, the smallest set of the most locally typical tokens with probabilities that add up to typical\_p or higher are kept for generation. See [this paper](https://arxiv.org/pdf/2202.00666.pdf) for more details.
-
-#### top\_k
-
-The number of highest probability vocabulary tokens to keep for top-k-filtering.
-
-#### top\_p
-
-If set to float < 1, only the smallest set of most probable tokens with probabilities that add up to top\_p or higher are kept for generation.
-
-#### repetition\_penalty
-
-The parameter for repetition penalty. 1.0 means no penalty. See [this paper](https://arxiv.org/pdf/1909.05858.pdf) for more details.
-
-#### num\_return\_sequences
-
-The number of independently computed returned sequences for each element in the batch.
-
-### Seed
-
-The seed used to initialize the random processes.
+## Sending Text-to-Text Tasks via Crynux AS (Raw Task API)
 
 {% hint style="info" %}
-Helium Network requires a deterministic algorithm for text generation, which means the text generated on the different nodes of the same deivces, given the same task definition, should be the same. This is a requirement for the consensus protocol to work. The seed is left as a required argument in the task definition so that all the nodes could use the same seed to initialize their random number generators, which will hopefully produce the same random numbers across all the nodes.
-
-Beside the seed, the GPT Task Framework has been implemented to maximize the reproducibility.
+Replace `https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1` and `your-api-key` with your project Base URL and API key from the Crynux AS dashboard.
 {% endhint %}
 
-### Dtype
+| Operation | Method and path |
+| --- | --- |
+| Create one task | `POST /api/<endpoint_token>/v1/inference_tasks` |
+| Create up to 100 tasks | `POST /api/<endpoint_token>/v1/inference_tasks/batch` |
+| Get status | `GET /api/<endpoint_token>/v1/inference_tasks/<client_task_id>` |
+| Batch status | `POST /api/<endpoint_token>/v1/inference_tasks/batch/status` |
+| Download LLM JSON | `GET /api/<endpoint_token>/v1/inference_tasks/<client_task_id>/llm` |
 
-Optional. Control the data precision for the model. Can be `float16`, `bfloat16`, `float32` or `auto`. When `dtype=auto`, the parameter `dtype` will be determined by the model's config file.
+Authenticate with `Authorization: Bearer <api-key-or-owner-jwt>`.
 
-### Quantize\_bits
+### Top-level request fields (outside `task_args`)
 
-Optional. Control the model quantization type. Can be `4` or `8`. `4` means the INT4 quantization, `8` means the INT8 quantization.
+| Field | Required | Notes |
+| --- | --- | --- |
+| `task_type` | Yes | Must be `1` for LLM tasks |
+| `task_args` | Yes | JSON **string** of `GPTTaskArgs` |
+| `min_vram` | No | Minimum GPU VRAM in GB. When omitted, Crynux AS matches the loaded-models cache using model id plus `quantization_config` / `dtype` when present; otherwise it selects the row with the greatest `min_vram` for that model |
+| `required_gpu` + `required_gpu_vram` | No | Exact GPU model name and VRAM. Provide both together. Do not combine with `min_vram` |
+| `task_version` | No | Task version string, for example `"3.7.1"` |
+| `queue_timeout` | No | Queue wait budget in seconds (Flexible Pricing). Positive integer. Not part of `task_args` |
+
+Do not send `task_fee`. Crynux AS owns pricing from the project Cost Level.
+
+#### Flexible Pricing with `queue_timeout`
+
+Crynux schedules queued tasks by task fee. A higher Cost Level / task fee ranks higher; a lower Cost Level / task fee ranks lower.
+
+Set a low project Cost Level and a long `queue_timeout` (for example `43200` for 12 hours) so large batches that do not need an immediate result can wait for quieter network periods at lower cost.
+
+Synchronous APIs such as `/v1/chat/completions` hold one HTTP request until the job finishes (about 10 minutes by default). They cannot wait for long queues. For low Cost Level + long `queue_timeout`, use this asynchronous Raw Task API, or use the [Responses API](../how-to-run-llm-using-crynux-network/responses-api.md) with `background=true`.
+
+### Status response fields
+
+| Field | Meaning |
+| --- | --- |
+| `id` | Public client task ID (`task_jobs.id`) |
+| `status` | `running`, `success`, or `failed` |
+| `phase` | `queued`, `running`, `validating`, `uploading`, `finalizing`, `success`, or `failed` |
+| `estimated_completion_at` | Present when `phase` is `running` and an estimate is known |
+| `error_message` | Present only when `status` is `failed` and an error was stored |
+
+### Create, poll, and download (Python)
+
+```python
+import json
+import time
+import requests
+
+BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1"
+HEADERS = {
+    "Authorization": "Bearer your-api-key",
+    "Content-Type": "application/json",
+}
+
+task_args = {
+    "version": "3.7.1",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "messages": [
+        {"role": "user", "content": "What is the capital of France?"}
+    ],
+    "generation_config": {
+        "max_new_tokens": 128,
+        "temperature": 0.7,
+        "top_p": 0.9,
+    },
+    "dtype": "auto",
+}
+
+create = requests.post(
+    f"{BASE}/inference_tasks",
+    headers=HEADERS,
+    json={
+        "task_type": 1,
+        "task_args": json.dumps(task_args),
+        "min_vram": 24,
+        "task_version": "3.7.1",
+        "queue_timeout": 3600,
+    },
+    timeout=60,
+)
+create.raise_for_status()
+task_id = create.json()["data"]["id"]
+print("created", task_id)
+
+while True:
+    status = requests.get(
+        f"{BASE}/inference_tasks/{task_id}",
+        headers=HEADERS,
+        timeout=60,
+    )
+    status.raise_for_status()
+    data = status.json()["data"]
+    print(data["status"], data["phase"])
+    if data["status"] in ("success", "failed"):
+        break
+    time.sleep(5)
+
+if data["status"] != "success":
+    raise RuntimeError(data.get("error_message") or "task failed")
+
+result = requests.get(
+    f"{BASE}/inference_tasks/{task_id}/llm",
+    headers=HEADERS,
+    timeout=120,
+)
+result.raise_for_status()
+print(result.json())
+```
+
+### Batch create and batch status (Python)
+
+```python
+import json
+import requests
+
+BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1"
+HEADERS = {
+    "Authorization": "Bearer your-api-key",
+    "Content-Type": "application/json",
+}
+
+def make_task(prompt: str) -> dict:
+    task_args = {
+        "version": "3.7.1",
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "messages": [{"role": "user", "content": prompt}],
+        "generation_config": {"max_new_tokens": 64},
+        "dtype": "auto",
+    }
+    return {
+        "task_type": 1,
+        "task_args": json.dumps(task_args),
+        "min_vram": 24,
+        "queue_timeout": 43200,
+    }
+
+batch = requests.post(
+    f"{BASE}/inference_tasks/batch",
+    headers=HEADERS,
+    json={
+        "tasks": [
+            make_task("Name one European capital."),
+            make_task("Name one Asian capital."),
+        ]
+    },
+    timeout=60,
+)
+batch.raise_for_status()
+items = batch.json()["data"]
+task_ids = [
+    item["client_task"]["id"]
+    for item in items
+    if item.get("client_task") is not None
+]
+
+status = requests.post(
+    f"{BASE}/inference_tasks/batch/status",
+    headers=HEADERS,
+    json={"client_task_ids": task_ids},
+    timeout=60,
+)
+status.raise_for_status()
+print(status.json())
+```
+
+### Create, poll, and download (JavaScript)
+
+```javascript
+const BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1";
+const HEADERS = {
+  Authorization: "Bearer your-api-key",
+  "Content-Type": "application/json",
+};
+
+const taskArgs = {
+  version: "3.7.1",
+  model: "Qwen/Qwen2.5-7B-Instruct",
+  messages: [{ role: "user", content: "What is the capital of France?" }],
+  generation_config: {
+    max_new_tokens: 128,
+    temperature: 0.7,
+    top_p: 0.9,
+  },
+  dtype: "auto",
+};
+
+async function sleep(ms) {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+const createRes = await fetch(`${BASE}/inference_tasks`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({
+    task_type: 1,
+    task_args: JSON.stringify(taskArgs),
+    min_vram: 24,
+    task_version: "3.7.1",
+    queue_timeout: 3600,
+  }),
+});
+if (!createRes.ok) {
+  throw new Error(await createRes.text());
+}
+const taskId = (await createRes.json()).data.id;
+console.log("created", taskId);
+
+let data;
+for (;;) {
+  const statusRes = await fetch(`${BASE}/inference_tasks/${taskId}`, {
+    headers: { Authorization: HEADERS.Authorization },
+  });
+  if (!statusRes.ok) {
+    throw new Error(await statusRes.text());
+  }
+  data = (await statusRes.json()).data;
+  console.log(data.status, data.phase);
+  if (data.status === "success" || data.status === "failed") {
+    break;
+  }
+  await sleep(5000);
+}
+
+if (data.status !== "success") {
+  throw new Error(data.error_message || "task failed");
+}
+
+const resultRes = await fetch(`${BASE}/inference_tasks/${taskId}/llm`, {
+  headers: { Authorization: HEADERS.Authorization },
+});
+if (!resultRes.ok) {
+  throw new Error(await resultRes.text());
+}
+console.log(await resultRes.json());
+```
+
+## `task_args` (`GPTTaskArgs`) Definition
+
+```json
+{
+  "version": "3.7.1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "revision": null,
+  "messages": [
+    {
+      "role": "user",
+      "content": "I want to create a chat bot. Any suggestions?"
+    }
+  ],
+  "generation_config": {
+    "max_new_tokens": 128,
+    "stop_strings": null,
+    "do_sample": true,
+    "num_beams": 1,
+    "temperature": 1.0,
+    "typical_p": 1.0,
+    "top_k": 20,
+    "top_p": 1.0,
+    "min_p": 0.0,
+    "repetition_penalty": 1.0,
+    "num_return_sequences": 1
+  },
+  "tools": null,
+  "tool_choice": null,
+  "response_format": null,
+  "template_args": {
+    "enable_thinking": false
+  },
+  "seed": 42,
+  "dtype": "auto",
+  "quantization_config": null
+}
+```
+
+More runnable samples are available in the [gpt-task GitHub repository](https://github.com/crynux-network/gpt-task/tree/main/examples).
+
+### `version`
+
+Schema version string, for example `"3.7.1"`.
+
+### `model` and `revision`
+
+`model` is a Hugging Face model ID suitable for text generation or chat. `revision` is an optional branch name or commit. Absolute URLs are rejected on Crynux AS.
+
+### `messages`
+
+A list of message objects. Each message has `role` (`user`, `assistant`, `system`, or `tool`) and `content`.
+
+`content` may be a plain string, or a list of multimodal parts:
+
+* `{"type": "text", "text": "..."}`
+* `{"type": "image", "base64": "<raw_base64>"}` — on Raw Task, use a **raw** base64 string, not a `data:image/...;base64,` data URL
+
+Messages may also carry `tool_calls` / `tool_call_id` for tool-calling conversations.
+
+During execution, messages are formatted with the model's chat template. Models without a chat template concatenate message contents.
+
+### `generation_config`
+
+Controls decoding. Field meanings match the [Hugging Face GenerationConfig](https://huggingface.co/docs/transformers/main_classes/text_generation#transformers.GenerationConfig).
+
+| Field | Notes |
+| --- | --- |
+| `max_new_tokens` | Maximum new tokens to generate |
+| `stop_strings` | Optional stop strings |
+| `do_sample` | Sampling vs greedy decoding |
+| `num_beams` | Beam search width; `1` disables beam search |
+| `temperature` | Sampling temperature |
+| `typical_p` | Local typical sampling |
+| `top_k` | Top-k filtering |
+| `top_p` | Nucleus sampling |
+| `min_p` | Min-p sampling, float in `0.0`–`1.0` |
+| `repetition_penalty` | Penalty for repeated tokens; `1.0` means no penalty |
+| `num_return_sequences` | Number of independent sequences to return |
+
+### `tools`, `tool_choice`, `response_format`
+
+Optional structured-output and function-calling definitions, aligned with OpenAI-style tool schemas and response formats. Prefer the OpenAI-compatible API when you only need these features without managing Raw Task lifecycle.
+
+### `template_args`
+
+Optional object passed to the Hugging Face chat template, for example `{"enable_thinking": true}` or `{"enable_thinking": false}`.
+
+### `seed`
+
+Integer seed for reproducible sampling. If omitted on Crynux AS create, AS fills a random integer from `0` through `2147483647`.
+
+### `dtype`
+
+`"float16"`, `"bfloat16"`, `"float32"`, or `"auto"`.
+
+### `quantization_config`
+
+Optional object or `null` for task-time quantization. The legacy `quantize_bits` field is removed.
+
+```json
+{
+  "quant_method": "bitsandbytes",
+  "quant_kwargs": {
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_compute_dtype": "bfloat16"
+  }
+}
+```
+
+See [Model Quantization](../quantization.md) for BitsAndBytes, FP8, AWQ, GPTQ, and platform rules.
 
 ## GPT Task Response
 
-The following is an intuitive look at a task response:
+`GET .../llm` returns a `GPTTaskResponse` JSON object:
 
 ```json
 {
-    "model": "gpt2",
-    "choices": [
-        {
-            "finish_reason": "length",
-            "message": {
-                "role": "assistant",
-                "content": "\n\nI have a chat bot, called \"Eleanor\" which was developed by my team on Skype. "
-                "The only thing I will say is this",
-            },
-            "index": 0,
-        }
-    ],
-    "usage": {"prompt_tokens": 11, "completion_tokens": 30, "total_tokens": 41},
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "The capital of France is Paris."
+      },
+      "index": 0
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 18,
+    "completion_tokens": 8,
+    "total_tokens": 26
+  }
 }
 ```
 
-## Model
+### `model`
 
-The model used for text generation.
+The model used for generation.
 
-## Choices
+### `choices`
 
-A list of choice object. The count of choices equals the the parameter `num_return_sequences` in `generation_config` of task definition.
+One choice per `num_return_sequences`. Each choice has:
 
-### Choice Object
+* `finish_reason` — `"stop"` (natural end / EOS) or `"length"` (hit `max_new_tokens`)
+* `message` — assistant message (`role` is always `"assistant"`; may include `tool_calls` when tools were used)
+* `index` — zero-based index in `choices`
 
-A choice object has three fields, `finish_reason`, `message` and `index`.
+### `usage`
 
-`finish_reason` represents the finish reason of the generated message, can be `stop` or `length`. When finish reason is `stop`, means the generated text ends with an eos token and stops naturally. When finish reason is `length`, means the generated text is truncated by the output token length limit, which defines by the `max_new_tokens` parameter in `generation_config` of task definition.
+Token counts:
 
-`message` is a message object which is the same with message object used in task definition. The `role` of response message will always be `assistant`.
-
-`index` is the index of the choice object in all choices, begins from 0.
-
-## Usage
-
-Usage represents the token used of this text generation task. It has three fields, `prompt_tokens`, `completion_tokens` and `total_tokens`.
-
-`prompt_tokens` means the input prompt tokens count. `completion_tokens` means the sum of all choices content tokens count. `total_tokens` is the sum of `prompt_tokens` and `completion_tokens`.
+* `prompt_tokens` — input tokens
+* `completion_tokens` — sum of completion tokens across choices
+* `total_tokens` — `prompt_tokens + completion_tokens`

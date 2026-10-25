@@ -50,6 +50,14 @@ Applications can use Crynux for LLM inference, Vision Language Model tasks, imag
 [how-to-run-llm-using-crynux-network](application-development/how-to-run-llm-using-crynux-network/)
 {% endcontent-ref %}
 
+{% content-ref url="application-development/openai-compatible-image-api.md" %}
+[OpenAI-Compatible Image API](application-development/openai-compatible-image-api.md)
+{% endcontent-ref %}
+
+{% content-ref url="application-development/quantization.md" %}
+[Model Quantization](application-development/quantization.md)
+{% endcontent-ref %}
+
 ### AI Ecosystem Integration
 
 Lithium integrates with the AI ecosystem developers already use. Through the OpenAI-compatible Crynux Bridge API, applications can connect Crynux to agent frameworks, tool-use workflows, LangChain, LangGraph, Hermes Agent, and Vision Language Model applications without rebuilding their stack around a new protocol.
