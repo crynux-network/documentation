@@ -18,7 +18,7 @@ Self-hosting Crynux Bridge is an advanced option. For most applications, [Crynux
 4. **Raw Task API and Batch Task API** — Create one task or up to 100 tasks per request, poll status (including batch status), and download image PNG or LLM JSON results.
 5. **Multi-user support and Role-Based Access Control (RBAC)** — API keys with roles, use quotas, and rate limits so multiple clients can share one Bridge instance with controlled access.
 
-## Prefer [Crynux AS](https://crynux-as.xyz) for most applications
+## Prefer Crynux AS for most applications
 
 Deploying your own Bridge means operating Docker, a database, a funded application wallet / Relay Account, API keys, and Bridge configuration (including optional repeat tasks). That is more complex than using the hosted [Crynux AS](https://crynux-as.xyz) service.
 

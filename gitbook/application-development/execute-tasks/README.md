@@ -4,7 +4,7 @@ Crynux Network executes work as typed Raw Tasks. Each task carries a `task_type`
 
 For more direct control over the application wallet, Relay fees, repeat-task settings, or Bridge-owned Raw / Batch APIs, you can deploy your own [Crynux Bridge](../crynux-bridge.md). Self-hosting Bridge is a more advanced option; [Crynux AS](https://crynux-as.xyz) is usually easier for application development.
 
-## [Crynux AS](https://crynux-as.xyz) Raw Task endpoints
+## Crynux AS Raw Task endpoints
 
 Under `/api/<endpoint_token>/v1`:
 

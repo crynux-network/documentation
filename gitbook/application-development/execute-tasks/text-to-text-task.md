@@ -10,7 +10,7 @@ If you only need standard chat, tool calling, structured output, or the Response
 
 For most applications, submit Raw Tasks through [Crynux AS](https://crynux-as.xyz) as shown below. If you need more complex control—such as managing your own wallet and Relay `task_fee`, Bridge-side repeat tasks, or operating without Crynux AS—deploy your own [Crynux Bridge](../crynux-bridge.md) and call its Raw Task and Batch Task APIs.
 
-## Sending Text-to-Text Tasks via [Crynux AS](https://crynux-as.xyz) (Raw Task API)
+## Sending Text-to-Text Tasks via Crynux AS (Raw Task API)
 
 {% hint style="info" %}
 Replace `<endpoint_token>` and `your-api-key` with your project endpoint token and API key from the [Crynux AS](https://crynux-as.xyz) dashboard.
