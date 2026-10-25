@@ -3,7 +3,7 @@
 Crynux Network provides OpenAI-compatible Image Generation and Image Edit APIs. You can use the official OpenAI SDK with only a Crynux base URL and API key.
 
 {% hint style="info" %}
-The examples below use a Crynux AS project endpoint. Replace `https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1` and `your-api-key` with your project Base URL and API key from the Crynux AS dashboard.
+The examples below use a [Crynux AS](https://crynux-as.xyz) project endpoint. Replace `<endpoint_token>` and `your-api-key` with your project endpoint token and API key from the [Crynux AS](https://crynux-as.xyz) dashboard.
 {% endhint %}
 
 ## Quick Start: Image Generation
@@ -17,7 +17,7 @@ import base64
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
     timeout=300,
     max_retries=1,
@@ -42,7 +42,7 @@ import fs from "fs";
 import OpenAI from "openai";
 
 const client = new OpenAI({
-  baseURL: "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1",
+  baseURL: "https://api.crynux-as.xyz/api/<endpoint_token>/v1",
   apiKey: "your-api-key",
   timeout: 300000,
   maxRetries: 1,
@@ -78,7 +78,7 @@ import base64
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
     timeout=300,
     max_retries=1,
@@ -105,7 +105,7 @@ import fs from "fs";
 import OpenAI from "openai";
 
 const client = new OpenAI({
-  baseURL: "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1",
+  baseURL: "https://api.crynux-as.xyz/api/<endpoint_token>/v1",
   apiKey: "your-api-key",
   timeout: 300000,
   maxRetries: 1,
@@ -141,7 +141,7 @@ with open("input.png", "rb") as f:
     data_url = "data:image/png;base64," + base64.b64encode(f.read()).decode("ascii")
 
 response = requests.post(
-    "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1/images/edits",
+    "https://api.crynux-as.xyz/api/<endpoint_token>/v1/images/edits",
     headers={
         "Authorization": "Bearer your-api-key",
         "Content-Type": "application/json",
@@ -202,7 +202,7 @@ Synchronous Image APIs (`/v1/images/generations` and `/v1/images/edits`) hold on
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
     timeout=300,
     max_retries=1,
@@ -245,7 +245,7 @@ result = client.images.generate(
 import OpenAI from "openai";
 
 const client = new OpenAI({
-  baseURL: "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1",
+  baseURL: "https://api.crynux-as.xyz/api/<endpoint_token>/v1",
   apiKey: "your-api-key",
   timeout: 300000,
   maxRetries: 1,

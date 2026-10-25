@@ -8,10 +8,10 @@ A GPT Task is a JSON document (`GPTTaskArgs`) that describes one LLM generation 
 
 If you only need standard chat, tool calling, structured output, or the Responses API, use the [OpenAI-compatible LLM API](../how-to-run-llm-using-crynux-network/README.md). Use the Raw Task API when you need full `GPTTaskArgs` control, batch create, exact GPU selection, or a create-and-poll flow you manage yourself.
 
-## Sending Text-to-Text Tasks via Crynux AS (Raw Task API)
+## Sending Text-to-Text Tasks via [Crynux AS](https://crynux-as.xyz) (Raw Task API)
 
 {% hint style="info" %}
-Replace `https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1` and `your-api-key` with your project Base URL and API key from the Crynux AS dashboard.
+Replace `<endpoint_token>` and `your-api-key` with your project endpoint token and API key from the [Crynux AS](https://crynux-as.xyz) dashboard.
 {% endhint %}
 
 | Operation | Method and path |
@@ -30,12 +30,12 @@ Authenticate with `Authorization: Bearer <api-key-or-owner-jwt>`.
 | --- | --- | --- |
 | `task_type` | Yes | Must be `1` for LLM tasks |
 | `task_args` | Yes | JSON **string** of `GPTTaskArgs` |
-| `min_vram` | No | Minimum GPU VRAM in GB. When omitted, Crynux AS matches the loaded-models cache using model id plus `quantization_config` / `dtype` when present; otherwise it selects the row with the greatest `min_vram` for that model |
+| `min_vram` | No | Minimum GPU VRAM in GB. When omitted, [Crynux AS](https://crynux-as.xyz) matches the loaded-models cache using model id plus `quantization_config` / `dtype` when present; otherwise it selects the row with the greatest `min_vram` for that model |
 | `required_gpu` + `required_gpu_vram` | No | Exact GPU model name and VRAM. Provide both together. Do not combine with `min_vram` |
 | `task_version` | No | Task version string, for example `"3.7.1"` |
 | `queue_timeout` | No | Queue wait budget in seconds (Flexible Pricing). Positive integer. Not part of `task_args` |
 
-Do not send `task_fee`. Crynux AS owns pricing from the project Cost Level.
+Do not send `task_fee`. [Crynux AS](https://crynux-as.xyz) owns pricing from the project Cost Level.
 
 #### Flexible Pricing with `queue_timeout`
 
@@ -55,14 +55,16 @@ Synchronous APIs such as `/v1/chat/completions` hold one HTTP request until the 
 | `estimated_completion_at` | Present when `phase` is `running` and an estimate is known |
 | `error_message` | Present only when `status` is `failed` and an error was stored |
 
-### Create, poll, and download (Python)
+### Create, poll, and download
 
+{% tabs %}
+{% tab title="Python" %}
 ```python
 import json
 import time
 import requests
 
-BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1"
+BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1"
 HEADERS = {
     "Authorization": "Bearer your-api-key",
     "Content-Type": "application/json",
@@ -122,67 +124,11 @@ result = requests.get(
 result.raise_for_status()
 print(result.json())
 ```
+{% endtab %}
 
-### Batch create and batch status (Python)
-
-```python
-import json
-import requests
-
-BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1"
-HEADERS = {
-    "Authorization": "Bearer your-api-key",
-    "Content-Type": "application/json",
-}
-
-def make_task(prompt: str) -> dict:
-    task_args = {
-        "version": "3.7.1",
-        "model": "Qwen/Qwen2.5-7B-Instruct",
-        "messages": [{"role": "user", "content": prompt}],
-        "generation_config": {"max_new_tokens": 64},
-        "dtype": "auto",
-    }
-    return {
-        "task_type": 1,
-        "task_args": json.dumps(task_args),
-        "min_vram": 24,
-        "queue_timeout": 43200,
-    }
-
-batch = requests.post(
-    f"{BASE}/inference_tasks/batch",
-    headers=HEADERS,
-    json={
-        "tasks": [
-            make_task("Name one European capital."),
-            make_task("Name one Asian capital."),
-        ]
-    },
-    timeout=60,
-)
-batch.raise_for_status()
-items = batch.json()["data"]
-task_ids = [
-    item["client_task"]["id"]
-    for item in items
-    if item.get("client_task") is not None
-]
-
-status = requests.post(
-    f"{BASE}/inference_tasks/batch/status",
-    headers=HEADERS,
-    json={"client_task_ids": task_ids},
-    timeout=60,
-)
-status.raise_for_status()
-print(status.json())
-```
-
-### Create, poll, and download (JavaScript)
-
+{% tab title="JavaScript" %}
 ```javascript
-const BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1";
+const BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1";
 const HEADERS = {
   Authorization: "Bearer your-api-key",
   "Content-Type": "application/json",
@@ -249,6 +195,122 @@ if (!resultRes.ok) {
 }
 console.log(await resultRes.json());
 ```
+{% endtab %}
+{% endtabs %}
+
+### Batch create and batch status
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+import json
+import requests
+
+BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1"
+HEADERS = {
+    "Authorization": "Bearer your-api-key",
+    "Content-Type": "application/json",
+}
+
+def make_task(prompt: str) -> dict:
+    task_args = {
+        "version": "3.7.1",
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "messages": [{"role": "user", "content": prompt}],
+        "generation_config": {"max_new_tokens": 64},
+        "dtype": "auto",
+    }
+    return {
+        "task_type": 1,
+        "task_args": json.dumps(task_args),
+        "min_vram": 24,
+        "queue_timeout": 43200,
+    }
+
+batch = requests.post(
+    f"{BASE}/inference_tasks/batch",
+    headers=HEADERS,
+    json={
+        "tasks": [
+            make_task("Name one European capital."),
+            make_task("Name one Asian capital."),
+        ]
+    },
+    timeout=60,
+)
+batch.raise_for_status()
+items = batch.json()["data"]
+task_ids = [
+    item["client_task"]["id"]
+    for item in items
+    if item.get("client_task") is not None
+]
+
+status = requests.post(
+    f"{BASE}/inference_tasks/batch/status",
+    headers=HEADERS,
+    json={"client_task_ids": task_ids},
+    timeout=60,
+)
+status.raise_for_status()
+print(status.json())
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+const BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1";
+const HEADERS = {
+  Authorization: "Bearer your-api-key",
+  "Content-Type": "application/json",
+};
+
+function makeTask(prompt) {
+  const taskArgs = {
+    version: "3.7.1",
+    model: "Qwen/Qwen2.5-7B-Instruct",
+    messages: [{ role: "user", content: prompt }],
+    generation_config: { max_new_tokens: 64 },
+    dtype: "auto",
+  };
+  return {
+    task_type: 1,
+    task_args: JSON.stringify(taskArgs),
+    min_vram: 24,
+    queue_timeout: 43200,
+  };
+}
+
+const batchRes = await fetch(`${BASE}/inference_tasks/batch`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({
+    tasks: [
+      makeTask("Name one European capital."),
+      makeTask("Name one Asian capital."),
+    ],
+  }),
+});
+if (!batchRes.ok) {
+  throw new Error(await batchRes.text());
+}
+const items = (await batchRes.json()).data;
+const taskIds = items
+  .filter((item) => item.client_task != null)
+  .map((item) => item.client_task.id);
+
+const statusRes = await fetch(`${BASE}/inference_tasks/batch/status`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({ client_task_ids: taskIds }),
+});
+if (!statusRes.ok) {
+  throw new Error(await statusRes.text());
+}
+console.log(await statusRes.json());
+```
+{% endtab %}
+{% endtabs %}
 
 ## `task_args` (`GPTTaskArgs`) Definition
 
@@ -296,7 +358,7 @@ Schema version string, for example `"3.7.1"`.
 
 ### `model` and `revision`
 
-`model` is a Hugging Face model ID suitable for text generation or chat. `revision` is an optional branch name or commit. Absolute URLs are rejected on Crynux AS.
+`model` is a Hugging Face model ID suitable for text generation or chat. `revision` is an optional branch name or commit. Absolute URLs are rejected on [Crynux AS](https://crynux-as.xyz).
 
 ### `messages`
 
@@ -339,7 +401,7 @@ Optional object passed to the Hugging Face chat template, for example `{"enable_
 
 ### `seed`
 
-Integer seed for reproducible sampling. If omitted on Crynux AS create, AS fills a random integer from `0` through `2147483647`.
+Integer seed for reproducible sampling. If omitted on [Crynux AS](https://crynux-as.xyz) create, AS fills a random integer from `0` through `2147483647`.
 
 ### `dtype`
 
@@ -347,7 +409,7 @@ Integer seed for reproducible sampling. If omitted on Crynux AS create, AS fills
 
 ### `quantization_config`
 
-Optional object or `null` for task-time quantization. The legacy `quantize_bits` field is removed.
+Optional object or `null` for task-time quantization.
 
 ```json
 {

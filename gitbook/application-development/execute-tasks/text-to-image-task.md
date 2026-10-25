@@ -8,10 +8,10 @@ An Image Task is a JSON document (`ImageTaskArgs`) that describes one Diffusers 
 
 If you only need a simple OpenAI-style generate or edit call, use the [OpenAI-Compatible Image API](../openai-compatible-image-api.md). Use the Raw Task API when you need full `ImageTaskArgs` control, batch create, long `queue_timeout` Flexible Pricing, or fields such as `steps`, `negative_prompt`, `lora`, `dtype`, and `required_gpu`.
 
-## Sending Image Tasks via Crynux AS (Raw Task API)
+## Sending Image Tasks via [Crynux AS](https://crynux-as.xyz) (Raw Task API)
 
 {% hint style="info" %}
-Replace `https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1` and `your-api-key` with your project Base URL and API key from the Crynux AS dashboard.
+Replace `<endpoint_token>` and `your-api-key` with your project endpoint token and API key from the [Crynux AS](https://crynux-as.xyz) dashboard.
 {% endhint %}
 
 | Operation | Method and path |
@@ -30,12 +30,12 @@ Authenticate with `Authorization: Bearer <api-key-or-owner-jwt>`.
 | --- | --- | --- |
 | `task_type` | Yes | Must be `0` for Image tasks |
 | `task_args` | Yes | JSON **string** of `ImageTaskArgs` |
-| `min_vram` | No | Minimum GPU VRAM in GB. When omitted and you do not set an exact GPU, Crynux AS resolves a default from the Image loaded-models cache. With a concrete `dtype`, an exact cache hit can supply `min_vram`; otherwise AS may use the configured default. With `dtype` omitted or `"auto"`, AS selects a matching loaded-models row and may fill concrete `dtype` / omitted `quantization_config` / `components` from that row |
+| `min_vram` | No | Minimum GPU VRAM in GB. When omitted and you do not set an exact GPU, [Crynux AS](https://crynux-as.xyz) resolves a default from the Image loaded-models cache. With a concrete `dtype`, an exact cache hit can supply `min_vram`; otherwise AS may use the configured default. With `dtype` omitted or `"auto"`, AS selects a matching loaded-models row and may fill concrete `dtype` / omitted `quantization_config` / `components` from that row |
 | `required_gpu` + `required_gpu_vram` | No | Exact GPU model name and VRAM. Provide both together. Do not combine with `min_vram` |
 | `task_version` | No | Task version string, for example `"3.7.1"` |
 | `queue_timeout` | No | Queue wait budget in seconds (Flexible Pricing). Positive integer. Not part of `task_args` |
 
-Do not send `task_fee`. Crynux AS owns pricing from the project Cost Level.
+Do not send `task_fee`. [Crynux AS](https://crynux-as.xyz) owns pricing from the project Cost Level.
 
 #### Flexible Pricing with `queue_timeout`
 
@@ -55,14 +55,16 @@ Synchronous OpenAI Images APIs hold one HTTP request until the job finishes (abo
 | `estimated_completion_at` | Present when `phase` is `running` and an estimate is known |
 | `error_message` | Present only when `status` is `failed` and an error was stored |
 
-### Create, poll, and download (Python)
+### Create, poll, and download
 
+{% tabs %}
+{% tab title="Python" %}
 ```python
 import json
 import time
 import requests
 
-BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1"
+BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1"
 HEADERS = {
     "Authorization": "Bearer your-api-key",
     "Content-Type": "application/json",
@@ -123,13 +125,13 @@ with open("output.png", "wb") as f:
     f.write(image.content)
 print("saved output.png")
 ```
+{% endtab %}
 
-### Create, poll, and download (JavaScript)
-
+{% tab title="JavaScript" %}
 ```javascript
 import fs from "fs";
 
-const BASE = "https://YOUR_CRYNUX_AS_URL/api/<endpoint_token>/v1";
+const BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1";
 const HEADERS = {
   Authorization: "Bearer your-api-key",
   "Content-Type": "application/json",
@@ -198,6 +200,132 @@ if (!imageRes.ok) {
 fs.writeFileSync("output.png", Buffer.from(await imageRes.arrayBuffer()));
 console.log("saved output.png");
 ```
+{% endtab %}
+{% endtabs %}
+
+### Batch create and batch status
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+import json
+import requests
+
+BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1"
+HEADERS = {
+    "Authorization": "Bearer your-api-key",
+    "Content-Type": "application/json",
+}
+
+def make_task(prompt: str) -> dict:
+    task_args = {
+        "version": "3.7.1",
+        "base_model": {"name": "Qwen/Qwen-Image-2.1", "revision": None},
+        "dtype": "bfloat16",
+        "prompt": prompt,
+        "task_config": {
+            "image_width": 1024,
+            "image_height": 1024,
+            "steps": 40,
+            "num_images_per_prompt": 1,
+        },
+    }
+    return {
+        "task_type": 0,
+        "task_args": json.dumps(task_args),
+        "min_vram": 24,
+        "queue_timeout": 43200,
+    }
+
+batch = requests.post(
+    f"{BASE}/inference_tasks/batch",
+    headers=HEADERS,
+    json={
+        "tasks": [
+            make_task("A product photo of a white ceramic cup on a wooden table"),
+            make_task("A watercolor painting of a mountain lake at sunrise"),
+        ]
+    },
+    timeout=60,
+)
+batch.raise_for_status()
+items = batch.json()["data"]
+task_ids = [
+    item["client_task"]["id"]
+    for item in items
+    if item.get("client_task") is not None
+]
+
+status = requests.post(
+    f"{BASE}/inference_tasks/batch/status",
+    headers=HEADERS,
+    json={"client_task_ids": task_ids},
+    timeout=60,
+)
+status.raise_for_status()
+print(status.json())
+```
+{% endtab %}
+
+{% tab title="JavaScript" %}
+```javascript
+const BASE = "https://api.crynux-as.xyz/api/<endpoint_token>/v1";
+const HEADERS = {
+  Authorization: "Bearer your-api-key",
+  "Content-Type": "application/json",
+};
+
+function makeTask(prompt) {
+  const taskArgs = {
+    version: "3.7.1",
+    base_model: { name: "Qwen/Qwen-Image-2.1", revision: null },
+    dtype: "bfloat16",
+    prompt,
+    task_config: {
+      image_width: 1024,
+      image_height: 1024,
+      steps: 40,
+      num_images_per_prompt: 1,
+    },
+  };
+  return {
+    task_type: 0,
+    task_args: JSON.stringify(taskArgs),
+    min_vram: 24,
+    queue_timeout: 43200,
+  };
+}
+
+const batchRes = await fetch(`${BASE}/inference_tasks/batch`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({
+    tasks: [
+      makeTask("A product photo of a white ceramic cup on a wooden table"),
+      makeTask("A watercolor painting of a mountain lake at sunrise"),
+    ],
+  }),
+});
+if (!batchRes.ok) {
+  throw new Error(await batchRes.text());
+}
+const items = (await batchRes.json()).data;
+const taskIds = items
+  .filter((item) => item.client_task != null)
+  .map((item) => item.client_task.id);
+
+const statusRes = await fetch(`${BASE}/inference_tasks/batch/status`, {
+  method: "POST",
+  headers: HEADERS,
+  body: JSON.stringify({ client_task_ids: taskIds }),
+});
+if (!statusRes.ok) {
+  throw new Error(await statusRes.text());
+}
+console.log(await statusRes.json());
+```
+{% endtab %}
+{% endtabs %}
 
 ## `task_args` Schema (`ImageTaskArgs`)
 
@@ -205,7 +333,7 @@ console.log("saved output.png");
 | --- | --- |
 | `version` | Schema version string, for example `"3.7.1"` |
 | `base_model` | `{"name": "<hf_repo_id>", "revision": null}`. `name` must be a Hugging Face Diffusers repo with `model_index.json`. Absolute URLs are rejected |
-| `dtype` | `"float16"`, `"bfloat16"`, `"float32"`, or `"auto"` (default `"auto"`). Concrete values are kept as-is. `"auto"` lets Crynux AS / the node resolve a concrete dtype from loaded-models matching when applicable |
+| `dtype` | `"float16"`, `"bfloat16"`, `"float32"`, or `"auto"` (default `"auto"`). Concrete values are kept as-is. `"auto"` lets [Crynux AS](https://crynux-as.xyz) / the node resolve a concrete dtype from loaded-models matching when applicable |
 | `prompt` | Required positive prompt |
 | `negative_prompt` | Optional. Effective when the pipeline supports CFG / true CFG and guidance is greater than 1 |
 | `images` | Optional list of data URLs (`"data:image/png;base64,..."`). Empty or omitted → text-to-image. Non-empty → image edit / img2img. Total string byte length of all entries must not exceed 1 MB (`1,048,576`) |
@@ -222,7 +350,7 @@ console.log("saved output.png");
 | `image_width` | Default `1024` |
 | `image_height` | Default `1024` |
 | `steps` | Integer `1`–`100`, default `30` |
-| `seed` | Integer `0`–`2147483647`. If omitted on Crynux AS create, AS fills a random value in that range |
+| `seed` | Integer `0`–`2147483647`. If omitted on [Crynux AS](https://crynux-as.xyz) create, AS fills a random value in that range |
 | `num_images_per_prompt` | Integer `1`–`10`, default `1` |
 | `guidance_scale` | Optional float `>= 0`. Mapped at runtime to the pipeline's `guidance_scale` or `true_cfg_scale` |
 
