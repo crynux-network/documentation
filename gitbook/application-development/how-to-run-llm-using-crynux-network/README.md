@@ -204,7 +204,6 @@ main();
 Use the OpenAI-compatible LLM APIs when you want chat completions, tool calling, structured output, or Responses. Use the [Crynux AS](https://crynux-as.xyz) Raw Task API when you need finer control, for example:
 
 * batch create up to 100 tasks with `POST /inference_tasks/batch` and batch status polling
-* a specific GPU model through `required_gpu` and `required_gpu_vram`
 * a specific Hugging Face `revision`
 * full control over `GPTTaskArgs`, including `template_args` and task-level create-and-poll flow
 

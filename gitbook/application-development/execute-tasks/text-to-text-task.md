@@ -6,7 +6,7 @@ description: How to define and submit a text-to-text Raw Task
 
 A GPT Task is a JSON document (`GPTTaskArgs`) that describes one LLM generation job. Crynux nodes load the Hugging Face model, apply the chat template, run generation, and return a structured JSON result.
 
-If you only need standard chat, tool calling, structured output, or the Responses API, use the [OpenAI-compatible LLM API](../how-to-run-llm-using-crynux-network/README.md). Use the Raw Task API when you need full `GPTTaskArgs` control, batch create, exact GPU selection, or a create-and-poll flow you manage yourself.
+If you only need standard chat, tool calling, structured output, or the Responses API, use the [OpenAI-compatible LLM API](../how-to-run-llm-using-crynux-network/README.md). Use the Raw Task API when you need full `GPTTaskArgs` control, batch create, or a create-and-poll flow you manage yourself.
 
 For most applications, submit Raw Tasks through [Crynux AS](https://crynux-as.xyz) as shown below. If you need more complex control—such as managing your own wallet and Relay `task_fee`, Bridge-side repeat tasks, or operating without Crynux AS—deploy your own [Crynux Bridge](../crynux-bridge.md) and call its Raw Task and Batch Task APIs.
 
@@ -33,7 +33,6 @@ Authenticate with `Authorization: Bearer <api-key-or-owner-jwt>`.
 | `task_type` | Yes | Must be `1` for LLM tasks |
 | `task_args` | Yes | JSON **string** of `GPTTaskArgs` |
 | `min_vram` | No | Minimum GPU VRAM in GB. When omitted, [Crynux AS](https://crynux-as.xyz) matches the loaded-models cache using model id plus `quantization_config` / `dtype` when present; otherwise it selects the row with the greatest `min_vram` for that model |
-| `required_gpu` + `required_gpu_vram` | No | Exact GPU model name and VRAM. Provide both together. Do not combine with `min_vram` |
 | `task_version` | No | Task version string, for example `"3.7.1"` |
 | `queue_timeout` | No | Queue wait budget in seconds (Flexible Pricing). Positive integer. Not part of `task_args` |
 
