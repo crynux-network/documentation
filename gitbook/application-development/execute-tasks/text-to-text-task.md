@@ -394,7 +394,71 @@ Controls decoding. Field meanings match the [Hugging Face GenerationConfig](http
 
 ### `tools`, `tool_choice`, `response_format`
 
-Optional structured-output and function-calling definitions, aligned with OpenAI-style tool schemas and response formats. Prefer the OpenAI-compatible API when you only need these features without managing Raw Task lifecycle.
+Optional structured-output and function-calling fields. Prefer the OpenAI-compatible `/chat/completions` or `/responses` APIs when you only need these features without managing Raw Task lifecycle, because those APIs parse tool-call syntax into OpenAI objects. Raw Task download returns the gpt-task result without that conversion.
+
+#### `tools`
+
+Function tools only. Tool names must be unique. Built-in tools are not supported.
+
+```json
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_current_weather",
+        "description": "Get the current weather in a given location",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {"type": "string"},
+            "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]}
+          },
+          "required": ["location"]
+        },
+        "strict": true
+      }
+    }
+  ]
+}
+```
+
+#### `tool_choice`
+
+| Value | Behavior |
+| --- | --- |
+| `"none"` | No tool grammar. Tools may still be passed to the chat template. |
+| `"auto"` | Default when tools are present. Enables a tool grammar only when at least one function sets `strict: true`. |
+| `"required"` | Requires at least one declared tool and constrains generation to include at least one tool call. |
+| `{"type":"function","function":{"name":"get_current_weather"}}` | Forces the named function. |
+
+#### `response_format`
+
+```json
+{"type": "json_object"}
+```
+
+```json
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "calendar_event",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "date": {"type": "string"}
+      },
+      "required": ["name", "date"]
+    },
+    "strict": true
+  }
+}
+```
+
+JSON Schema limits: 65,536 UTF-8 bytes, nesting depth 32, and 1,024 properties. If an active tool constraint and `response_format` are both present, the tool constraint takes precedence.
+
+Unsupported top-level fields in `task_args` include `functions`, `function_call`, `parallel_tool_calls`, and `structured_outputs`. Unknown top-level fields are rejected.
 
 ### `template_args`
 
@@ -459,8 +523,10 @@ The model used for generation.
 One choice per `num_return_sequences`. Each choice has:
 
 * `finish_reason` — `"stop"` (natural end / EOS) or `"length"` (hit `max_new_tokens`)
-* `message` — assistant message (`role` is always `"assistant"`; may include `tool_calls` when tools were used)
+* `message` — assistant message (`role` is always `"assistant"`; generated text, including constrained JSON or tool-call syntax, stays in `content`)
 * `index` — zero-based index in `choices`
+
+Raw Task results do not populate OpenAI `message.tool_calls` and do not use `finish_reason="tool_calls"`. Crynux AS performs that conversion only for `/chat/completions` and `/responses`.
 
 ### `usage`
 
