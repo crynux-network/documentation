@@ -12,6 +12,8 @@ If a model isn't on this list, feel free to try it out as long as you're confide
 
 Changing the `model` field in the OpenAI-compatible API is enough to run a different model. The response time is not the same for every model. It mainly depends on whether that model is already available on nodes in the network.
 
+Structured JSON generation through `response_format` / `text.format` is a runtime generation constraint. Tool calling still depends on the loaded model's tokenizer, chat template, and tool-call format. A model name that contains `Instruct` is a useful signal, but it is not a guarantee that every tool-calling request will work for that model.
+
 You can think of three common situations:
 
 * **The model is already loaded in GPU memory on some nodes.** Requests are usually the fastest. The node can start generating without downloading or loading the model first.

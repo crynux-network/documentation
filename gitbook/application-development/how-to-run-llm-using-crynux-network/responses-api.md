@@ -10,6 +10,15 @@ Crynux supports:
 * `GET /v1/responses/{response_id}` to retrieve status and result
 * `background=true` for asynchronous execution with client-side polling
 * `previous_response_id` to continue a conversation from a completed response
+* structured output through `text.format`
+* function tools through `tools` and `tool_choice`
+
+Unsupported on `/responses`:
+
+* `stream=true`
+* built-in tools
+* `conversation`
+* Chat Completions nested `response_format` as a top-level Responses field; use `text.format` instead
 
 {% hint style="info" %}
 The code examples below use the official OpenAI SDK. Point `base_url` at `https://api.crynux-as.xyz/api/<endpoint_token>/v1` and replace `<endpoint_token>` and `your-api-key` with values from [Crynux AS](https://crynux-as.xyz), the same way as in the [parent guide](./README.md).
@@ -101,6 +110,190 @@ main();
 {% hint style="success" %}
 You can also set `background=false` (or omit it). In that mode, `responses.create` waits until the job finishes and returns the final response in one call, similar to a synchronous `chat/completions` request.
 {% endhint %}
+
+## Structured Output with `text.format`
+
+Use `text.format` for JSON Object or JSON Schema generation. The result remains a string in `output_text`.
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
+    api_key="your-api-key",
+)
+
+response = client.responses.create(
+    model="Qwen/Qwen2.5-7B-Instruct",
+    input="Alice and Bob are going to a Science Fair on 2024-05-10.",
+    text={
+        "format": {
+            "type": "json_schema",
+            "name": "calendar_event",
+            "strict": True,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "date": {"type": "string"},
+                    "participants": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                    },
+                },
+                "required": ["name", "date", "participants"],
+                "additionalProperties": False,
+            },
+        }
+    },
+    extra_body={"vram_limit": 24},
+)
+
+print(response.output_text)
+```
+{% endtab %}
+
+{% tab title="Node.js" %}
+```javascript
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://api.crynux-as.xyz/api/<endpoint_token>/v1",
+  apiKey: "your-api-key",
+});
+
+async function main() {
+  const response = await client.responses.create({
+    model: "Qwen/Qwen2.5-7B-Instruct",
+    input: "Alice and Bob are going to a Science Fair on 2024-05-10.",
+    text: {
+      format: {
+        type: "json_schema",
+        name: "calendar_event",
+        strict: true,
+        schema: {
+          type: "object",
+          properties: {
+            name: { type: "string" },
+            date: { type: "string" },
+            participants: {
+              type: "array",
+              items: { type: "string" },
+            },
+          },
+          required: ["name", "date", "participants"],
+          additionalProperties: false,
+        },
+      },
+    },
+    vram_limit: 24,
+  });
+
+  console.log(response.output_text);
+}
+
+main();
+```
+{% endtab %}
+{% endtabs %}
+
+For Chat Completions `response_format`, schema limits, and LangChain options, see [Structured Output](structured-ouput.md).
+
+## Function Tools
+
+Responses uses a flat function tool shape. Named `tool_choice` is also flat: `{"type":"function","name":"..."}`.
+
+{% tabs %}
+{% tab title="Python" %}
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
+    api_key="your-api-key",
+)
+
+tools = [
+    {
+        "type": "function",
+        "name": "get_current_weather",
+        "description": "Get the current weather in a given location",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "location": {"type": "string"},
+                "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
+            },
+            "required": ["location"],
+        },
+        "strict": True,
+    }
+]
+
+response = client.responses.create(
+    model="Qwen/Qwen2.5-7B-Instruct",
+    input="What's the weather like in Boston today?",
+    tools=tools,
+    tool_choice="required",
+    extra_body={"vram_limit": 24},
+)
+
+for item in response.output:
+    if item.type == "function_call":
+        print(item.name, item.arguments, item.call_id)
+```
+{% endtab %}
+
+{% tab title="Node.js" %}
+```javascript
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://api.crynux-as.xyz/api/<endpoint_token>/v1",
+  apiKey: "your-api-key",
+});
+
+const tools = [
+  {
+    type: "function",
+    name: "get_current_weather",
+    description: "Get the current weather in a given location",
+    parameters: {
+      type: "object",
+      properties: {
+        location: { type: "string" },
+        unit: { type: "string", enum: ["celsius", "fahrenheit"] },
+      },
+      required: ["location"],
+    },
+    strict: true,
+  },
+];
+
+async function main() {
+  const response = await client.responses.create({
+    model: "Qwen/Qwen2.5-7B-Instruct",
+    input: "What's the weather like in Boston today?",
+    tools,
+    tool_choice: "required",
+    vram_limit: 24,
+  });
+
+  for (const item of response.output) {
+    if (item.type === "function_call") {
+      console.log(item.name, item.arguments, item.call_id);
+    }
+  }
+}
+
+main();
+```
+{% endtab %}
+{% endtabs %}
+
+To continue after a function call, send the previous `function_call` item plus a `function_call_output` item in the next `input`, or use `previous_response_id` and only send the new items. The `tool_choice` semantics match [Tool Use](tool-use.md): `none`, `auto`, `required`, and named function. On Crynux models, `auto` enables a tool grammar only when at least one tool sets `strict: true`.
 
 ## Using `langchain-crynux`
 

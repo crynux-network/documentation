@@ -6,7 +6,7 @@ description: How to define and submit a text-to-image or image-edit Raw Task
 
 An Image Task is a JSON document (`ImageTaskArgs`) that describes one Diffusers image generation or edit job. Crynux nodes resolve the pipeline from the base model's `model_index.json` and run text-to-image, image-to-image, or native image editing from the same schema.
 
-If you only need a simple OpenAI-style generate or edit call, use the [OpenAI-Compatible Image API](../openai-compatible-image-api.md). Use the Raw Task API when you need full `ImageTaskArgs` control, batch create, long `queue_timeout` Flexible Pricing, or fields such as `steps`, `negative_prompt`, `lora`, `dtype`, and `required_gpu`.
+If you only need a simple OpenAI-style generate or edit call, use the [OpenAI-Compatible Image API](../openai-compatible-image-api.md). Use the Raw Task API when you need full `ImageTaskArgs` control, batch create, long `queue_timeout` Flexible Pricing, or fields such as `steps`, `negative_prompt`, `lora`, and `dtype`.
 
 The examples below use the [Crynux AS](https://crynux-as.xyz) Raw Task API. If you need more complex control—such as setting `task_fee` yourself, owning the application wallet and Relay Account, or configuring Bridge repeat tasks—you can deploy your own [Crynux Bridge](../crynux-bridge.md) and call its Raw / Batch APIs directly.
 
@@ -32,8 +32,7 @@ Authenticate with `Authorization: Bearer <api-key-or-owner-jwt>`.
 | --- | --- | --- |
 | `task_type` | Yes | Must be `0` for Image tasks |
 | `task_args` | Yes | JSON **string** of `ImageTaskArgs` |
-| `min_vram` | No | Minimum GPU VRAM in GB. When omitted and you do not set an exact GPU, [Crynux AS](https://crynux-as.xyz) resolves a default from the Image loaded-models cache. With a concrete `dtype`, an exact cache hit can supply `min_vram`; otherwise AS may use the configured default. With `dtype` omitted or `"auto"`, AS selects a matching loaded-models row and may fill concrete `dtype` / omitted `quantization_config` / `components` from that row |
-| `required_gpu` + `required_gpu_vram` | No | Exact GPU model name and VRAM. Provide both together. Do not combine with `min_vram` |
+| `min_vram` | No | Minimum GPU VRAM in GB. When omitted, [Crynux AS](https://crynux-as.xyz) resolves a default from the Image loaded-models cache. With a concrete `dtype`, an exact cache hit can supply `min_vram`; otherwise AS may use the configured default. With `dtype` omitted or `"auto"`, AS selects a matching loaded-models row and may fill concrete `dtype` / omitted `quantization_config` / `components` from that row |
 | `task_version` | No | Task version string, for example `"3.7.1"` |
 | `queue_timeout` | No | Queue wait budget in seconds (Flexible Pricing). Positive integer. Not part of `task_args` |
 

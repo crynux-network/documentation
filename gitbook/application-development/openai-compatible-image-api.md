@@ -334,7 +334,6 @@ Use the OpenAI-compatible Images APIs when you want a simple generation or edit 
 * custom `steps`, `negative_prompt`, `guidance_scale`, fixed `seed`, or img2img `strength`
 * LoRA adapters (`lora`)
 * explicit `dtype`
-* a specific GPU model through `required_gpu` and `required_gpu_vram`
 * asynchronous create-and-poll, batch create (`POST /inference_tasks/batch`), or long `queue_timeout` Flexible Pricing jobs
 
 {% content-ref url="execute-tasks/text-to-image-task.md" %}

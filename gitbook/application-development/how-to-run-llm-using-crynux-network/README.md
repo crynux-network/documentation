@@ -1,6 +1,6 @@
 # How to Run LLM using Crynux Network
 
-Running LLM tasks with various open-source models can be as simple as calling an OpenAI-compliant API via the Crynux Network. The example below demonstrates how to send an LLM chat completion task to [Crynux AS](https://crynux-as.xyz) using the official OpenAI SDK:
+Running LLM tasks with various open-source models can be as simple as calling an OpenAI-compatible API via the Crynux Network. The example below demonstrates how to send an LLM chat completion task to [Crynux AS](https://crynux-as.xyz) using the official OpenAI SDK:
 
 {% hint style="info" %}
 Replace `<endpoint_token>` and `your-api-key` with your project endpoint token and API key from [Crynux AS](https://crynux-as.xyz).
@@ -75,11 +75,20 @@ main();
 
 This code is standard for invoking OpenAI models through their API. The only modification is the `base_url`, which points at your [Crynux AS](https://crynux-as.xyz) project endpoint. Create a project, obtain the Base URL and API key, and manage Credits at [Crynux AS](https://crynux-as.xyz).
 
-The API supports OpenAI-compliant `/completions`, `/chat/completions`, and `/responses` endpoints. Features like streaming, tool-calling, and numerous other configuration options are also supported.
+The API supports OpenAI-compatible `/completions`, `/chat/completions`, and `/responses` for the documented fields below. Support differs by endpoint:
+
+| Capability | `/completions` | `/chat/completions` | `/responses` |
+| --- | --- | --- | --- |
+| Streaming | Yes | Yes | No (`stream=true` is rejected) |
+| Function tools (`tools`, `tool_choice`) | No | Yes | Yes |
+| Structured output | No | `response_format` | `text.format` |
+| Background create-and-poll | No | No | Yes (`background=true`) |
+
+Crynux supports function tools only. Built-in tools and `parallel_tool_calls` are not supported on Crynux models. For forced tool calls and structured JSON generation, see [Tool Use](tool-use.md) and [Structured Output](structured-ouput.md).
 
 ## Crynux Extended Parameters
 
-In addition to standard OpenAI parameters (`model`, `messages`, `temperature`, `top_p`, `max_tokens` / `max_completion_tokens`, `stop`, `seed`, `tools`, `tool_choice`, `response_format`, `stream`, and others), Crynux extends `/v1/chat/completions`, `/v1/completions`, and `/v1/responses` with the fields below.
+In addition to the documented OpenAI-compatible fields (`model`, `messages` / `input`, `temperature`, `top_p`, `max_tokens` / `max_completion_tokens` / `max_output_tokens`, `stop`, `seed`, `tools`, `tool_choice`, `response_format` / `text.format`, and `stream` where supported), Crynux extends `/v1/chat/completions`, `/v1/completions`, and `/v1/responses` with the fields below.
 
 In the Python OpenAI SDK, pass them through `extra_body`. In the JavaScript OpenAI SDK, pass them as top-level request fields.
 
@@ -204,7 +213,6 @@ main();
 Use the OpenAI-compatible LLM APIs when you want chat completions, tool calling, structured output, or Responses. Use the [Crynux AS](https://crynux-as.xyz) Raw Task API when you need finer control, for example:
 
 * batch create up to 100 tasks with `POST /inference_tasks/batch` and batch status polling
-* a specific GPU model through `required_gpu` and `required_gpu_vram`
 * a specific Hugging Face `revision`
 * full control over `GPTTaskArgs`, including `template_args` and task-level create-and-poll flow
 

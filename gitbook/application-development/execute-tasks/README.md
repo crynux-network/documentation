@@ -23,7 +23,6 @@ Common top-level create fields (outside `task_args`):
 * `task_type` — `0` for Image, `1` for LLM
 * `task_args` — JSON string of the task schema
 * `min_vram` — optional minimum GPU VRAM in GB
-* `required_gpu` / `required_gpu_vram` — optional exact GPU selection (use together; do not combine with `min_vram`)
 * `task_version` — optional task version string
 * `queue_timeout` — optional queue wait budget in seconds (Flexible Pricing)
 

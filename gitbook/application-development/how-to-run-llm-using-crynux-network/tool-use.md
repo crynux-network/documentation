@@ -1,31 +1,68 @@
 # Tool Use (Function Calling)
 
-Crynux Bridge supports the standard OpenAI Tool Use (Function Calling) API. This allows you to describe functions to the model, and have the model intelligently choose to output a JSON object containing arguments to call one or many of those functions.
+Crynux AS supports the OpenAI-compatible function tool API on `/chat/completions` and `/responses`. You describe functions to the model, and the model can return one or more function calls with JSON arguments.
 
-{% hint style="warning" %}
-It is important to note that **not all open-source models support tool calling**. You must choose a model that has been specifically trained or fine-tuned for this capability.
-
-Generally, models with "Instruct" in their name (Instruction Fine-Tuned models) are more likely to support tool use. For example, if you are using the Qwen model family, the base model `Qwen/Qwen2.5-7B` might not support tool calls effectively, whereas the instruction-tuned version `Qwen/Qwen2.5-7B-Instruct` is designed to handle such tasks.
-
-Always check the model card or documentation of the specific model you intend to use to confirm its support for function calling or tool use.
+{% hint style="info" %}
+Replace `<endpoint_token>` and `your-api-key` with your project endpoint token and API key from [Crynux AS](https://crynux-as.xyz).
 {% endhint %}
 
-The following examples demonstrate how to use the tool calling feature with the **OpenAI SDK**, the dedicated **langchain-crynux** library, and the standard **langchain-openai** library.
+{% hint style="warning" %}
+Not every open-source model supports tool calling. Schema acceptance alone is not enough: the model must provide a compatible chat template and tool-call format.
+
+Instruction-tuned models are more likely to work. For example, `Qwen/Qwen2.5-7B-Instruct` is a better choice than the base model `Qwen/Qwen2.5-7B`. Always check the model card for function calling or tool use support.
+{% endhint %}
+
+## Supported Parameters
+
+Crynux supports function tools only:
+
+```json
+{
+  "type": "function",
+  "function": {
+    "name": "get_current_weather",
+    "description": "Get the current weather in a given location",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "location": {"type": "string"},
+        "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]}
+      },
+      "required": ["location"]
+    },
+    "strict": true
+  }
+}
+```
+
+| `tool_choice` | Behavior |
+| --- | --- |
+| `"none"` | Tools may still be sent to the chat template. No tool grammar is applied. |
+| `"auto"` | The model may return normal text or tool calls. A tool grammar is applied only when at least one declared function has `strict: true`. |
+| `"required"` | The model must produce at least one tool call. |
+| `{"type":"function","function":{"name":"..."}}` | The model must call the named function. |
+
+Limits and unsupported fields:
+
+* Built-in tools such as web search are rejected.
+* `parallel_tool_calls` is ignored on Crynux models.
+* Legacy `functions` / `function_call` are not supported.
+* If an active tool constraint and `response_format` / `text.format` are both present, the tool constraint takes precedence.
+
+On `/chat/completions`, Crynux AS parses the model raw text into OpenAI `message.tool_calls` and sets `finish_reason` to `tool_calls` when a call is detected. The Raw Task download API does not perform that conversion.
+
+## Chat Completions with the OpenAI SDK
 
 {% tabs %}
-{% tab title="OpenAI SDK" %}
-When using the official `openai` Python SDK, you define tools as dictionaries and pass them to the `tools` parameter. The `vram_limit` is passed via `extra_body`.
-
+{% tab title="Auto" %}
 ```python
 from openai import OpenAI
-import json
 
 client = OpenAI(
-    base_url="https://bridge.crynux.io/v1/llm",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
 )
 
-# 1. Define the tool
 tools = [
     {
         "type": "function",
@@ -43,79 +80,179 @@ tools = [
                 },
                 "required": ["location"],
             },
+            "strict": True,
         },
     }
 ]
 
-# 2. Call the model
 messages = [{"role": "user", "content": "What's the weather like in Boston today?"}]
 completion = client.chat.completions.create(
     model="Qwen/Qwen2.5-7B-Instruct",
     messages=messages,
     tools=tools,
     tool_choice="auto",
-    extra_body={
-        "vram_limit": 24
-    }
+    extra_body={"vram_limit": 24},
 )
 
-response_message = completion.choices[0].message
-tool_calls = response_message.tool_calls
-
-if tool_calls:
-    print("Tool calls detected:")
-    for tool_call in tool_calls:
-        print(f"Function: {tool_call.function.name}")
-        print(f"Arguments: {tool_call.function.arguments}")
+message = completion.choices[0].message
+print(message.tool_calls)
 ```
 {% endtab %}
 
-{% tab title="LangChain-Crynux" %}
-The `langchain-crynux` library provides a drop-in replacement for `ChatOpenAI` optimized for Crynux. It handles `vram_limit` as a first-class parameter.
+{% tab title="Forced Call" %}
+```python
+from openai import OpenAI
 
+client = OpenAI(
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
+    api_key="your-api-key",
+)
+
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_current_weather",
+            "description": "Get the current weather in a given location",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string"},
+                    "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
+                },
+                "required": ["location"],
+            },
+            "strict": True,
+        },
+    }
+]
+
+# Force at least one tool call:
+# tool_choice="required"
+#
+# Or force a specific function:
+completion = client.chat.completions.create(
+    model="Qwen/Qwen2.5-7B-Instruct",
+    messages=[{"role": "user", "content": "What's the weather like in Boston today?"}],
+    tools=tools,
+    tool_choice={
+        "type": "function",
+        "function": {"name": "get_current_weather"},
+    },
+    extra_body={"vram_limit": 24},
+)
+
+print(completion.choices[0].message.tool_calls)
+```
+{% endtab %}
+{% endtabs %}
+
+## Complete Tool Loop
+
+A useful application usually executes the returned function, appends the tool result, and asks the model again for the final answer:
+
+```python
+import json
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
+    api_key="your-api-key",
+)
+
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_current_weather",
+            "description": "Get the current weather in a given location",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string"},
+                    "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
+                },
+                "required": ["location"],
+            },
+            "strict": True,
+        },
+    }
+]
+
+
+def get_current_weather(location: str, unit: str = "celsius"):
+    return {"location": location, "temperature": "22", "unit": unit, "condition": "Sunny"}
+
+
+messages = [{"role": "user", "content": "What's the weather like in Boston today?"}]
+completion = client.chat.completions.create(
+    model="Qwen/Qwen2.5-7B-Instruct",
+    messages=messages,
+    tools=tools,
+    tool_choice="required",
+    extra_body={"vram_limit": 24},
+)
+
+assistant_message = completion.choices[0].message
+messages.append(assistant_message)
+
+for tool_call in assistant_message.tool_calls or []:
+    args = json.loads(tool_call.function.arguments)
+    result = get_current_weather(**args)
+    messages.append(
+        {
+            "role": "tool",
+            "tool_call_id": tool_call.id,
+            "content": json.dumps(result),
+        }
+    )
+
+final = client.chat.completions.create(
+    model="Qwen/Qwen2.5-7B-Instruct",
+    messages=messages,
+    tools=tools,
+    tool_choice="none",
+    extra_body={"vram_limit": 24},
+)
+print(final.choices[0].message.content)
+```
+
+## LangChain
+
+{% tabs %}
+{% tab title="LangChain-Crynux" %}
 ```python
 from langchain_crynux import ChatCrynux
 from langchain_core.tools import tool
 
-# 1. Define the tool using the @tool decorator
 @tool
 def get_current_weather(location: str, unit: str = "celsius"):
     """Get the current weather in a given location"""
-    # Simulate a weather API response
     return {
         "location": location,
         "temperature": "22",
         "unit": unit,
-        "condition": "Sunny"
+        "condition": "Sunny",
     }
 
-# 2. Initialize the ChatCrynux model
 llm = ChatCrynux(
-    base_url="https://bridge.crynux.io/v1/llm",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     model="Qwen/Qwen2.5-7B-Instruct",
-    vram_limit=24,           # Specify VRAM requirement directly
-    api_key="your-api-key"
+    vram_limit=24,
+    api_key="your-api-key",
 )
 
-# 3. Bind the tool to the model
 llm_with_tools = llm.bind_tools([get_current_weather])
-
-# 4. Invoke the model
-query = "What's the weather like in Boston today?"
-response = llm_with_tools.invoke(query)
-
-print("Tool Calls:", response.tool_calls)
+response = llm_with_tools.invoke("What's the weather like in Boston today?")
+print(response.tool_calls)
 ```
 {% endtab %}
 
 {% tab title="LangChain-OpenAI" %}
-If you prefer using the standard `langchain-openai` library, you can pass the Crynux-specific `vram_limit` parameter inside the `model_kwargs` dictionary.
-
 ```python
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
 
-# 1. Define the tool
 @tool
 def get_current_weather(location: str, unit: str = "celsius"):
     """Get the current weather in a given location"""
@@ -123,25 +260,27 @@ def get_current_weather(location: str, unit: str = "celsius"):
         "location": location,
         "temperature": "22",
         "unit": unit,
-        "condition": "Sunny"
+        "condition": "Sunny",
     }
 
-# 2. Initialize ChatOpenAI with Crynux configuration
 llm = ChatOpenAI(
-    base_url="https://bridge.crynux.io/v1/llm",
+    base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
     model="Qwen/Qwen2.5-7B-Instruct",
-    # Pass Crynux parameters in model_kwargs
-    model_kwargs={
-        "vram_limit": 24
-    }
+    model_kwargs={"vram_limit": 24},
 )
 
-# 3. Bind and invoke
 llm_with_tools = llm.bind_tools([get_current_weather])
 response = llm_with_tools.invoke("What's the weather like in Boston today?")
-
-print("Tool Calls:", response.tool_calls)
+print(response.tool_calls)
 ```
 {% endtab %}
 {% endtabs %}
+
+## Responses API
+
+Responses uses a flat function tool shape and returns `function_call` output items. Continue the conversation with `function_call_output` items, or use `previous_response_id`. See [Responses API](responses-api.md).
+
+## Raw Task API
+
+Raw Task `GPTTaskArgs` accepts the same `tools` and `tool_choice` fields. The download result keeps tool-call syntax in `choices[].message.content` and does not populate OpenAI `message.tool_calls`. Prefer `/chat/completions` or `/responses` when you need the parsed OpenAI tool-call objects. See [Text-to-Text Task](../execute-tasks/text-to-text-task.md).
