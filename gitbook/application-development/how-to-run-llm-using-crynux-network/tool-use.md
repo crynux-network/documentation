@@ -284,3 +284,39 @@ Responses uses a flat function tool shape and returns `function_call` output ite
 ## Raw Task API
 
 Raw Task `GPTTaskArgs` accepts the same `tools` and `tool_choice` fields. The download result keeps tool-call syntax in `choices[].message.content` and does not populate OpenAI `message.tool_calls`. Prefer `/chat/completions` or `/responses` when you need the parsed OpenAI tool-call objects. See [Text-to-Text Task](../execute-tasks/text-to-text-task.md).
+
+## Parameter Details
+
+### `tools`
+
+`tools` is the list of functions the model may call. Crynux accepts only OpenAI-style function tools:
+
+* `type` must be `"function"`
+* `function.name` is required and must be unique in the list
+* `function.description` and `function.parameters` are optional
+* `function.strict` is optional; see below
+
+Built-in tools such as web search are not supported. Legacy `functions` / `function_call` fields are not supported. `parallel_tool_calls` is ignored on Crynux models.
+
+### `tool_choice`
+
+`tool_choice` controls whether the model must call a tool, and how strongly Crynux constrains generation:
+
+* `"none"`: do not require a tool call. Tools may still be passed into the chat template, but no tool grammar is applied. Use this on the final turn after you already have tool results.
+* `"auto"`: the model may return normal text or tool calls. Crynux applies a tool grammar only when at least one declared function has `strict: true`. If every tool omits `strict` or sets `strict: false`, generation is not forced into valid tool-call syntax.
+* `"required"`: the request must declare at least one tool, and generation is constrained to include at least one tool call.
+* Named function, Chat Completions shape: `{"type":"function","function":{"name":"get_current_weather"}}`. Generation is constrained to that function. Responses uses the flat shape `{"type":"function","name":"get_current_weather"}`.
+
+If an active tool constraint and `response_format` / `text.format` are both present, the tool constraint takes precedence and structured output is ignored.
+
+### `strict`
+
+`function.strict` is a per-tool boolean:
+
+* With `tool_choice="auto"`, at least one `strict: true` tool is required before Crynux enables the tool grammar.
+* When a tool grammar is active, `strict` is also passed into that grammar so function arguments follow the declared parameter schema more closely.
+* `strict` is not a global switch that forces every tool to be called.
+
+### Response fields
+
+On `/chat/completions`, Crynux AS parses successful tool-call syntax into `message.tool_calls` and sets `finish_reason` to `tool_calls`. On `/responses`, parsed calls appear as `function_call` output items. Set `max_tokens` / `max_output_tokens` high enough for a complete call; a `finish_reason="length"` result may contain an incomplete tool-call prefix.
