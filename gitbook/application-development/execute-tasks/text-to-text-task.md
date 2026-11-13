@@ -73,7 +73,7 @@ HEADERS = {
 
 task_args = {
     "version": "3.7.1",
-    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "model": "Qwen/Qwen3.5-9B",
     "messages": [
         {"role": "user", "content": "What is the capital of France?"}
     ],
@@ -137,7 +137,7 @@ const HEADERS = {
 
 const taskArgs = {
   version: "3.7.1",
-  model: "Qwen/Qwen2.5-7B-Instruct",
+  model: "Qwen/Qwen3.5-9B",
   messages: [{ role: "user", content: "What is the capital of France?" }],
   generation_config: {
     max_new_tokens: 128,
@@ -216,7 +216,7 @@ HEADERS = {
 def make_task(prompt: str) -> dict:
     task_args = {
         "version": "3.7.1",
-        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "model": "Qwen/Qwen3.5-9B",
         "messages": [{"role": "user", "content": prompt}],
         "generation_config": {"max_new_tokens": 64},
         "dtype": "auto",
@@ -269,7 +269,7 @@ const HEADERS = {
 function makeTask(prompt) {
   const taskArgs = {
     version: "3.7.1",
-    model: "Qwen/Qwen2.5-7B-Instruct",
+    model: "Qwen/Qwen3.5-9B",
     messages: [{ role: "user", content: prompt }],
     generation_config: { max_new_tokens: 64 },
     dtype: "auto",
@@ -318,7 +318,7 @@ console.log(await statusRes.json());
 ```json
 {
   "version": "3.7.1",
-  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "model": "Qwen/Qwen3.5-9B",
   "revision": null,
   "messages": [
     {
@@ -495,7 +495,7 @@ See [Model Quantization](../quantization.md) for BitsAndBytes, FP8, AWQ, GPTQ, a
 
 ```json
 {
-  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "model": "Qwen/Qwen3.5-9B",
   "choices": [
     {
       "finish_reason": "stop",

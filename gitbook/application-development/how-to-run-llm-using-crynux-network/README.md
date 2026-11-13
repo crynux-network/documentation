@@ -19,7 +19,7 @@ client = OpenAI(
 )
 
 res = client.chat.completions.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     messages=[
         {
             "role": "user",
@@ -50,7 +50,7 @@ const client = new OpenAI({
 async function main() {
   try {
     const chatCompletion = await client.chat.completions.create({
-      model: "Qwen/Qwen2.5-7B-Instruct",
+      model: "Qwen/Qwen3.5-9B",
       messages: [
         {
           role: "user",
@@ -128,7 +128,7 @@ client = OpenAI(
 )
 
 res = client.chat.completions.create(
-    model="Qwen/Qwen2.5-14B-Instruct",
+    model="Qwen/Qwen3.8-27B",
     messages=[
         {
             "role": "user",
@@ -174,7 +174,7 @@ const client = new OpenAI({
 
 async function main() {
   const chatCompletion = await client.chat.completions.create({
-    model: "Qwen/Qwen2.5-14B-Instruct",
+    model: "Qwen/Qwen3.8-27B",
     messages: [
       {
         role: "user",

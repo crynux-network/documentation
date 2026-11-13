@@ -27,7 +27,7 @@ from langchain_crynux import ChatCrynux
 
 chat = ChatCrynux(
     base_url="https://bridge.crynux.io/v1/llm",
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     vram_limit=24,  # Specify the required VRAM in GB
     # api_key="your-api-key", # Or pass it directly
 )
@@ -58,7 +58,7 @@ from langchain_openai import ChatOpenAI
 llm = ChatOpenAI(
     base_url="https://bridge.crynux.io/v1/llm",
     api_key="your-api-key", # Use a real key or a dummy one for local bridges
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     temperature=0.7,
     # Pass Crynux-specific parameters in model_kwargs
     model_kwargs={
@@ -99,7 +99,7 @@ class State(TypedDict):
 # 2. Initialize the Model
 model = ChatCrynux(
     base_url="https://bridge.crynux.io/v1/llm",
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     vram_limit=24,
     api_key="your-api-key"
 )
