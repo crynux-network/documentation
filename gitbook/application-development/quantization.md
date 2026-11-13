@@ -50,7 +50,7 @@ client = OpenAI(
 )
 
 res = client.chat.completions.create(
-    model="Qwen/Qwen2.5-14B-Instruct",
+    model="Qwen/Qwen3.8-27B",
     messages=[{"role": "user", "content": "Say hello in one sentence."}],
     extra_body={
         "vram_limit": 24,
@@ -74,7 +74,7 @@ print(res.choices[0].message.content)
 ```json
 {
   "version": "3.7.1",
-  "model": "Qwen/Qwen2.5-14B-Instruct",
+  "model": "Qwen/Qwen3.8-27B",
   "messages": [{"role": "user", "content": "Say hello in one sentence."}],
   "dtype": "bfloat16",
   "seed": 42,
@@ -100,7 +100,7 @@ Supported `quant_kwargs` include `load_in_8bit`, `llm_int8_threshold` (for examp
 ```json
 {
   "version": "3.7.1",
-  "model": "Qwen/Qwen3-8B",
+  "model": "Qwen/Qwen3.8-27B",
   "messages": [{"role": "user", "content": "Say hello in one sentence."}],
   "dtype": "bfloat16",
   "seed": 42,
@@ -122,7 +122,7 @@ Requires a GPU with compute capability 8.9 or higher.
 ```json
 {
   "version": "3.7.1",
-  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "model": "Qwen/Qwen3.8-27B",
   "messages": [{"role": "user", "content": "Say hello in one sentence."}],
   "dtype": "bfloat16",
   "seed": 42,
@@ -146,13 +146,13 @@ Set `model` to the pre-quantized Hub repository. Omit `quantization_config` or s
 
 | Method | Example model ID |
 | --- | --- |
-| AWQ (INT4) | `Qwen/Qwen2.5-32B-Instruct-AWQ` |
-| GPTQ / GPTQModel (INT4) | `Qwen/Qwen2.5-32B-Instruct-GPTQ-Int4` |
+| AWQ (INT4) | `mattbucci/Qwen3.8-27B-AWQ` |
+| GPTQ / compressed-tensors (INT4) | `RedHatAI/Qwen3.8-27B-INT4` |
 | compressed-tensors (FP8, etc.) | `RedHatAI/Llama-3.2-1B-Instruct-FP8-dynamic` |
 
 ```python
 res = client.chat.completions.create(
-    model="Qwen/Qwen2.5-32B-Instruct-AWQ",
+    model="mattbucci/Qwen3.8-27B-AWQ",
     messages=[{"role": "user", "content": "Say hello in one sentence."}],
     extra_body={
         "vram_limit": 24,

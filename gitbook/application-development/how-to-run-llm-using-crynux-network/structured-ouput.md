@@ -43,7 +43,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     messages=[
         {
             "role": "user",
@@ -69,7 +69,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     messages=[
         {
             "role": "user",
@@ -119,7 +119,7 @@ client = OpenAI(
 )
 
 response = client.responses.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     input="Alice and Bob are going to a Science Fair on 2024-05-10.",
     text={
         "format": {
@@ -166,7 +166,7 @@ class CalendarEvent(BaseModel):
 
 llm = ChatCrynux(
     base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     vram_limit=24,
     api_key="your-api-key",
 )
@@ -194,7 +194,7 @@ class CalendarEvent(BaseModel):
 llm = ChatOpenAI(
     base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     model_kwargs={"vram_limit": 24},
 )
 

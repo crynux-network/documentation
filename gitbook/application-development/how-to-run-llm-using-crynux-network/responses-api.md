@@ -42,7 +42,7 @@ client = OpenAI(
 )
 
 response = client.responses.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     input="Write a short plan for building a todo app.",
     background=True,
     extra_body={
@@ -81,7 +81,7 @@ function sleep(ms) {
 
 async function main() {
   let response = await client.responses.create({
-    model: "Qwen/Qwen2.5-7B-Instruct",
+    model: "Qwen/Qwen3.5-9B",
     input: "Write a short plan for building a todo app.",
     background: true,
     vram_limit: 24,
@@ -126,7 +126,7 @@ client = OpenAI(
 )
 
 response = client.responses.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     input="Alice and Bob are going to a Science Fair on 2024-05-10.",
     text={
         "format": {
@@ -166,7 +166,7 @@ const client = new OpenAI({
 
 async function main() {
   const response = await client.responses.create({
-    model: "Qwen/Qwen2.5-7B-Instruct",
+    model: "Qwen/Qwen3.5-9B",
     input: "Alice and Bob are going to a Science Fair on 2024-05-10.",
     text: {
       format: {
@@ -233,7 +233,7 @@ tools = [
 ]
 
 response = client.responses.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     input="What's the weather like in Boston today?",
     tools=tools,
     tool_choice="required",
@@ -274,7 +274,7 @@ const tools = [
 
 async function main() {
   const response = await client.responses.create({
-    model: "Qwen/Qwen2.5-7B-Instruct",
+    model: "Qwen/Qwen3.5-9B",
     input: "What's the weather like in Boston today?",
     tools,
     tool_choice: "required",
@@ -317,7 +317,7 @@ from langchain_crynux import ChatCrynux
 chat = ChatCrynux(
     base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     vram_limit=24,
     use_responses_api=True,
     background=True,
@@ -372,7 +372,7 @@ def wait_until_done(response):
 
 
 first = client.responses.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     input="My name is Alice. Remember it.",
     background=True,
     extra_body={"vram_limit": 24},
@@ -381,7 +381,7 @@ first = wait_until_done(first)
 print(first.output_text)
 
 second = client.responses.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     input="What is my name?",
     previous_response_id=first.id,
     background=True,
@@ -415,7 +415,7 @@ async function waitUntilDone(response) {
 
 async function main() {
   let first = await client.responses.create({
-    model: "Qwen/Qwen2.5-7B-Instruct",
+    model: "Qwen/Qwen3.5-9B",
     input: "My name is Alice. Remember it.",
     background: true,
     vram_limit: 24,
@@ -424,7 +424,7 @@ async function main() {
   console.log(first.output_text);
 
   let second = await client.responses.create({
-    model: "Qwen/Qwen2.5-7B-Instruct",
+    model: "Qwen/Qwen3.5-9B",
     input: "What is my name?",
     previous_response_id: first.id,
     background: true,

@@ -35,7 +35,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="Qwen/Qwen2.5-VL-3B-Instruct",
+    model="Qwen/Qwen3.8-27B",
     messages=[
         {
             "role": "user",
@@ -55,7 +55,7 @@ response = client.chat.completions.create(
     ],
     max_tokens=300,
     extra_body={
-        "vram_limit": 24, # Ensure the node has enough VRAM
+        "vram_limit": 70, # Ensure the node has enough VRAM
     }
 )
 
@@ -86,7 +86,7 @@ const base64Image = encodeImage(imagePath);
 
 async function main() {
   const response = await openai.chat.completions.create({
-    model: "Qwen/Qwen2.5-VL-3B-Instruct",
+    model: "Qwen/Qwen3.8-27B",
     messages: [
       {
         role: "user",
@@ -102,7 +102,7 @@ async function main() {
       },
     ],
     max_tokens: 300,
-    vram_limit: 24, // Ensure the node has enough VRAM
+    vram_limit: 70, // Ensure the node has enough VRAM
   });
 
   console.log(response.choices[0].message.content);
@@ -115,4 +115,4 @@ main();
 
 ## VRAM Requirement
 
-Just like with text-only models, you should specify the `vram_limit` in the `extra_body` (Python) or directly in the options (JavaScript) to ensure the task is routed to a node with sufficient GPU memory. For the models listed above, a `vram_limit` of `24` GB is generally sufficient.
+Just like with text-only models, you should specify the `vram_limit` in the `extra_body` (Python) or directly in the options (JavaScript) to ensure the task is routed to a node with sufficient GPU memory. For `Qwen/Qwen3.8-27B` without quantization, use a `vram_limit` of `70` GB.

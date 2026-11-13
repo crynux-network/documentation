@@ -9,7 +9,7 @@ Replace `<endpoint_token>` and `your-api-key` with your project endpoint token a
 {% hint style="warning" %}
 Not every open-source model supports tool calling. Schema acceptance alone is not enough: the model must provide a compatible chat template and tool-call format.
 
-Instruction-tuned models are more likely to work. For example, `Qwen/Qwen2.5-7B-Instruct` is a better choice than the base model `Qwen/Qwen2.5-7B`. Always check the model card for function calling or tool use support.
+Prefer models that document function calling or tool use support. For example, `Qwen/Qwen3.5-9B` is a common choice on Crynux. Always check the model card for tool use support.
 {% endhint %}
 
 ## Supported Parameters
@@ -87,7 +87,7 @@ tools = [
 
 messages = [{"role": "user", "content": "What's the weather like in Boston today?"}]
 completion = client.chat.completions.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     messages=messages,
     tools=tools,
     tool_choice="auto",
@@ -132,7 +132,7 @@ tools = [
 #
 # Or force a specific function:
 completion = client.chat.completions.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     messages=[{"role": "user", "content": "What's the weather like in Boston today?"}],
     tools=tools,
     tool_choice={
@@ -186,7 +186,7 @@ def get_current_weather(location: str, unit: str = "celsius"):
 
 messages = [{"role": "user", "content": "What's the weather like in Boston today?"}]
 completion = client.chat.completions.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     messages=messages,
     tools=tools,
     tool_choice="required",
@@ -208,7 +208,7 @@ for tool_call in assistant_message.tool_calls or []:
     )
 
 final = client.chat.completions.create(
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     messages=messages,
     tools=tools,
     tool_choice="none",
@@ -237,7 +237,7 @@ def get_current_weather(location: str, unit: str = "celsius"):
 
 llm = ChatCrynux(
     base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     vram_limit=24,
     api_key="your-api-key",
 )
@@ -266,7 +266,7 @@ def get_current_weather(location: str, unit: str = "celsius"):
 llm = ChatOpenAI(
     base_url="https://api.crynux-as.xyz/api/<endpoint_token>/v1",
     api_key="your-api-key",
-    model="Qwen/Qwen2.5-7B-Instruct",
+    model="Qwen/Qwen3.5-9B",
     model_kwargs={"vram_limit": 24},
 )
 

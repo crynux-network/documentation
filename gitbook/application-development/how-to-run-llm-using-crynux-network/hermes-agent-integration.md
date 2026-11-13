@@ -42,7 +42,7 @@ To get a free token with better quota:
 
 Crynux generally supports open-source models that are compatible with the Hugging Face `transformers` library. In practice, the main limitation is available VRAM on network nodes, so larger models require higher VRAM settings.
 
-Hermes workflows require tool use/function calling support, so choose a model that supports tool calling. Instruction-tuned models are usually safer choices (for example, `Qwen/Qwen2.5-7B-Instruct`). For details, refer to:
+Hermes workflows require tool use/function calling support, so choose a model that supports tool calling. Instruction-tuned models are usually safer choices (for example, `Qwen/Qwen3.5-9B`). For details, refer to:
 
 - [Tool Use/Function Calling](./tool-use.md)
 - [Supported Models](./supported-models.md)
@@ -60,7 +60,7 @@ Then in the menu:
 1. Choose **Custom endpoint (self-hosted / VLLM / etc.)**
 2. API base URL: `https://bridge.crynux.io/v1/llm`
 3. API key: paste your Crynux token
-4. Model name: for example `Qwen/Qwen2.5-7B-Instruct`
+4. Model name: for example `Qwen/Qwen3.5-9B`
 5. Context length: keep auto-detect, or enter a value manually if prompted
 
 Start Hermes:
@@ -79,7 +79,7 @@ Use this method for both local runtime and Docker runtime.
 Update these exact config items in `~/.hermes/config.yaml`:
 
 - `model.provider`: `custom`
-- `model.default`: your selected model (example: `Qwen/Qwen2.5-7B-Instruct`)
+- `model.default`: your selected model (example: `Qwen/Qwen3.5-9B`)
 - `model.base_url`: `https://bridge.crynux.io/v1/llm`
 - `model.api_key`: `${CRYNUX_API_KEY}`
 
@@ -92,7 +92,7 @@ Optional:
 ```yaml
 model:
   provider: custom
-  default: Qwen/Qwen2.5-7B-Instruct
+  default: Qwen/Qwen3.5-9B
   base_url: https://bridge.crynux.io/v1/llm
   api_key: ${CRYNUX_API_KEY}
 ```
